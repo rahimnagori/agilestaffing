@@ -29,7 +29,7 @@
 
   .heade_login h4 {
     font-size: 24px;
-    font-family: 'MuktaSB';
+    font-family: 'LatoB';
     margin-bottom: 10px;
     color: #333;
   }

@@ -60,7 +60,7 @@
 
   <script type="text/javascript" src="<?= site_url('assets/site/'); ?>js/owl.carousel.js"></script>
 
-  <script type="text/javascript" src="<?= site_url('assets/site/'); ?>js/sticky-sidebar.js"></script>
+  <!-- <script type="text/javascript" src="<?= site_url('assets/site/'); ?>js/sticky-sidebar.js"></script> -->
 
   <script type="text/javascript" src="<?= site_url('assets/site/'); ?>js/tags.js"></script>
 
@@ -133,7 +133,116 @@ $(function(){
 });
 </script>
 
+<script>
+    const BASE_URL = "<?= site_url(); ?>";
+    const LOADING = "<i class='fa fa-spin fa-spinner' aria-hidden='true'></i> Processing ... ";
 
+    function preview_image(input, previewId) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                let previewImg = $('<img />', {
+                    src: e.target.result,
+                    alt: 'Resume',
+                    width: '50px'
+                });
+                $('#' + previewId).html(previewImg);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    function accept_cookie() {
+        localStorage.setItem('isCookieAccepted', true);
+        hide_cookie_notification()
+    }
+
+    function hide_cookie_notification() {
+        $(".cokis").hide();
+    }
+
+    function scroll_to_bottom(div) {
+        $("" + div).animate({
+            scrollTop: $("" + div)[0].scrollHeight
+        }, 1000);
+    }
+
+    if (localStorage.getItem('isCookieAccepted')) {
+        hide_cookie_notification();
+    }
+</script>
+
+
+<script>
+    function request_professional(e) {
+        e.preventDefault();
+        $.ajax({
+            type: 'POST',
+            url: BASE_URL + 'Request-Professional',
+            data: new FormData($('#requestProfessionalForm')[0]),
+            dataType: 'JSON',
+            processData: false,
+            contentType: false,
+            cache: false,
+            beforeSend: function(xhr) {
+                $(".btn_submit").attr('disabled', true);
+                $(".btn_submit").html(LOADING);
+                $("#responseMessage").html('');
+                $("#responseMessage").hide();
+            },
+            success: function(response) {
+                $("#requestProfessionalForm")[0].reset();
+                $(".btn_submit").prop('disabled', false);
+                $(".btn_submit").html(' Submit ');
+                $("#responseMessage").html(response.responseMessage);
+                $("#responseMessage").show();
+            }
+        });
+    }
+</script>
+
+
+<script type="text/javascript">
+
+  document.getElementById('output').innerHTML = location.search;
+
+$(".chosen-select").chosen();
+
+</script>
+
+<script type="text/javascript">
+
+  /*range*/
+
+  $( function() {
+
+    $( "#slider-range2" ).slider({
+
+      range: true,
+
+      min: 0,
+
+      max: 500,
+
+      values: [ 75, 300 ],
+
+      slide: function( event, ui ) {
+
+        $( "#amount2" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
+
+      }
+
+    });
+
+    $( "#amount2" ).val( "$" + $( "#slider-range2" ).slider( "values", 0 ) +
+
+      " - $" + $( "#slider-range2" ).slider( "values", 1 ) );
+
+  } );
+
+/*range*/
+
+</script>
 
   </body>
 

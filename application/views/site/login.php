@@ -48,8 +48,8 @@
 
            <?=$this->session->flashdata('responseMessage');?>
                   <div class="responseMessage" id="responseMessage" ></div>
-                  <div class="form-group ">
-                     <button class="btn btn_theme btn-lg btn-block" type="submit">Login</button>
+                  <div class="form-group btnloggib">
+                     <button class="btn btn_theme btn-lg btn-block btn_submit" type="submit">Login</button>
                   </div>
 
            

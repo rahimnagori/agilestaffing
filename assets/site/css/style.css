@@ -2847,6 +2847,9 @@ box-shadow: 0 0 5px rgba(0,0,0,0.1);
 .inner_cont span {
   color: var(--blue);
 }
+.form-group.btn_next.text-right {
+	margin-top: 15px;
+}
 /*media*/
 @media(min-width: 768px){
   .Feat_img {

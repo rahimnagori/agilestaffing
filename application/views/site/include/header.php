@@ -34,9 +34,9 @@
                </div>
                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                   <ul class="nav navbar-nav navbar-right">
-                  <li><a href="#">Find jobs</a></li>
+                  <li><a href="<?= site_url('Jobs') ?>">Find jobs</a></li>
                      <li>
-                        <a href="#">Post jobs</a>
+                        <a href="<?= site_url('Post_Jobs') ?>">Post jobs</a>
                      </li>
 
                      

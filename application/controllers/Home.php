@@ -112,6 +112,30 @@ class Home extends CI_Controller
     $this->load->view('site/include/footer', $pageData);
   }
 
+  public function post_jobs()
+  {
+    $pageData = $this->Common_Model->get_userdata();
+    $this->load->view('site/include/header', $pageData);
+    $this->load->view('site/post_jobs', $pageData);
+    $this->load->view('site/include/footer', $pageData);
+  }
+
+  public function post_jobs2()
+  {
+    $pageData = $this->Common_Model->get_userdata();
+    $this->load->view('site/include/header', $pageData);
+    $this->load->view('site/post_jobs2', $pageData);
+    $this->load->view('site/include/footer', $pageData);
+  }
+
+  public function post_jobs3()
+  {
+    $pageData = $this->Common_Model->get_userdata();
+    $this->load->view('site/include/header', $pageData);
+    $this->load->view('site/post_jobs3', $pageData);
+    $this->load->view('site/include/footer', $pageData);
+  }
+
   public function contact_request()
   {
     $response['status'] = 0;

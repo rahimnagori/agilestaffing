@@ -74,6 +74,9 @@ $route['Request-Professional'] = 'Home/request_professional';
 $route['Terms'] = 'Home/terms';
 $route['Privacy'] = 'Home/privacy';
 $route['Policy'] = 'Home/policy';
+$route['Post_Jobs'] = 'Home/post_jobs';
+$route['Post_Jobs2'] = 'Home/post_jobs2';
+$route['Post_Jobs3'] = 'Home/post_jobs3';
 
 /* Protected Routes */
 $route['Login'] = 'Users/index';
