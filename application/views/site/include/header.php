@@ -47,15 +47,15 @@
             <li class="droup_des">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <span class="img_radiuus">
-                        <img src="img/img_9.png">
+                        <img src="<?= site_url('assets/site/'); ?>img/img_9.png">
                         User Name
                         <span class="caret"></span>
                         </span>
                         </a>
                         <ul class="dropdown-menu">
-                           <li><a href="profile.php">Profile</a></li>
+                           <li><a href="<?= site_url('Profile'); ?>">Profile</a></li>
                            <!-- <li><a href="#">Balance information: <b>0 $</b> </a></li> -->
-                           <li><a href="index.php"><i class="fa fa-sign-out"></i> Logout</a></li>
+                           <li><a href="<?= site_url('Logout') ?>"><i class="fa fa-sign-out"></i> Logout</a></li>
                         </ul>
                      </li>
             <?php

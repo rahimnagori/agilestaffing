@@ -76,7 +76,20 @@ $route['Privacy'] = 'Home/privacy';
 $route['Policy'] = 'Home/policy';
 $route['Post_Jobs'] = 'Home/post_jobs';
 $route['Post_Jobs2'] = 'Home/post_jobs2';
-$route['Post_Jobs3'] = 'Home/post_jobs3';
+$route['Post_App'] = 'Home/post_app';
+$route['Message'] = 'Home/message';
+$route['Notification'] = 'Home/notification';
+$route['Job_List'] = 'Home/job_list';
+$route['Candidate'] = 'Home/candidate';
+$route['Setting'] = 'Home/setting';
+$route['Review'] = 'Home/review';
+$route['Profile_Company'] = 'Home/profile_company';
+$route['Job'] = 'Home/job';
+$route['Company_Profile'] = 'Home/company_profile';
+$route['Interview'] = 'Home/interview';
+$route['Photos'] = 'Home/photos';
+$route['Question'] = 'Home/question';
+
 
 /* Protected Routes */
 $route['Login'] = 'Users/index';

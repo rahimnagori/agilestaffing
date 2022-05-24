@@ -136,6 +136,111 @@ class Home extends CI_Controller
     $this->load->view('site/include/footer', $pageData);
   }
 
+  public function post_app()
+  {
+    $pageData = $this->Common_Model->get_userdata();
+    $this->load->view('site/include/header', $pageData);
+    $this->load->view('site/post_app', $pageData);
+    $this->load->view('site/include/footer', $pageData);
+  }
+
+  public function message()
+  {
+    $pageData = $this->Common_Model->get_userdata();
+    $this->load->view('site/include/header', $pageData);
+    $this->load->view('site/message', $pageData);
+    $this->load->view('site/include/footer', $pageData);
+  }
+
+  public function notification()
+  {
+    $pageData = $this->Common_Model->get_userdata();
+    $this->load->view('site/include/header', $pageData);
+    $this->load->view('site/notification', $pageData);
+    $this->load->view('site/include/footer', $pageData);
+  }
+
+  public function job_list()
+  {
+    $pageData = $this->Common_Model->get_userdata();
+    $this->load->view('site/include/header', $pageData);
+    $this->load->view('site/job_list', $pageData);
+    $this->load->view('site/include/footer', $pageData);
+  }
+
+  public function candidate()
+  {
+    $pageData = $this->Common_Model->get_userdata();
+    $this->load->view('site/include/header', $pageData);
+    $this->load->view('site/candidate', $pageData);
+    $this->load->view('site/include/footer', $pageData);
+  }
+
+  public function setting()
+  {
+    $pageData = $this->Common_Model->get_userdata();
+    $this->load->view('site/include/header', $pageData);
+    $this->load->view('site/setting', $pageData);
+    $this->load->view('site/include/footer', $pageData);
+  }
+
+  public function review()
+  {
+    $pageData = $this->Common_Model->get_userdata();
+    $this->load->view('site/include/header', $pageData);
+    $this->load->view('site/review', $pageData);
+    $this->load->view('site/include/footer', $pageData);
+  }
+
+  public function profile_company()
+  {
+    $pageData = $this->Common_Model->get_userdata();
+    $this->load->view('site/include/header', $pageData);
+    $this->load->view('site/Profile_Company', $pageData);
+    $this->load->view('site/include/footer', $pageData);
+  }
+
+  public function job()
+  {
+    $pageData = $this->Common_Model->get_userdata();
+    $this->load->view('site/include/header', $pageData);
+    $this->load->view('site/job', $pageData);
+    $this->load->view('site/include/footer', $pageData);
+  }
+
+  public function interview()
+  {
+    $pageData = $this->Common_Model->get_userdata();
+    $this->load->view('site/include/header', $pageData);
+    $this->load->view('site/interview', $pageData);
+    $this->load->view('site/include/footer', $pageData);
+  }
+
+  public function photos()
+  {
+    $pageData = $this->Common_Model->get_userdata();
+    $this->load->view('site/include/header', $pageData);
+    $this->load->view('site/photos', $pageData);
+    $this->load->view('site/include/footer', $pageData);
+  }
+
+  public function question()
+  {
+    $pageData = $this->Common_Model->get_userdata();
+    $this->load->view('site/include/header', $pageData);
+    $this->load->view('site/question', $pageData);
+    $this->load->view('site/include/footer', $pageData);
+  }
+
+ 
+  public function company_profile()
+  {
+    $pageData = $this->Common_Model->get_userdata();
+    $this->load->view('site/include/header', $pageData);
+    $this->load->view('site/company_profile', $pageData);
+    $this->load->view('site/include/footer', $pageData);
+  }
+
   public function contact_request()
   {
     $response['status'] = 0;

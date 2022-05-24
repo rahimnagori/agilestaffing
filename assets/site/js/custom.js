@@ -126,12 +126,12 @@
 /*scroll*/
 
 /*scroll*/
-var stickySidebar = new StickySidebar('#sidebar2', {
-      topSpacing: 20,
-      bottomSpacing: 20,
-      containerSelector: '.container-fluid',
-      innerWrapperSelector: '.container-fluid'
-    });
+// var stickySidebar = new StickySidebar('#sidebar2', {
+//       topSpacing: 20,
+//       bottomSpacing: 20,
+//       containerSelector: '.container-fluid',
+//       innerWrapperSelector: '.container-fluid'
+//     });
 
 /*ttt*/
 
