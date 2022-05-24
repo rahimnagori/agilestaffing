@@ -1516,7 +1516,7 @@ padding-top: 30px;
   border-radius: 6px 0 0 6px;
 }
 .right_side{
-  background: #f8f8f8;
+  /* background: #f8f8f8; */
   padding:0 15px;
   padding-top: 30px;
   padding-bottom: 40px;
