@@ -14,16 +14,6 @@ class Users extends CI_Controller {
   }
 
   public function index(){
-    if($this->check_login()){
-      redirect('Profile');
-    }
-    $pageData = [];
-    $this->load->view('site/include/header', $pageData);
-    $this->load->view('site/login', $pageData);
-    $this->load->view('site/include/footer', $pageData);
-  }
-
-  public function login(){
     $response['status'] = 0;
     $response['responseMessage'] = $this->Common_Model->error('Something went wrong, please try again later.');
 
@@ -64,12 +54,6 @@ class Users extends CI_Controller {
     echo json_encode($response);
   }
 
-  public function signup(){
-    $this->load->view('site/include/header');
-    $this->load->view('site/sign-up');
-    $this->load->view('site/include/footer');
-  }
-
   public function register(){
     $response['status'] = 0;
     $response['responseMessage'] = $this->Common_Model->error('Something went wrong, please try again later.');
@@ -94,9 +78,9 @@ class Users extends CI_Controller {
       $insert['password'] = md5($insert['password']);
       $userId = $this->Common_Model->insert('users', $insert);
       if($userId){
-        $this->send_verification_email($userId);
+        $emailResponse = $this->send_verification_email($userId);
         $response['status'] = 1;
-        $response['responseMessage'] = $this->Common_Model->success('Check your email to complete registration. If you have not found mail in Inbox please check your junk folder.');
+        $response['responseMessage'] = $this->Common_Model->success('Check your email to complete registration. If you have not found mail in Inbox please check your junk folder.' .$emailResponse);
       }
     } else {
       $response['status'] = 2;
@@ -168,7 +152,12 @@ class Users extends CI_Controller {
         $body .= "<p><a href='" .$verificationLink ."'>Verify Now</a></p>";
         $body .= "<p>If the above link doesn't work, you may copy paste the below link in your browser also.</p>";
         $body .= "<p>" .$verificationLink ."</p>";
-        $mailResponse = $this->Common_Model->send_mail($userdata['email'], $subject, $body);
+        if($this->config->item('ENVIRONMENT') == 'production'){
+          $this->Common_Model->send_mail($userdata['email'], $subject, $body);
+          return '';
+        }else{
+          return "<br/>" .$body;
+        }
       }
     }else{
       /* User does not exist */
@@ -189,7 +178,9 @@ class Users extends CI_Controller {
           $subject = 'Email successfully verified.';
           $body = '<p>Hello ' .$userdata['first_name'] .' ' .$userdata['last_name'] .',</p>';
           $body .= '<p>Congratulations!! your email has been verified successfully. You may now continue using our services.</p>';
-          $mailResponse = $this->Common_Model->send_mail($to, $subject, $body);
+          if($this->config->item('ENVIRONMENT') == 'production'){
+            $this->Common_Model->send_mail($to, $subject, $body);
+          }
           if($this->session->userdata('is_logged_id')){
             redirect('Verify');
           }else{

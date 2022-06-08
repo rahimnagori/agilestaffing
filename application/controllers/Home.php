@@ -11,6 +11,10 @@ class Home extends CI_Controller
     $this->load->library('session');
   }
 
+  private function check_login(){
+    return ($this->session->userdata('is_user_logged_in')) ? true : false;
+  }
+
   public function index()
   {
     $pageData = $this->Common_Model->get_userdata();
@@ -21,6 +25,26 @@ class Home extends CI_Controller
     $this->load->view('site/include/footer', $pageData);
   }
 
+  public function login(){
+    if($this->check_login()){
+      redirect('Profile');
+    }
+    $pageData = [];
+    $this->load->view('site/include/header', $pageData);
+    $this->load->view('site/login', $pageData);
+    $this->load->view('site/include/footer', $pageData);
+  }
+
+  public function signup(){
+    if($this->check_login()){
+      redirect('Profile');
+    }
+    $this->load->view('site/include/header');
+    $this->load->view('site/sign-up');
+    $this->load->view('site/include/footer');
+  }
+
+  /*
   public function about()
   {
     $pageData = $this->Common_Model->get_userdata();
@@ -238,4 +262,5 @@ class Home extends CI_Controller
     }
     echo json_encode($response);
   }
+  */
 }
