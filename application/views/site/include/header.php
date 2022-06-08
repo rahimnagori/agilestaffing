@@ -5,7 +5,7 @@
    <meta charset="utf-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1">
-   <title><?=$this->config->item('PROJECT');?></title>
+   <title><?= $this->config->item('PROJECT'); ?></title>
    <link rel="shortcut icon" href="<?= site_url('assets/site/'); ?>img/favi.png" type="image/x-icon">
    <link href="<?= site_url('assets/site/'); ?>css/bootstrap.min.css" rel="stylesheet">
    <link rel="stylesheet" href="<?= site_url('assets/site/'); ?>css/owl.carousel.min.css">
@@ -46,15 +46,15 @@
                      <li class="droup_des">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                            <span class="img_radiuus">
-                              <img src="img/img_9.png">
+                              <img src="<?= site_url('assets/site/'); ?>img/img_9.png">
                               User Name
                               <span class="caret"></span>
                            </span>
                         </a>
                         <ul class="dropdown-menu">
-                           <li><a href="profile.php">Profile</a></li>
+                           <li><a href="<?= site_url('Profile'); ?>">Profile</a></li>
                            <!-- <li><a href="#">Balance information: <b>0 $</b> </a></li> -->
-                           <li><a href="<?= site_url('Logout'); ?>"><i class="fa fa-sign-out"></i> Logout</a></li>
+                           <li><a href="<?= site_url('Logout') ?>"><i class="fa fa-sign-out"></i> Logout</a></li>
                         </ul>
                      </li>
                   <?php

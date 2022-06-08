@@ -70,7 +70,7 @@
 
                 <div class="com_img">
 
-                  <img src="img/img_7.png">
+                  <img src="<?= site_url('assets/site/'); ?>img/img_7.png">
 
                 </div>
 
@@ -92,7 +92,7 @@
 
                 <div class="com_img">
 
-                  <img src="img/img_7.png">
+                  <img src="<?= site_url('assets/site/'); ?>img/img_7.png">
 
                 </div>
 
@@ -114,7 +114,7 @@
 
                 <div class="com_img">
 
-                  <img src="img/img_7.png">
+                  <img src="<?= site_url('assets/site/'); ?>img/img_7.png">
 
                 </div>
 

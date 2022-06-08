@@ -6,29 +6,42 @@ $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
 /* Static Route */
-// $route['About'] = 'Home/about';
-// $route['Legal'] = 'Home/legal';
-// $route['Career'] = 'Home/career';
-// $route['Newses'] = 'Home/newses';
-// $route['News/(:any)'] = 'Home/news/$1';
-// $route['Work'] = 'Home/work';
+$route['About'] = 'Home/about';
+$route['Legal'] = 'Home/legal';
+$route['Career'] = 'Home/career';
+$route['Newses'] = 'Home/newses';
+$route['News/(:any)'] = 'Home/news/$1';
+$route['Work'] = 'Home/work';
 
-// $route['Jobs'] = 'Home/jobs';
-// $route['Search-Jobs'] = 'Jobs';
-// $route['Job-Details/(:any)'] = 'Jobs/job_details/$1';
-// $route['Apply'] = 'Jobs/apply';
+$route['Jobs'] = 'Home/jobs';
+$route['Search-Jobs'] = 'Jobs';
+$route['Job-Details/(:any)'] = 'Jobs/job_details/$1';
+$route['Apply'] = 'Jobs/apply';
 
-// $route['Contact'] = 'Home/contact';
-// $route['Contact/Request'] = 'Home/contact_request';
-// $route['Contact/Resume'] = 'Home/resume';
-// $route['Request-Professional'] = 'Home/request_professional';
+$route['Contact'] = 'Home/contact';
+$route['Contact/Request'] = 'Home/contact_request';
+$route['Contact/Resume'] = 'Home/resume';
+$route['Request-Professional'] = 'Home/request_professional';
 
-// $route['Terms'] = 'Home/terms';
-// $route['Privacy'] = 'Home/privacy';
-// $route['Policy'] = 'Home/policy';
-// $route['Post_Jobs'] = 'Home/post_jobs';
-// $route['Post_Jobs2'] = 'Home/post_jobs2';
-// $route['Post_Jobs3'] = 'Home/post_jobs3';
+$route['Terms'] = 'Home/terms';
+$route['Privacy'] = 'Home/privacy';
+$route['Policy'] = 'Home/policy';
+$route['Post_Jobs'] = 'Home/post_jobs';
+$route['Post_Jobs2'] = 'Home/post_jobs2';
+$route['Post_App'] = 'Home/post_app';
+$route['Message'] = 'Home/message';
+$route['Notification'] = 'Home/notification';
+$route['Job_List'] = 'Home/job_list';
+$route['Candidate'] = 'Home/candidate';
+$route['Setting'] = 'Home/setting';
+$route['Review'] = 'Home/review';
+$route['Profile_Company'] = 'Home/profile_company';
+$route['Job'] = 'Home/job';
+$route['Company_Profile'] = 'Home/company_profile';
+$route['Interview'] = 'Home/interview';
+$route['Photos'] = 'Home/photos';
+$route['Question'] = 'Home/question';
+
 
 /* User Routes */
 $route['Login'] = 'Home/login';

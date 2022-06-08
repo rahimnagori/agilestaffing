@@ -209,6 +209,17 @@ $(function(){
 $(".chosen-select").chosen();
 
 </script>
+<script type="text/javascript">
+
+    
+
+/*tabel*/
+
+  $('#extent_tbl1').DataTable();
+
+/*tabel close*/
+
+</script>
 
 <script type="text/javascript">
 
@@ -243,6 +254,120 @@ $(".chosen-select").chosen();
 /*range*/
 
 </script>
+
+
+
+<!-- Message -->
+
+<script type="text/javascript">
+
+  $(document).ready(function(){
+
+  $(".mesaage1").click(function(){
+
+    $(".cover_1").addClass("size1");
+
+    $(".cover_4").removeClass("size6");
+
+    $(".cover_2").addClass("size2");
+
+    $(".cover_4").removeClass("size5");
+
+  });
+
+});
+
+</script>
+
+
+
+<script type="text/javascript">
+
+  $(document).ready(function(){
+
+  $(".mesaage2").click(function(){
+
+    $(".cover_3").addClass("size5");
+
+    $(".cover_3").removeClass("size1");
+
+    $(".cover_4").addClass("size6");
+
+    $(".cover_4").removeClass("size2");
+
+  });
+
+});
+
+</script>
+
+<!-- Message -->
+
+
+<!-- setting -->
+<link href="<?= site_url('assets/site/'); ?>css/cropper.min.css" rel="stylesheet">
+<link href="<?= site_url('assets/site/'); ?>css/main.css" rel="stylesheet">
+<script src="<?= site_url('assets/site/'); ?>js/cropper.min.js"></script> 
+<script src="<?= site_url('assets/site/'); ?>js/main.js"></script> 
+<script type="text/javascript">
+  $(document).ready(function(){
+  $(".Company_Logo").click(function(){
+    $(".uploadd_bii").addClass("Company_Logo3");
+    $(".Company_Logo").addClass("Company_Logo4");
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+  $(document).ready(function(){
+  $(".Company_Logo5").click(function(){
+    $(".Company_Logo6").addClass("Company_Logo7");
+    $(".Company_Logo5").addClass("Company_Logo8");
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+  $(document).ready(function(){
+  $(".Company_Logo9").click(function(){
+    $(".Company_Logo10").addClass("Company_Logo11");
+    $(".Company_Logo9").addClass("Company_Logo12");
+  });
+});
+</script>
+<script type="text/javascript">
+  $(document).ready(function(){
+  $(".Company_Logo13").click(function(){
+    $(".Company_Logo14").addClass("Company_Logo15");
+    $(".Company_Logo13").addClass("Company_Logo16");
+  });
+});
+</script>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+  $(".Company_Logo17").click(function(){
+    $(".Company_Logo18").addClass("Company_Logo19");
+    $(".Company_Logo17").addClass("Company_Logo20");
+  });
+});
+</script>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+  $(".Company_Logo21").click(function(){
+    $(".Company_Logo22").addClass("Company_Logo23");
+    $(".Company_Logo21").addClass("Company_Logo24");
+  });
+});
+</script>
+
+<!-- setting -->
+
+
+
 
   </body>
 

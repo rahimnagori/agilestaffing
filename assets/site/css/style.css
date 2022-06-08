@@ -77,6 +77,7 @@
 }
 :root{
   --blue:#032da6;
+  --blue2:#0ee;
   --BL:#0C0833;
 }
 /*start*/
@@ -1505,7 +1506,7 @@ padding-top: 30px;
 .sider_barr li a i {
   left: 10px;
   position: absolute;
-  top: 12px;
+  top: 15px;
 }
 .sider_barr li.active a{
   background: var(--blue);
@@ -1515,14 +1516,14 @@ padding-top: 30px;
   border-radius: 6px 0 0 6px;
 }
 .right_side{
-  background: #f8f8f8;
+  /* background: #f8f8f8; */
   padding:0 15px;
   padding-top: 30px;
   padding-bottom: 40px;
 
 }
 .sider_barr li a i{
-  font-size: 18px;
+  font-size: 20px;
   margin-right: 5px;
 }
 .tabel_me th{
@@ -2446,8 +2447,10 @@ table.dataTable th{
 .add_puss .edddd{
   margin-top: 5px;
 }
-.add_puss .btn{
-  width: 65px;
+.add_puss .btn {
+	width: 70px;
+	padding: 8px 10px;
+	font-size: 14px;
 }
 .fit_rees{
   color: #333;
@@ -2610,7 +2613,8 @@ box-shadow: 0 0 5px rgba(0,0,0,0.1);
   overflow-x: hidden;
  }
  .size_same{
-  width: 95px;
+  padding: 4px 10px;
+  font-size: 12px;
  }
 
 .top_mme{
@@ -2845,10 +2849,17 @@ box-shadow: 0 0 5px rgba(0,0,0,0.1);
 }
 
 .inner_cont span {
-  color: var(--blue);
+  color: var(--blue2);
 }
 .form-group.btn_next.text-right {
 	margin-top: 15px;
+}
+.btn-xs {
+	padding: 1px 5px;
+	font-size: 12px;
+}
+.banner_con_h .color1 {
+	color: var(--blue2);
 }
 /*media*/
 @media(min-width: 768px){
