@@ -44,73 +44,7 @@ class Home extends CI_Controller
     $this->load->view('site/include/footer');
   }
 
-  /*
-  public function about()
-  {
-    $pageData = $this->Common_Model->get_userdata();
-    $this->load->view('site/include/header', $pageData);
-    $this->load->view('site/about', $pageData);
-    $this->load->view('site/include/footer', $pageData);
-  }
-
-  public function career()
-  {
-    $pageData = $this->Common_Model->get_userdata();
-    $this->load->view('site/include/header', $pageData);
-    $this->load->view('site/career', $pageData);
-    $this->load->view('site/include/footer', $pageData);
-  }
-  
-
-  public function legal()
-  {
-    $pageData = $this->Common_Model->get_userdata();
-    $this->load->view('site/include/header', $pageData);
-    $this->load->view('site/legal', $pageData);
-    $this->load->view('site/include/footer', $pageData);
-  }
-
-  public function policy()
-  {
-    $pageData = $this->Common_Model->get_userdata();
-    $this->load->view('site/include/header', $pageData);
-    $this->load->view('site/policy', $pageData);
-    $this->load->view('site/include/footer', $pageData);
-  }
-  
-  public function newses()
-  {
-    $pageData = $this->Common_Model->get_userdata();
-    $pageData['newses']  = $this->Common_Model->fetch_records('newses', array('is_deleted' => 0), false, false, 'id');
-    $this->load->view('site/include/header', $pageData);
-    $this->load->view('site/blogs', $pageData);
-    $this->load->view('site/include/footer', $pageData);
-  }
-
-  public function news($id)
-  {
-    $pageData = $this->Common_Model->get_userdata();
-    $this->load->view('site/include/header', $pageData);
-    $this->load->view('site/blog-details', $pageData);
-    $this->load->view('site/include/footer', $pageData);
-  }
-
-  public function jobs()
-  {
-    $pageData = $this->Common_Model->get_userdata();
-    $join[0][] = 'job_types';
-    $join[0][] = 'jobs.job_type = job_types.id';
-    $join[0][] = 'left';
-    $whereJoin['jobs.is_deleted'] = 0;
-    $select = 'jobs.*, job_types.name';
-    $pageData['jobs'] = $this->Common_Model->join_records('jobs', $join, $whereJoin, $select, 'jobs.id', 'DESC');
-    $pageData['paymentTypes'] = $this->Common_Model->get_payment_types();
-    $pageData['jobLocations'] = $this->Common_Model->fetch_records('job_types');
-
-    $this->load->view('site/include/header', $pageData);
-    $this->load->view('site/jobs', $pageData);
-    $this->load->view('site/include/footer', $pageData);
-  }
+  /* Some static pages */
 
   public function contact()
   {
@@ -262,6 +196,74 @@ class Home extends CI_Controller
     $pageData = $this->Common_Model->get_userdata();
     $this->load->view('site/include/header', $pageData);
     $this->load->view('site/company_profile', $pageData);
+    $this->load->view('site/include/footer', $pageData);
+  }
+
+  /*
+  public function about()
+  {
+    $pageData = $this->Common_Model->get_userdata();
+    $this->load->view('site/include/header', $pageData);
+    $this->load->view('site/about', $pageData);
+    $this->load->view('site/include/footer', $pageData);
+  }
+
+  public function career()
+  {
+    $pageData = $this->Common_Model->get_userdata();
+    $this->load->view('site/include/header', $pageData);
+    $this->load->view('site/career', $pageData);
+    $this->load->view('site/include/footer', $pageData);
+  }
+  
+
+  public function legal()
+  {
+    $pageData = $this->Common_Model->get_userdata();
+    $this->load->view('site/include/header', $pageData);
+    $this->load->view('site/legal', $pageData);
+    $this->load->view('site/include/footer', $pageData);
+  }
+
+  public function policy()
+  {
+    $pageData = $this->Common_Model->get_userdata();
+    $this->load->view('site/include/header', $pageData);
+    $this->load->view('site/policy', $pageData);
+    $this->load->view('site/include/footer', $pageData);
+  }
+  
+  public function newses()
+  {
+    $pageData = $this->Common_Model->get_userdata();
+    $pageData['newses']  = $this->Common_Model->fetch_records('newses', array('is_deleted' => 0), false, false, 'id');
+    $this->load->view('site/include/header', $pageData);
+    $this->load->view('site/blogs', $pageData);
+    $this->load->view('site/include/footer', $pageData);
+  }
+
+  public function news($id)
+  {
+    $pageData = $this->Common_Model->get_userdata();
+    $this->load->view('site/include/header', $pageData);
+    $this->load->view('site/blog-details', $pageData);
+    $this->load->view('site/include/footer', $pageData);
+  }
+
+  public function jobs()
+  {
+    $pageData = $this->Common_Model->get_userdata();
+    $join[0][] = 'job_types';
+    $join[0][] = 'jobs.job_type = job_types.id';
+    $join[0][] = 'left';
+    $whereJoin['jobs.is_deleted'] = 0;
+    $select = 'jobs.*, job_types.name';
+    $pageData['jobs'] = $this->Common_Model->join_records('jobs', $join, $whereJoin, $select, 'jobs.id', 'DESC');
+    $pageData['paymentTypes'] = $this->Common_Model->get_payment_types();
+    $pageData['jobLocations'] = $this->Common_Model->fetch_records('job_types');
+
+    $this->load->view('site/include/header', $pageData);
+    $this->load->view('site/jobs', $pageData);
     $this->load->view('site/include/footer', $pageData);
   }
 

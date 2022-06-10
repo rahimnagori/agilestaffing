@@ -53,7 +53,7 @@ $route['Log-In'] = 'Users';
 $route['Profile'] = 'Users/profile';
 $route['Logout'] = 'Users/logout';
 
-// $route['Resend-Email-Verification'] = 'Users/resend';
+$route['Resend-Email-Verification'] = 'Users/resend';
 
 // $route['Update-User'] = 'Users/update';
 // $route['Account'] = 'Users/account';

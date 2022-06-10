@@ -57,7 +57,7 @@ class Common_Model extends CI_Model {
   public function send_mail($to, $subject, $body, $bcc = null, $attachment = false){
     $response['status'] = 0;
     $PROJECT = $this->config->item('PROJECT');
-    $fromEmail = 'info@nursing.com';
+    $fromEmail = 'contact@agilestaffing.com';
     $config = array();
     $config['mailtype'] = "html";
     $config['charset'] = "utf-8";

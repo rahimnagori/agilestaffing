@@ -129,9 +129,9 @@ class Users extends CI_Controller {
     $response['status'] = 0;
 
     if($pageData['userDetails']['id']){
-      $this->send_verification_email($pageData['userDetails']['id'], true);
+      $emailResponse = $this->send_verification_email($pageData['userDetails']['id'], true);
       $response['status'] = 1;
-      $response['responseMessage'] = $this->Common_Model->success('Verification email sent successfully.');
+      $response['responseMessage'] = $this->Common_Model->success('Verification email sent successfully.' .$emailResponse);
     }
     echo json_encode($response);
   }

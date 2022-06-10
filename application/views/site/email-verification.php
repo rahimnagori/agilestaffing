@@ -155,7 +155,7 @@
           <div class="heade_login">
             <h4>Email Verification </h4>
           </div>
-          <div class="msg">
+          <div class="msg" id="responseMessage">
             <div class="alert alert-success">Please verify your email first to complete registration.</div>
           </div>
           <p>You need to verify your email address. We've sent an email to <b><u>
