@@ -48,7 +48,7 @@
    </div>
    <div class="copy_right">
       <div class="container">
-         © Copyright 2022 rahimnagori Software Solutions. All Rights Reserved.
+         © Copyright <?=date('Y');?> <?=$this->config->item('PROJECT');?>. All Rights Reserved.
       </div>
    </div>
 </footer>

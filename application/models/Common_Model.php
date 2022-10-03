@@ -159,6 +159,7 @@ class Common_Model extends CI_Model {
   }
 
   public function get_payment_types(){
+    /* Not in use */
     $formattedPaymentTypes = [];
     $paymentTypes = $this->fetch_records('payment_types');
     foreach($paymentTypes as $paymentType){

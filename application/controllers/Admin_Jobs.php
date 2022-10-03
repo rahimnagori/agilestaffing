@@ -24,11 +24,14 @@ class Admin_Jobs extends CI_Controller {
     $join[0][] = 'job_types';
     $join[0][] = 'jobs.job_type = job_types.id';
     $join[0][] = 'left';
+    $join[1][] = 'job_modes';
+    $join[1][] = 'jobs.job_mode = job_modes.id';
+    $join[1][] = 'left';
     $whereJoin['jobs.is_deleted'] = 0;
-    $select = 'jobs.*, job_types.name';
+    $select = 'jobs.*, job_types.job_type_title, job_types.job_type_description, job_modes.mode_title';
     $pageData['jobs'] = $this->Common_Model->join_records('jobs', $join, $whereJoin, $select, 'jobs.id', 'DESC');
+    $pageData['locations'] = $this->Common_Model->fetch_records('job_locations');
     $pageData['jobTypes'] = $this->Common_Model->fetch_records('job_types');
-    $pageData['paymentTypes'] = $this->Common_Model->get_payment_types();
 
     $this->load->view('admin/jobs_management', $pageData);
   }

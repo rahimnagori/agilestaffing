@@ -11,12 +11,10 @@
             <tr>
               <th>S.No.</th>
               <th>Title</th>
-              <th>Location</th>
-              <th>Salary</th>
               <th>Description</th>
-              <th>Qualification</th>
-              <th>Employment Type</th>
-              <th>Payment Type</th>
+              <th>Location</th>
+              <th>Job Reference</th>
+              <th>Job Mode</th>
               <th>Last Date</th>
               <th>Created</th>
               <th>Updated</th>
@@ -32,17 +30,15 @@
               <tr>
                 <td><?= $serialNumber + 1; ?></td>
                 <td><?= $job['title']; ?></td>
-                <td><?= $job['name'] ?></td>
-                <td>$<?= $job['salary']; ?></td>
                 <td>
                   <?php
                   echo $description;
                   echo (strlen($description) > 100) ? '...' : '';
                   ?>
                 </td>
-                <td><?= $job['qualification']; ?></td>
-                <td><?= ($job['employment_type'] == 1) ? 'Permanent' : 'Temporary'; ?></td>
-                <td><?= $paymentTypes[$job['payment_type']]; ?></td>
+                <td><?= $job['location']; ?></td>
+                <td><?= $job['mode_title']; ?></td>
+                <td><?= $job['job_reference']; ?></td>
                 <td class="<?=$elementClass;?>"><?= date("d M, Y", strtotime($job['last_date'])); ?></td>
                 <td><?= date("d M, Y", strtotime($job['created'])); ?></td>
                 <td><?= date("d M, Y", strtotime($job['updated'])); ?></td>
@@ -79,53 +75,39 @@
             </div>
             <div class="form-group">
               <label> Location </label>
-              <select class="form-control" name="job_type" onchange="update_location(this.value);">
+              <select class="form-control" name="job_type" >
                 <?php
-                foreach ($jobTypes as $jobType) {
+                foreach ($locations as $location) {
                 ?>
-                  <option value="<?= $jobType['id']; ?>"><?= $jobType['name']; ?></option>
+                  <option value="<?= $location['id']; ?>"><?= $location['location_name']; ?></option>
                 <?php
                 }
                 ?>
-                <option value="other">Other</option>
               </select>
-            </div>
-            <div class="responseMessage" id="addLocationHtml">
-
-            </div>
-            <div class="form-group">
-              <label> Salary </label>
-              <div class="input-group">
-                <span class="input-group-addon">$</span>
-                <input type="number" name="salary" class="form-control" required="">
-              </div>
             </div>
             <div class="form-group">
               <label> Description </label>
               <textarea class="form-control textarea" name="description" required=""></textarea>
             </div>
             <div class="form-group">
-              <label> Qualification </label>
-              <input type="text" name="qualification" class="form-control" required="">
-            </div>
-            <div class="form-group">
-              <label> Employment Type </label>
-              <label class="radio"> Permanent
-                <input type="radio" value="1" checked="checked" name="employment_type">
+              <label> Job Type </label>
+              <label class="radio"> Temporary
+                <input type="radio" value="1" name="employment_type">
                 <span class="checkround"></span>
               </label>
-              <label class="radio"> Temporary
-                <input type="radio" value="0" name="employment_type">
+              <label class="radio"> Permanent
+                <input type="radio" value="2" checked="checked" name="employment_type">
                 <span class="checkround"></span>
               </label>
             </div>
             <div class="form-group">
               <label> Payment Type </label>
               <?php
-                foreach($paymentTypes as $key => $paymentType){
+                foreach($jobTypes as $jobType){
+                  if($jobType['parent_id'] == null || $jobType['parent_id'] == '') continue;
               ?>
-                  <label class="radio"> <?=$paymentType;?>
-                    <input type="radio" value="<?=$key;?>" checked="checked" name="payment_type">
+                  <label class="radio"> <?=$jobType['job_type_title'];?>
+                    <input type="radio" value="<?=$jobType['id'];?>" checked="checked" name="payment_type">
                     <span class="checkround"></span>
                   </label>
               <?php
@@ -295,15 +277,5 @@
         if (response.status == 1) location.reload();
       }
     });
-  }
-
-  function update_location(locationType) {
-    if (locationType == 'other') {
-      $("#addLocationHtml").html(`<input type="text" name="name" id="location" class="form-control" required="" placeholder="Add other..." />`);
-      $("#addLocationHtml").show();
-    } else {
-      $("#addLocationHtml").hide();
-      $("#addLocationHtml").html("");
-    }
   }
 </script>

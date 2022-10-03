@@ -8,9 +8,6 @@
   </div>
 </div>
 
-
-
-
 <div class="sign_up">
   <div class="container">
     <div class="row">
@@ -28,7 +25,7 @@
             </div>
 
             <p class="already_l form-group text-right">
-              <a href="forgot.php">Forgot password?</a>
+              <a href="<?= site_url('Forgot'); ?>">Forgot password?</a>
             </p>
 
             <?= $this->session->flashdata('responseMessage'); ?>
@@ -45,7 +42,7 @@
               Don't have an account? <a href="<?= site_url('Sign-Up'); ?>">Sign Up</a>
             </p>
 
-            <div class="fb_g+">
+            <div class="fb_g+" style="display:none;">
               <div class="row">
                 <div class="col-xs-6">
                   <a href="#" class="btn btn-lg btn-block btn_fb">
