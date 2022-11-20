@@ -16,12 +16,12 @@
           <h2 class="font_1">Login</h2>
           <form id="loginForm" name="loginForm" onsubmit="log_user_in(event);">
             <div class="form-group">
-              <label>Email or Phone Number</label>
-              <input type="text" name="username" placeholder="Username" class="form-control" required="">
+              <label>Email</label>
+              <input type="text" name="email" placeholder="Enter email" class="form-control" required="">
             </div>
             <div class="form-group">
               <label>Password </label>
-              <input type="password" name="password" placeholder="Password" class="form-control" required="">
+              <input type="password" name="password" placeholder="Enter password" class="form-control" required="">
             </div>
 
             <p class="already_l form-group text-right">

@@ -17,6 +17,9 @@ $route['Logout'] = 'Users/logout';
 $route['Resend-Email-Verification'] = 'Users/resend';
 
 $route['Forgot'] = 'Home/forget';
+$route['Reset-Password'] = 'Users/reset';
+$route['Reset/(:any)/(:any)'] = 'Users/reset_password/$1/$2';
+$route['Update-Password'] = 'Users/update_new_password';
 /* Static Route */
 // $route['About'] = 'Home/about';
 // $route['Legal'] = 'Home/legal';

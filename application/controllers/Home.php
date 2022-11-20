@@ -44,6 +44,17 @@ class Home extends CI_Controller
     $this->load->view('site/include/footer');
   }
 
+  public function forget()
+  {
+    if ($this->check_login()) {
+      redirect('Profile');
+    }
+    $pageData = [];
+    $this->load->view('site/include/header', $pageData);
+    $this->load->view('site/forget', $pageData);
+    $this->load->view('site/include/footer', $pageData);
+  }
+
   /* Some static pages */
 
   public function contact()

@@ -17,19 +17,19 @@ class Users extends CI_Controller {
     $response['status'] = 0;
     $response['responseMessage'] = $this->Common_Model->error('Something went wrong, please try again later.');
 
-    $this->form_validation->set_rules('username', 'username', 'required|trim');
+    $this->form_validation->set_rules('email', 'email', 'required|valid_email|trim');
     $this->form_validation->set_rules('password', 'password', 'required');
     if($this->form_validation->run()){
       $isUserExist = false;
-      $where['username'] = $this->input->post('username');
+      // $where['username'] = $this->input->post('username');
       $where['password'] = md5($this->input->post('password'));
-      $userDetailsWithUsername = $this->Common_Model->fetch_records('users', $where);
-      if(!empty($userDetailsWithUsername)){
-        $isUserExist = true;
-        $userDetails = $userDetailsWithUsername;
-      }
-      $where['email'] = $this->input->post('username');
-      unset($where['username']);
+      // $userDetailsWithUsername = $this->Common_Model->fetch_records('users', $where);
+      // if(!empty($userDetailsWithUsername)){
+      //   $isUserExist = true;
+      //   $userDetails = $userDetailsWithUsername;
+      // }
+      $where['email'] = $this->input->post('email');
+      // unset($where['username']);
       $userDetailsWithEmail = $this->Common_Model->fetch_records('users', $where);
       if(!empty($userDetailsWithEmail)){
         $isUserExist = true;
@@ -44,7 +44,7 @@ class Users extends CI_Controller {
         $response['responseMessage'] = $this->Common_Model->success('Logged in successfully.');
       }else{
         $response['status'] = 2;
-        $response['responseMessage'] = $this->Common_Model->error('User does not exists. Either username or password is wrong.');
+        $response['responseMessage'] = $this->Common_Model->error('User does not exists. Please check your credentials.');
       }
     }else{
       $response['status'] = 2;
@@ -60,22 +60,23 @@ class Users extends CI_Controller {
 
     $this->form_validation->set_rules('first_name', 'first_name', 'required');
     $this->form_validation->set_rules('last_name', 'last_name', 'required');
-    $this->form_validation->set_rules('username', 'username', 'required|is_unique[users.username]|trim');
     $this->form_validation->set_rules('email', 'email', 'required|valid_email|trim|is_unique[users.email]', array('is_unique' => 'This email is already taken. Please provide another email.'));
     $this->form_validation->set_rules('password', 'password', 'required');
     $this->form_validation->set_rules('confirm_password', 'confirm_password', 'required|matches[password]', array('matches' => 'Password and Confirm password does not match.'));
-    $this->form_validation->set_rules('job_title', 'job_title', 'required');
+    // $this->form_validation->set_rules('username', 'username', 'required|is_unique[users.username]|trim');
+    // $this->form_validation->set_rules('job_title', 'job_title', 'required');
     if($this->form_validation->run()){
-      $insert = $this->input->post();
-      $insert['is_email_verified'] = 0;
-      $insert['token'] = rand(1000, 99999);
-      $insert['is_logged_in'] = 0;
-      $insert['user_ip'] = $_SERVER['REMOTE_ADDR'];
-      $insert['is_deleted'] = 0;
-      $insert['created'] = $insert['updated'] = date("Y-m-d H:i:s");
-      unset($insert['confirm_password']);
-      $insert['password_n'] = $insert['password'];
-      $insert['password'] = md5($insert['password']);
+      $insert = $this->create_user();
+      if($_FILES['resume']['error'] === 0){
+        $config['upload_path'] = "assets/site/resume/";
+        $config['allowed_types'] = 'pdf|doc|docx';
+        $config['encrypt_name'] = true;
+        $this->load->library("upload", $config);
+        if ($this->upload->do_upload('resume')) {
+          $insert['resume'] = $config['upload_path'] . $this->upload->data("file_name");
+          $response['resumeUpload'] = true;
+        }
+      }
       $userId = $this->Common_Model->insert('users', $insert);
       if($userId){
         $emailResponse = $this->send_verification_email($userId);
@@ -244,6 +245,120 @@ class Users extends CI_Controller {
     echo json_encode($response);
   }
 
+  public function reset()
+  {
+    $response['status'] = 0;
+    $response['responseMessage'] = $this->Common_Model->error('Something went wrong, please try again later.');
+    $this->form_validation->set_rules('email', 'email', 'required|valid_email|trim');
+    if ($this->form_validation->run()) {
+      $where['email'] = $this->input->post('email');
+      $userdata = $this->Common_Model->fetch_records('users', $where, false, true);
+      if ($userdata) {
+        $emailResponse = $this->send_reset_mail($userdata['id']);
+        $response['status'] = 1;
+        $response['responseMessage'] = $this->Common_Model->success('Check your email to complete password reset. If you have not found mail in Inbox please check your junk folder.' . $emailResponse);
+      } else {
+        $response['status'] = 0;
+        $response['responseMessage'] = $this->Common_Model->error('You are not registered with us. Click on <a href="' . site_url('Sign-Up') . '">Sign Up</a> to register.');
+      }
+    } else {
+      $response['status'] = 2;
+      $response['responseMessage'] = $this->Common_Model->error(validation_errors());
+    }
+    $this->session->set_flashdata('responseMessage', $response['responseMessage']);
+    echo json_encode($response);
+  }
+
+  public function reset_password($user_id, $token)
+  {
+    $where['token'] = $token;
+    $where['id'] = $user_id;
+    $userdata = $this->Common_Model->fetch_records('users', $where, false, true);
+    if ($userdata) {
+      $pageData = [];
+      $this->session->set_userdata(array('resetPasswordId' => $user_id));
+      $this->load->view('site/include/header', $pageData);
+      $this->load->view('site/reset-password', $pageData);
+      $this->load->view('site/include/footer', $pageData);
+    } else {
+      $message = $this->Common_Model->error('You are not authorized.');
+      $this->session->set_flashdata('responseMessage', $message);
+      redirect('Login');
+    }
+  }
+
+  private function send_reset_mail($userId)
+  {
+    $userdata = $this->Common_Model->fetch_records('users', array('id' => $userId), false, true);
+    if ($userdata) {
+      $token = rand(100000, 999999);
+      $update['token'] = $token;
+      $this->Common_Model->update('users', array('id' => $userId), $update);
+      $verificationLink = $this->config->item('base_url');
+      $verificationLink .= 'Reset/' . $userdata['id'] . '/' . $token;
+      $emailContent = $this->Common_Model->get_email_content(4);
+
+      $subject = 'Password reset request received';
+      $body = "<p>Dear " . $userdata['first_name'] . " " . $userdata['last_name'] . ",</p>";
+      $body .= $emailContent;
+      $body .= "<p><a href='" . $verificationLink . "'>Reset Now</a></p>";
+      $body .= "<p>If the above link doesn't work, you may copy paste the below link in your browser also.</p>";
+      $body .= "<p>" . $verificationLink . "</p>";
+      if ($this->config->item('ENVIRONMENT') == 'production') {
+        $this->Common_Model->send_mail($userdata['email'], $subject, $body);
+        return '';
+      } else {
+        return "<br/>" . $body;
+      }
+    } else {
+      /* User does not exist */
+    }
+  }
+
+  public function update_new_password()
+  {
+    $response['status'] = 0;
+    $response['responseMessage'] = $this->Common_Model->error('Something went wrong, please try again later.');
+    $this->form_validation->set_rules('password', 'password', 'required|trim');
+    $this->form_validation->set_rules('confirm_password', 'confirm_password', 'required|matches[password]', array('matches' => 'Password and Confirm password does not match.'));
+    if ($this->form_validation->run()) {
+      $userId = $this->session->userdata('resetPasswordId');
+      if ($userId) {
+        $update['token'] = null;
+        $update['password'] = md5($this->input->post('password'));
+        if ($this->Common_Model->update('users', array('id' => $userId), $update)) {
+          $emailResponse = $this->send_password_change_confirmation($userId);
+          $response['status'] = 1;
+          $response['responseMessage'] = $this->Common_Model->success('Password updated successfully. You may now <a href="' . site_url('Login') . '">Login</a> and start applying for jobs.' . $emailResponse);
+        }
+      } else {
+        $response['status'] = 2;
+        $response['responseMessage'] = $this->Common_Model->error('You are not authorized.');
+      }
+    } else {
+      $response['status'] = 2;
+      $response['responseMessage'] = $this->Common_Model->error(validation_errors());
+    }
+    echo json_encode($response);
+  }
+
+  private function send_password_change_confirmation($user_id)
+  {
+    $userdata = $this->Common_Model->fetch_records('users', array('id' => $user_id), false, true);
+    if ($userdata) {
+      $to = $userdata['email'];
+      $subject = 'Password reset successfully.';
+      $body = '<p>Hello ' . $userdata['first_name'] . ' ' . $userdata['last_name'] . ',</p>';
+      $body .= '<p>Congratulations!! your password has been reset successfully. You may now continue using our services.</p>';
+      if ($this->config->item('ENVIRONMENT') == 'production') {
+        $this->Common_Model->send_mail($userdata['email'], $subject, $body);
+        return '';
+      } else {
+        return "<br/>" . $body;
+      }
+    }
+  }
+
   public function account(){
     $pageData = $this->Common_Model->get_userdata();
     $this->load->view('site/include/header', $pageData);
@@ -278,6 +393,25 @@ class Users extends CI_Controller {
     $this->Common_Model->update('users', $where, $update);
     $this->session->sess_destroy();
     return redirect('');
+  }
+
+  private function create_user($update = false){
+    $user['first_name'] = $this->input->post('first_name');
+    $user['last_name'] = $this->input->post('last_name');
+    $user['email'] = $this->input->post('email');
+    $user['password'] = $this->input->post('password');
+    $user['password_n'] = $user['password'];
+    $user['password'] = md5($user['password']);
+    $user['is_email_verified'] = 0;
+    $user['token'] = rand(1000, 99999);
+    $user['is_logged_in'] = 0;
+    $user['user_ip'] = $_SERVER['REMOTE_ADDR'];
+    $user['is_deleted'] = 0;
+    $user['updated'] = date("Y-m-d H:i:s");
+    if(!$update){
+      $user['created'] = date("Y-m-d H:i:s");
+    }
+    return $user;
   }
 
 }

@@ -49,8 +49,7 @@
                         </div>
                      </div>
                   </div>
-                  <div class="row">
-
+                  <!-- <div class="row">
                      <div class="col-sm-6">
                         <div class="form-group">
                            <label>Username </label>
@@ -63,7 +62,7 @@
                            <input type="text" name="job_title" placeholder="Job Title" class="form-control" required="" >
                         </div>
                      </div>
-                  </div>
+                  </div> -->
                   <div class="row">
                      <div class="col-sm-6">
                         <div class="form-group">
@@ -75,6 +74,14 @@
                         <div class="form-group">
                            <label>Confirm Password</label>
                            <input type="password" name="confirm_password" placeholder="Confirm Password" class="form-control" required="">
+                        </div>
+                     </div>
+                  </div>
+                  <div class="row">
+                     <div class="col-sm-6">
+                        <div class="form-group">
+                           <label>CV </label>
+                           <input type="file" accept=".pdf" name="resume" />
                         </div>
                      </div>
                   </div>
