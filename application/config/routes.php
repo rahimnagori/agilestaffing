@@ -12,6 +12,8 @@ $route['Verify/(:any)/(:any)'] = 'Users/email_verification/$1/$2';
 $route['Verify'] = 'Users/verify';
 $route['Log-In'] = 'Users';
 $route['Profile'] = 'Users/profile';
+$route['Edit-Profile'] = 'Users/edit_profile';
+$route['Update-Profile'] = 'Users/update_profile';
 $route['Logout'] = 'Users/logout';
 
 $route['Resend-Email-Verification'] = 'Users/resend';

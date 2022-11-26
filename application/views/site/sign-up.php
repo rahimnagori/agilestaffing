@@ -45,7 +45,7 @@
                      <div class="col-sm-6">
                         <div class="form-group">
                            <label>Phone </label>
-                           <input type="text" name="Phone" placeholder="Phone" class="form-control" required="">
+                           <input type="text" name="phone" placeholder="Phone" class="form-control" required="">
                         </div>
                      </div>
                   </div>
@@ -86,10 +86,9 @@
                      </div>
                   </div>
 
-                  <div class="form-group responseMessage" id="otherJobField"></div>
-
-                  <?= $this->session->flashdata('responseMessage'); ?>
-                  <div class="responseMessage" id="responseMessage"></div>
+                  <div class="responseMessage" id="responseMessage">
+                     <?= $this->session->flashdata('responseMessage'); ?>
+                  </div>
                   <div class="btnloggib">
                      <button class="btn btn_theme btn-lg btn-block btn_submit" type="submit">Register</button>
                   </div>

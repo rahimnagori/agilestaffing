@@ -72,8 +72,9 @@
                            Do you have the right to work in the UK: <b>Yes/No</b>
                         </label>
                      </div>
-                     <?=$this->session->flashdata('responseMessage');?>
-                     <div class="responseMessage" id="responseMessage" ></div>
+                     <div class="responseMessage" id="responseMessage" >
+                        <?=$this->session->flashdata('responseMessage');?>
+                     </div>
                      <div class="form-group">
                         <label><button class="btn btn_theme2 btn-lg btn_submit">Update</button></label>
                      </div>

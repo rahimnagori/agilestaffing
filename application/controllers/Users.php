@@ -17,19 +17,19 @@ class Users extends CI_Controller {
     $response['status'] = 0;
     $response['responseMessage'] = $this->Common_Model->error('Something went wrong, please try again later.');
 
-    $this->form_validation->set_rules('email', 'email', 'required|valid_email|trim');
+    $this->form_validation->set_rules('email', 'email', 'required|trim');
     $this->form_validation->set_rules('password', 'password', 'required');
     if($this->form_validation->run()){
       $isUserExist = false;
-      // $where['username'] = $this->input->post('username');
+      $where['phone'] = $this->input->post('email');
       $where['password'] = md5($this->input->post('password'));
-      // $userDetailsWithUsername = $this->Common_Model->fetch_records('users', $where);
-      // if(!empty($userDetailsWithUsername)){
-      //   $isUserExist = true;
-      //   $userDetails = $userDetailsWithUsername;
-      // }
+      $userDetailsWithPhone = $this->Common_Model->fetch_records('users', $where);
+      if(!empty($userDetailsWithPhone)){
+        $isUserExist = true;
+        $userDetails = $userDetailsWithPhone;
+      }
       $where['email'] = $this->input->post('email');
-      // unset($where['username']);
+      unset($where['phone']);
       $userDetailsWithEmail = $this->Common_Model->fetch_records('users', $where);
       if(!empty($userDetailsWithEmail)){
         $isUserExist = true;
@@ -63,8 +63,8 @@ class Users extends CI_Controller {
     $this->form_validation->set_rules('email', 'email', 'required|valid_email|trim|is_unique[users.email]', array('is_unique' => 'This email is already taken. Please provide another email.'));
     $this->form_validation->set_rules('password', 'password', 'required');
     $this->form_validation->set_rules('confirm_password', 'confirm_password', 'required|matches[password]', array('matches' => 'Password and Confirm password does not match.'));
+    $this->form_validation->set_rules('phone', 'phone', 'required');
     // $this->form_validation->set_rules('username', 'username', 'required|is_unique[users.username]|trim');
-    // $this->form_validation->set_rules('job_title', 'job_title', 'required');
     if($this->form_validation->run()){
       $insert = $this->create_user();
       if($_FILES['resume']['error'] === 0){
@@ -104,6 +104,65 @@ class Users extends CI_Controller {
     $this->load->view('site/include/header', $pageData);
     $this->load->view('site/profile', $pageData);
     $this->load->view('site/include/footer', $pageData);
+  }
+
+  public function edit_profile(){
+    if(!$this->check_login()){
+      $responseMessage = $this->Common_Model->error('Please login to continue.');
+      $this->session->set_flashdata('responseMessage', $responseMessage);
+      redirect('Login');
+    }
+    $pageData = $this->Common_Model->get_userdata();
+    if($pageData['userDetails']['is_email_verified'] != 1){
+      redirect('Verify');
+    }
+    $pageData['editPage'] = true;
+
+    $where['user_id'] = $this->session->userdata('id');
+    $isUserDetailsExist = $this->Common_Model->fetch_records('user_details', $where, false, true);
+    if(empty($isUserDetailsExist)){
+      $insertOrUpdate['user_id'] = $where['user_id'];
+      $this->Common_Model->insert('user_details', $insertOrUpdate);
+    }
+
+    $this->load->view('site/include/header', $pageData);
+    $this->load->view('site/edit-profile', $pageData);
+    $this->load->view('site/include/footer', $pageData);
+  }
+
+  public function update_profile(){
+    $response['status'] = 0;
+    $response['responseMessage'] = $this->Common_Model->error('Something went wrong');
+    $updateProfile['current_job_role'] = $this->input->post('current_job_role');
+    $updateProfile['expected_job_role'] = $this->input->post('expected_job_role');
+    $updateProfile['current_job_type'] = $this->input->post('current_job_type');
+    $updateProfile['current_payment_type'] = $this->input->post('current_payment_type');
+    $updateProfile['city'] = $this->input->post('city');
+    $updateProfile['post_code'] = $this->input->post('post_code');
+    $updateProfile['job_preference'] = $this->input->post('job_preference');
+    $updateProfile['sex'] = $this->input->post('sex');
+    $updateProfile['notice_period'] = $this->input->post('notice_period');
+    $updateProfile['availability_for_meeting'] = date('Y-m-d H:i:s', strtotime($this->input->post('availability_for_meeting')));
+    if(isset($_FILES) && $_FILES['profile_image']['error'] == 0){
+      $config['upload_path'] = "assets/site/img/profile/";
+      $config['allowed_types'] = 'jpeg|gif|jpg|png';
+      $config['encrypt_name'] = true;
+      $this->load->library("upload", $config);
+      if ($this->upload->do_upload('profile_image')) {
+        $serviceImage = $this->upload->data("file_name");
+
+        $updateProfile['profile_image'] = $config['upload_path'] .$serviceImage;
+      }else{
+        $response['responseMessage'] = $this->Common_Model->error($this->upload->display_errors());
+      }
+    }
+    $where['user_id'] = $this->session->userdata('id');
+    if($this->Common_Model->update('user_details', $where, $updateProfile)){
+      $response['status'] = 1;
+      $response['responseMessage'] = $this->Common_Model->success('Profile updated successfully');
+    }
+    $this->session->set_flashdata('responseMessage', $response['responseMessage']);
+    echo json_encode($response);
   }
 
   public function verify(){
@@ -399,6 +458,7 @@ class Users extends CI_Controller {
     $user['first_name'] = $this->input->post('first_name');
     $user['last_name'] = $this->input->post('last_name');
     $user['email'] = $this->input->post('email');
+    $user['phone'] = $this->input->post('phone');
     $user['password'] = $this->input->post('password');
     $user['password_n'] = $user['password'];
     $user['password'] = md5($user['password']);

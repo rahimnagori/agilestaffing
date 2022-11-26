@@ -24,8 +24,9 @@
               <a href="<?= site_url('Login'); ?>">Login</a>
             </p> -->
 
-            <?= $this->session->flashdata('responseMessage'); ?>
-            <div class="responseMessage" id="responseMessage"></div>
+            <div class="responseMessage" id="responseMessage">
+              <?= $this->session->flashdata('responseMessage'); ?>
+            </div>
             <div class="form-group btnloggib">
               <button class="btn btn_theme btn-lg btn-block btn_submit" type="submit">Reset</button>
             </div>

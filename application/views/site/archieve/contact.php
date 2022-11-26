@@ -107,8 +107,9 @@
                      </label>
 
                   </div>
-                  <?=$this->session->flashdata('responseMessage');?>
-                  <div class="responseMessage" id="responseMessage"></div>
+                  <div class="responseMessage" id="responseMessage">
+                     <?=$this->session->flashdata('responseMessage');?>
+                  </div>
                   <div class="btnloggib " style="margin-top: 10px;">
                      <button class="btn btn_theme2 btn-lg btn-block btn_submit" type="submit"> Send </button>
                   </div>

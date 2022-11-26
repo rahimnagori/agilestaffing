@@ -16,8 +16,8 @@
           <h2 class="font_1">Login</h2>
           <form id="loginForm" name="loginForm" onsubmit="log_user_in(event);">
             <div class="form-group">
-              <label>Email</label>
-              <input type="text" name="email" placeholder="Enter email" class="form-control" required="">
+              <label>Email or Phone</label>
+              <input type="text" name="email" placeholder="Enter email or phone" class="form-control" required="">
             </div>
             <div class="form-group">
               <label>Password </label>
@@ -28,8 +28,9 @@
               <a href="<?= site_url('Forgot'); ?>">Forgot password?</a>
             </p>
 
-            <?= $this->session->flashdata('responseMessage'); ?>
-            <div class="responseMessage" id="responseMessage"></div>
+            <div class="responseMessage" id="responseMessage">
+              <?= $this->session->flashdata('responseMessage'); ?>
+            </div>
             <div class="form-group btnloggib">
               <button class="btn btn_theme btn-lg btn-block btn_submit" type="submit">Login</button>
             </div>

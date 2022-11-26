@@ -152,6 +152,8 @@ class Common_Model extends CI_Model {
     $where['id'] = $this->session->userdata('id');
     if($where['id']){
       $pageData['userDetails'] = $this->fetch_records('users', $where, false, true);
+      $pageData['moreUserDetails'] = $this->fetch_records('user_details', array('user_id' => $where['id']), false, true);
+      $pageData['editPage'] = false;
     }
 
     return $pageData;

@@ -46,8 +46,8 @@
                      <li class="droup_des">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                            <span class="img_radiuus">
-                              <img src="<?= site_url('assets/site/'); ?>img/img_9.png">
-                              User Name
+                           <img src="<?= site_url(); ?><?=(!empty($moreUserDetails) && $moreUserDetails['profile_image']) ? $moreUserDetails['profile_image'] : 'assets/site/img/img_9.png';?>">
+                              <?=$userDetails['first_name'] .' ' .$userDetails['last_name'];?>
                               <span class="caret"></span>
                            </span>
                         </a>

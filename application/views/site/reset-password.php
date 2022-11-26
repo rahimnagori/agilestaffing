@@ -24,8 +24,9 @@
               <input type="password" name="confirm_password" placeholder="Confirm new password" class="form-control" required="">
             </div>
 
-            <?= $this->session->flashdata('responseMessage'); ?>
-            <div class="responseMessage" id="responseMessage"></div>
+            <div class="responseMessage" id="responseMessage">
+              <?= $this->session->flashdata('responseMessage'); ?>
+            </div>
             <div class="form-group btnloggib">
               <button class="btn btn_theme btn-lg btn-block btn_submit" type="submit">Update</button>
             </div>
