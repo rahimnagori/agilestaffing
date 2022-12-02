@@ -78,10 +78,10 @@
                      </div>
                   </div>
                   <div class="row">
-                     <div class="col-sm-6">
+                     <div class="col-sm-12">
                         <div class="form-group">
                            <label>CV </label>
-                           <input type="file" accept=".pdf" name="resume" />
+                           <input type="file" accept=".pdf" name="resume" class="form-control upload" />
                         </div>
                      </div>
                   </div>
