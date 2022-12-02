@@ -9,14 +9,14 @@
           <thead>
             <tr>
               <th>S.No.</th>
-              <th>Username</th>
               <th>Email</th>
               <th>Name</th>
-              <th>Job Title</th>
+              <th>Current Job Role</th>
+              <th>Expected Job Role</th>
+              <th>Current Job Type</th>
+              <th>Current Payment Type</th>
               <th>Address</th>
               <th>Phone</th>
-              <th>National Insurance Number</th>
-              <th>UK Work Permit</th>
               <th>Resume</th>
               <th>Last Login</th>
               <th>Created</th>
@@ -32,19 +32,22 @@
             ?>
               <tr>
                 <td><?= $serialNumber + 1; ?></td>
-                <td><?= $user['username']; ?></td>
                 <td>
                   <?= $user['email']; ?>
                   <strong><span class="text-<?= $statusClass; ?>">
                       (<?= $emailStatus; ?>)
                     </span></strong>
                 </td>
-                <td><?= $user['first_name'] . ' ' . $user['last_name']; ?></td>
-                <td>Job Title</td>
-                <td><?= $user['address']; ?></td>
+                <td>
+                  <img src="<?=site_url($user['profile_image']);?>" width="100" >
+                  <?= $user['first_name'] . ' ' . $user['last_name']; ?>
+                </td>
+                <td><?= $user['current_job_role']; ?></td>
+                <td><?= $user['expected_job_role']; ?></td>
+                <td><?= $user['current_job_type']; ?></td>
+                <td><?= $user['current_payment_type']; ?></td>
+                <td><?= $user['city']; ?></td>
                 <td><?= $user['phone']; ?></td>
-                <td><?= $user['national_insurance_number']; ?></td>
-                <td><?= $user['uk_work_permit']; ?></td>
                 <td>
                   <?php
                   $resume = 'No resume uploaded yet';
@@ -60,9 +63,10 @@
                 <td><?= date("d M, Y", strtotime($user['created'])); ?></td>
                 <td><?= date("d M, Y", strtotime($user['updated'])); ?></td>
                 <td>
-                  <a href="#" class="btn btn-info btn-xs">Send Mail</a>
+                  Action
+                  <!-- <a href="#" class="btn btn-info btn-xs">Send Mail</a>
                   <a href="#" class="btn btn-info btn-xs">Edit</a>
-                  <a href="#" class="btn btn-danger btn-xs">Delete</a>
+                  <a href="#" class="btn btn-danger btn-xs">Delete</a> -->
                 </td>
               </tr>
             <?php

@@ -4,13 +4,36 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Jobs extends CI_Controller
 {
 
-    public function __construct(){
+    public function __construct()
+    {
         parent::__construct();
         $this->load->model('Common_Model');
         $this->load->model('Jobs_Model');
         $this->load->library('session');
     }
 
+    public function index()
+    {
+        if (!$this->check_login()) {
+            $responseMessage = $this->Common_Model->error('Please login to continue.');
+            $this->session->set_flashdata('responseMessage', $responseMessage);
+            // redirect('Login');
+        }
+        $pageData = $this->Common_Model->get_userdata();
+        if ($pageData['userDetails']['is_email_verified'] != 1) {
+            // redirect('Verify');
+        }
+        $this->load->view('site/include/header', $pageData);
+        $this->load->view('site/job', $pageData);
+        $this->load->view('site/include/footer', $pageData);
+    }
+
+    private function check_login()
+    {
+        return ($this->session->userdata('is_user_logged_in')) ? true : false;
+    }
+
+    /*
     public function index(){
         $searchParams = $this->input->post();
         $orLikeGroup = [];
@@ -35,7 +58,7 @@ class Jobs extends CI_Controller
         $select = 'jobs.*, job_types.name';
         $pageData['jobs'] = $this->Jobs_Model->join_records('jobs', $join, $select, $whereJoin, $orLikeGroup,  'jobs.id', 'DESC');
         $pageData['paymentTypes'] = $this->Common_Model->get_payment_types();
-        $this->load->view('site/include/jobs_listings', $pageData);
+        $this->load->view('site/job_list', $pageData);
     }
 
     public function job_details($id){
@@ -89,4 +112,5 @@ class Jobs extends CI_Controller
         }
         echo json_encode($response);
     }
+    */
 }
