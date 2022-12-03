@@ -26,7 +26,7 @@ class Jobs extends CI_Controller
         $pageData = [];
 
         $this->load->view('site/include/header', $pageData);
-        $this->load->view('site/job_list_1', $pageData);
+        $this->load->view('site/jobs', $pageData);
         $this->load->view('site/include/footer', $pageData);
     }
 
