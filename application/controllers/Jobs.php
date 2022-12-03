@@ -14,17 +14,19 @@ class Jobs extends CI_Controller
 
     public function index()
     {
-        if (!$this->check_login()) {
-            $responseMessage = $this->Common_Model->error('Please login to continue.');
-            $this->session->set_flashdata('responseMessage', $responseMessage);
-            // redirect('Login');
-        }
-        $pageData = $this->Common_Model->get_userdata();
-        if ($pageData['userDetails']['is_email_verified'] != 1) {
-            // redirect('Verify');
-        }
+        // if (!$this->check_login()) {
+        //     $responseMessage = $this->Common_Model->error('Please login to continue.');
+        //     $this->session->set_flashdata('responseMessage', $responseMessage);
+        //     // redirect('Login');
+        // }
+        // $pageData = $this->Common_Model->get_userdata();
+        // if ($pageData['userDetails']['is_email_verified'] != 1) {
+        //     // redirect('Verify');
+        // }
+        $pageData = [];
+
         $this->load->view('site/include/header', $pageData);
-        $this->load->view('site/job', $pageData);
+        $this->load->view('site/job_list_1', $pageData);
         $this->load->view('site/include/footer', $pageData);
     }
 
