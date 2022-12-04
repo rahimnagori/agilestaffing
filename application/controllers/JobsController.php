@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Jobs extends CI_Controller
+class JobsController extends CI_Controller
 {
 
     public function __construct()
@@ -17,7 +17,7 @@ class Jobs extends CI_Controller
         $pageData = $this->Common_Model->get_userdata();
     
         $this->load->view('site/include/header', $pageData);
-        $this->load->view('site/jobs', $pageData);
+        $this->load->view('site/search_jobs', $pageData);
         $this->load->view('site/include/footer', $pageData);
     }
 

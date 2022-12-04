@@ -993,8 +993,6 @@ Computer Software (160,912)
 
 <!-- Modal -->
 <div class="modal fade modal_desus2 " id="filterr" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    
-</div>
+  <div class="modal-dialog" role="document"></div>
 </div>
 
