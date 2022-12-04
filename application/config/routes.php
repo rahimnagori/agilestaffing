@@ -31,7 +31,7 @@ $route['Update-Password'] = 'Users/update_new_password';
 // $route['Work'] = 'Home/work';
 
 // $route['Jobs'] = 'Home/jobs';
-// $route['Search-Jobs'] = 'Jobs';
+$route['Search-Jobs'] = 'Jobs';
 // $route['Job-Details/(:any)'] = 'Jobs/job_details/$1';
 // $route['Apply'] = 'Jobs/apply';
 

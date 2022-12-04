@@ -55,5 +55,32 @@
 </div>
 
 <script type="text/javascript">
-    
+    function apply() {
+        $.ajax({
+            type: 'POST',
+            url: BASE_URL + 'Apply',
+            data: {
+                id: 3
+            },
+            dataType: 'json',
+            beforeSend: function(xhr) {
+                $(".btn_submit").attr('disabled', true);
+                $(".btn_submit").html(LOADING);
+                $("#job-listings").html(LOADING);
+                $("#responseMessage").hide();
+            },
+            success: function(response) {
+                $("#responseMessage").html(response.responseMessage);
+                $("#responseMessage").show();
+                if (response.status == 1) {
+                    $(".btn_submit").html(' Applied ');
+                } else if (response.status == 3) {
+                    $(".btn_submit").html(' Already applied ');
+                } else {
+                    $(".btn_submit").html(' Apply ');
+                    $(".btn_submit").prop('disabled', false);
+                }
+            }
+        });
+    }
 </script>

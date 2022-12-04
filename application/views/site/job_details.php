@@ -15,7 +15,7 @@
             <span class="fa fa-star"></span>
         </div>
         <div class="ayrollh3">
-            <a href="#" class="btn btn_theme" data-toggle="modal" data-target="#detail_list">Apply this company</a>
+            <a href="#" class="btn btn_theme" data-toggle="modal" data-target="#detail_list">Apply</a>
             <a href="#" class="btn btn_theme2">
                 <i class="fa fa-heart-o"></i> Save
             </a>
