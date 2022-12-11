@@ -355,7 +355,7 @@ class Users extends CI_Controller {
       $this->Common_Model->update('users', array('id' => $userId), $update);
       $verificationLink = $this->config->item('base_url');
       $verificationLink .= 'Reset/' . $userdata['id'] . '/' . $token;
-      $emailContent = $this->Common_Model->get_email_content(4);
+      $emailContent = $this->Common_Model->get_email_content('password_reset');
 
       $subject = 'Password reset request received';
       $body = "<p>Dear " . $userdata['first_name'] . " " . $userdata['last_name'] . ",</p>";

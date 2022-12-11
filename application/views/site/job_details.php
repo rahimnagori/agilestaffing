@@ -3,17 +3,17 @@
 </div>
 <div class="cont_Payroll">
     <div class="commodo_de commodo_de2">
-        <a href="reviews.php">
-            <h3>Insurance Executive / Agent</h3>
-            <h2>SYMBO INDIA INSURANCE BROKING LIMITED</h2>
+        <a href="#">
+            <h3><?=$jobDetails['title'];?></h3>
+            <h2><?=$jobDetails['company'];?></h2>
         </a>
-        <div class="star_5">
+        <!-- <div class="star_5">
             <span class="active fa fa-star"></span>
             <span class="active fa fa-star"></span>
             <span class="active fa fa-star"></span>
             <span class="active fa fa-star"></span>
             <span class="fa fa-star"></span>
-        </div>
+        </div> -->
         <div class="ayrollh3">
             <a href="#" class="btn btn_theme" data-toggle="modal" data-target="#detail_list">Apply</a>
             <a href="#" class="btn btn_theme2">
@@ -21,12 +21,13 @@
             </a>
         </div>
         <hr>
-        <h4><i class="fa fa-briefcase"></i> Facilities Officer</h4>
-        <h4><i class="fa fa-map-marker"></i>Indore</h4>
+        <h4><i class="fa fa-briefcase"></i> <?=$jobDetails['position'];?></h4>
+        <h4><i class="fa fa-map-marker"></i><?=$jobDetails['address'];?></h4>
         <!-- <h4><i class="fa fa-money"></i>₹30,000 a month</h4> -->
     </div>
+    <?=$jobDetails['description'];?>
 
-    <h4>sunt in culpa qui officia deserunt mollit anim</h4>
+    <!-- <h4>sunt in culpa qui officia deserunt mollit anim</h4>
     <p>
         Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
         incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
@@ -49,7 +50,7 @@
         fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
         culpa qui officia deserunt mollit anim id est laborum.
     </p>
-    <br>
+    <br> -->
     <div class="row www0">
         <!-- <div class="col-sm-6 col-xs-12">
             <div class="row">

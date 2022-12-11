@@ -32,7 +32,9 @@ $route['Update-Password'] = 'Users/update_new_password';
 
 // $route['Jobs'] = 'Home/jobs';
 $route['Search-Jobs'] = 'JobsController';
-// $route['Job-Details/(:any)'] = 'Jobs/job_details/$1';
+$route['Job-Details/(:any)'] = 'JobsController/job_details/$1';
+$route['Guest-Apply'] = 'JobsController/apply_guest';
+$route['Submit-Otp'] = 'JobsController/submit_otp';
 // $route['Apply'] = 'Jobs/apply';
 
 // $route['Contact'] = 'Home/contact';
@@ -91,6 +93,11 @@ $route['Admin-Jobs/Get/(:any)'] = 'Admin_Jobs/get_job/$1';
 $route['Admin-Jobs/Add'] = 'Admin_Jobs/add_job';
 $route['Admin-Jobs/delete'] = 'Admin_Jobs/delete_job';
 $route['Admin-Jobs/Update'] = 'Admin_Jobs/update_job';
+
+$route['Admin-Settings'] = 'Admin_Settings';
+$route['Get-Email'] = 'Admin_Settings/get_email';
+$route['Update-Email'] = 'Admin_Settings/update_email';
+$route['Update-Settings'] = 'Admin_Settings/update_settings';
 
 // $route['Admin-Contact'] = 'Admin_Contacts';
 

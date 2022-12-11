@@ -177,4 +177,27 @@ class Common_Model extends CI_Model {
     return $email['content'];
   }
 
+  public function getAdmin($adminId)
+  {
+    $where['id'] = $adminId;
+    $pageData['adminData'] = $this->fetch_records('admins', $where, false, true);
+    // $pageData['defaultPermissions'] = $this->fetch_records('permissions');
+    // if (!empty($pageData['adminData'])) {
+    //   $pageData['permissions'] = $this->is_admin_authorized($adminId);
+    // }
+    return $pageData;
+  }
+
+  public function generate_password($passwordLength)
+  {
+    $alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
+    $pass = array();
+    $alphaLength = strlen($alphabet) - 1;
+    for ($i = 0; $i <= $passwordLength; $i++) {
+      $n = rand(0, $alphaLength);
+      $pass[] = $alphabet[$n];
+    }
+    return implode($pass);
+  }
+
 }

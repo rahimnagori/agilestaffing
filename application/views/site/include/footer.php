@@ -204,7 +204,7 @@ $(function(){
 
 <script type="text/javascript">
 
-  document.getElementById('output').innerHTML = location.search;
+  // document.getElementById('output').innerHTML = location.search;
 
   // $(".chosen-select").chosen();
 

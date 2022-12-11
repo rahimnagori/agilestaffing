@@ -32,6 +32,9 @@
       <li>
         <a href="<?=site_url('Professional-Request');?>"><i class="fa fa-user"></i> Professional Requests</a>
       </li>
+      <!-- <li>
+        <a href="<?= site_url('Admin-Settings'); ?>"><i class="fa fa-gear"></i> Admin Settings</a>
+      </li> -->
     </ul>
   </div>
 </div>

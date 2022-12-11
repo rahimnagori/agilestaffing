@@ -11,10 +11,12 @@
             <tr>
               <th>S.No.</th>
               <th>Title</th>
+              <th>Position</th>
               <th>Description</th>
-              <th>Location</th>
-              <th>Job Reference</th>
               <th>Job Mode</th>
+              <th>Company</th>
+              <th>Address</th>
+              <th>Salary</th>
               <th>Last Date</th>
               <th>Created</th>
               <th>Updated</th>
@@ -26,19 +28,28 @@
             foreach ($jobs as $serialNumber => $job) {
               $elementClass = (date("Y-m-d H:i:s") >= date("d M, Y", strtotime($job['last_date']))) ? 'danger' : '';
               $description = strip_tags(substr($job['description'], 0, 100));
+              if($job['job_mode'] == 1){
+                $jobMode = 'Remote';
+              }else if($job['job_mode'] == 2){
+                $jobMode = 'Hybrid';
+              }else{
+                $jobMode = 'Onsite';
+              }
             ?>
               <tr>
                 <td><?= $serialNumber + 1; ?></td>
                 <td><?= $job['title']; ?></td>
+                <td><?= $job['position']; ?></td>
                 <td>
                   <?php
                   echo $description;
                   echo (strlen($description) > 100) ? '...' : '';
                   ?>
                 </td>
-                <td><?= $job['location']; ?></td>
-                <td><?= $job['mode_title']; ?></td>
-                <td><?= $job['job_reference']; ?></td>
+                <td><?= $jobMode; ?></td>
+                <td><?= $job['company']; ?></td>
+                <td><?= $job['address']; ?></td>
+                <td><?= $job['salary']; ?></td>
                 <td class="<?=$elementClass;?>"><?= date("d M, Y", strtotime($job['last_date'])); ?></td>
                 <td><?= date("d M, Y", strtotime($job['created'])); ?></td>
                 <td><?= date("d M, Y", strtotime($job['updated'])); ?></td>
@@ -74,45 +85,32 @@
               <input type="text" name="title" class="form-control" required="">
             </div>
             <div class="form-group">
-              <label> Location </label>
-              <select class="form-control" name="job_type" >
-                <?php
-                foreach ($locations as $location) {
-                ?>
-                  <option value="<?= $location['id']; ?>"><?= $location['location_name']; ?></option>
-                <?php
-                }
-                ?>
-              </select>
-            </div>
-            <div class="form-group">
               <label> Description </label>
               <textarea class="form-control textarea" name="description" required=""></textarea>
             </div>
             <div class="form-group">
-              <label> Job Type </label>
-              <label class="radio"> Temporary
-                <input type="radio" value="1" name="employment_type">
-                <span class="checkround"></span>
-              </label>
-              <label class="radio"> Permanent
-                <input type="radio" value="2" checked="checked" name="employment_type">
-                <span class="checkround"></span>
-              </label>
+              <label> Position </label>
+              <input type="text" name="position" class="form-control" required="">
             </div>
             <div class="form-group">
-              <label> Payment Type </label>
-              <?php
-                foreach($jobTypes as $jobType){
-                  if($jobType['parent_id'] == null || $jobType['parent_id'] == '') continue;
-              ?>
-                  <label class="radio"> <?=$jobType['job_type_title'];?>
-                    <input type="radio" value="<?=$jobType['id'];?>" checked="checked" name="payment_type">
-                    <span class="checkround"></span>
-                  </label>
-              <?php
-                }
-              ?>
+              <label> Job Mode </label>
+              <select name="job_mode" class="form-control" required="">
+                <option value="1">Remote</option>
+                <option value="2">Hybrid</option>
+                <option value="3">Onsite</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label> Company </label>
+              <input type="text" name="company" class="form-control" required="">
+            </div>
+            <div class="form-group">
+              <label> Address </label>
+              <input type="text" name="address" class="form-control" required="">
+            </div>
+            <div class="form-group">
+              <label> Salary </label>
+              <input type="number" name="salary" class="form-control" required="">
             </div>
             <div class="form-group">
               <label> Last Date </label>
