@@ -30,7 +30,7 @@
                                 foreach($jobs as $job) {
                                 ?>
                                     <!-- loop -->
-                                    <button class="job_com1" type="button" onclick="get_job(<?=$job['id'];?>);" >
+                                    <button class="job_com1 sidebar-jobs" type="button" onclick="get_job(this, <?=$job['id'];?>);" >
                                         <div class="com_img">
                                             <img src="<?= site_url('assets/site/'); ?>img/img_7.png">
                                         </div>
@@ -122,7 +122,9 @@
         });
     }
 
-    function get_job(job_id){
+    function get_job(e, job_id){
+        $(".sidebar-jobs").removeClass('active');
+        $(e).addClass('active');
         $.ajax({
             type: 'POST',
             url: BASE_URL + 'Job-Details/' + job_id,

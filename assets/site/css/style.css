@@ -773,9 +773,10 @@ font-size: 21px;
 	border: none;
 	border-bottom: 1px solid #e1e1e1;
   text-align: left;
+  background: #fff;
 }
 .job_com1.active{
-    background: rgba(3, 45, 166, 0.05);
+    background: rgba(3, 45, 166, 0.1);
 }
 .com_img {
   left: 10px;
