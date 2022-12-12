@@ -762,14 +762,17 @@ font-size: 21px;
     border-color: var(--blue);
 }
 .job_com1 {
-  /*margin-bottom: 10px;*/
-  min-height: 90px;
-  padding:12px 10px 13px 70px;
-  position: relative;
-  border-bottom: 1px solid #e1e1e1;
-  display: inline-block;
-  width: 100%;
-
+	/* margin-bottom: 10px; */
+	min-height: 90px;
+	padding: 12px 10px 13px 70px;
+	position: relative;
+	border-bottom: 1px solid #e1e1e1;
+	display: inline-block;
+	width: 100%;
+	box-shadow: none !important;
+	border: none;
+	border-bottom: 1px solid #e1e1e1;
+  text-align: left;
 }
 .job_com1.active{
     background: rgba(3, 45, 166, 0.05);

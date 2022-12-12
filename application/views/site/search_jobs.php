@@ -30,7 +30,7 @@
                                 foreach($jobs as $job) {
                                 ?>
                                     <!-- loop -->
-                                    <button class="job_com1 active" type="button" onclick="get_job(<?=$job['id'];?>);" >
+                                    <button class="job_com1" type="button" onclick="get_job(<?=$job['id'];?>);" >
                                         <div class="com_img">
                                             <img src="<?= site_url('assets/site/'); ?>img/img_7.png">
                                         </div>
