@@ -1,6 +1,6 @@
 <style>
-    #submitOtpForm{
-        display:none;
+    #submitOtpForm {
+        display: none;
     }
 </style>
 <div class="search2 search_row_nw cover_2 cover_4">
@@ -17,8 +17,9 @@
                             <a href="#" class="job_com4"><i class="fa fa-long-arrow-left"></i> Back</a>
                         </div>
                         <div class="">
-                            <div class="scroll_1" id="job_details_div" >
-                                <?php //include_once('job_details.php'); ?>
+                            <div class="scroll_1" id="job_details_div">
+                                <?php //include_once('job_details.php'); 
+                                ?>
                             </div>
                         </div>
                     </div>
@@ -27,10 +28,10 @@
                         <div class="scroll_1">
                             <div class="job_com2">
                                 <?php
-                                foreach($jobs as $job) {
+                                foreach ($jobs as $job) {
                                 ?>
                                     <!-- loop -->
-                                    <button class="job_com1 sidebar-jobs" type="button" onclick="get_job(this, <?=$job['id'];?>);" >
+                                    <button class="job_com1 sidebar-jobs" type="button" onclick="get_job(this, <?= $job['id']; ?>);">
                                         <div class="com_img">
                                             <img src="<?= site_url('assets/site/'); ?>img/img_7.png">
                                         </div>
@@ -43,8 +44,8 @@
                                                 <span class="active fa fa-star"></span>
                                                 <span class="fa fa-star"></span>
                                             </div> -->
-                                            <h4><i class="fa fa-briefcase"></i><?=$job['position'];?></h4>
-                                            <h4><i class="fa fa-map-marker"></i><?=$job['address'];?></h4>
+                                            <h4><i class="fa fa-briefcase"></i><?= $job['position']; ?></h4>
+                                            <h4><i class="fa fa-map-marker"></i><?= $job['address']; ?></h4>
                                         </div>
                                     </button>
                                 <?php
@@ -59,7 +60,7 @@
     </div>
 </div>
 
-<?php include_once('job_modals.php'); ?>
+<div id="modals-div"><?php include_once('job_modals.php'); ?></div>
 
 <script type="text/javascript">
     function apply_job(e) {
@@ -83,9 +84,9 @@
                 $("#responseMessageOtp").show();
                 $("#jobApplicationForm").hide();
                 $("#submitOtpForm").show();
-                if(response.status == 1){
-                    $("#user_id_input").value(response.user_id);
-                    $("#job_id_input").value(response.job_id);
+                if (response.status == 1) {
+                    $("#user_id_input").val(response.user_id);
+                    $("#job_id_input").val(response.job_id);
                 }
             }
         });
@@ -112,8 +113,10 @@
                 if (response.status == 1) {
                     $(".otp_btn").html('Applied');
                     $("#my-modal").modal("show");
+                    $("#submitOtpForm").hide();
                 } else if (response.status == 3) {
                     $(".otp_btn").html('Already applied');
+                    $("#submitOtpForm").hide();
                 } else {
                     $(".otp_btn").html('Apply');
                     $(".otp_btn").prop('disabled', false);
@@ -122,7 +125,7 @@
         });
     }
 
-    function get_job(e, job_id){
+    function get_job(e, job_id) {
         $(".sidebar-jobs").removeClass('active');
         $(e).addClass('active');
         $.ajax({
@@ -134,6 +137,21 @@
             },
             success: function(response) {
                 $("#job_details_div").html(response);
+                get_job_modal(job_id);
+            }
+        });
+    }
+
+    function get_job_modal(job_id) {
+        $.ajax({
+            type: 'POST',
+            url: BASE_URL + 'Reset-Job/' + job_id,
+            dataType: 'html',
+            beforeSend: function(xhr) {
+                $("#modals-div").html('');
+            },
+            success: function(response) {
+                $("#modals-div").html(response);
             }
         });
     }

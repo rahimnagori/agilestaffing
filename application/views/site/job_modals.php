@@ -8,10 +8,10 @@
             </div>
             <div class="modal-body">
                 <div class="modal_foo">
-                    <form id="jobApplicationForm" name="jobApplicationForm" method="post" onsubmit="apply_job(event);" >
+                    <form id="jobApplicationForm" name="jobApplicationForm" method="post" onsubmit="apply_job(event);">
                         <div class="form-group">
                             <label>Name</label>
-                            <input type="text" name="first_name" placeholder="Name" class="form-control" required="" >
+                            <input type="text" name="first_name" placeholder="Name" class="form-control" required="">
                         </div>
                         <div class="form-group">
                             <label>Email</label>
@@ -22,7 +22,7 @@
                             <label>Resume</label>
                             <input type="file" name="resume" placeholder="Resume" class="form-control upload">
                         </div>
-                        <input type="hidden" name="job_id" required="" value="1" >
+                        <input type="hidden" name="job_id" id="search-job-id" required="" value="<?= $jobId; ?>">
                         <!-- <div class="form-group">
                             <label>Skills</label>
                             <input id="form-tags-1" name="tags-1" type="text" value="jQuery,Script,Net">
@@ -33,20 +33,20 @@
                             <input type="text" name="" placeholder="Experience" class="form-control">
                         </div> -->
                         <div class="form-group">
-                            <button class="btn btn_theme btn-lg btn-block apply_btn" type="submit" >
+                            <button class="btn btn_theme btn-lg btn-block apply_btn" type="submit">
                                 Apply
                             </button>
                         </div>
                     </form>
-                    <form id="submitOtpForm" name="submitOtpForm" method="post" onsubmit="submit_otp(event);" >
+                    <form id="submitOtpForm" name="submitOtpForm" method="post" onsubmit="submit_otp(event);">
                         <div class="form-group">
                             <label>Code</label>
-                            <input type="text" name="otp" placeholder="Code" class="form-control" required="" >
-                            <input type="hidden" name="job_id" id="job_id_input" required="" value="0" >
-                            <input type="hidden" name="user_id" id="user_id_input" required="" value="0" >
+                            <input type="text" name="otp" placeholder="Code" class="form-control" required="">
+                            <input type="hidden" name="job_id" id="job_id_input" required="" value="0">
+                            <input type="hidden" name="user_id" id="user_id_input" required="" value="0">
                         </div>
                         <div class="form-group">
-                            <button class="btn btn_theme btn-lg btn-block otp_btn" type="submit" >
+                            <button class="btn btn_theme btn-lg btn-block otp_btn" type="submit">
                                 Submit
                             </button>
                         </div>
@@ -73,8 +73,8 @@
                     </div>
                     <h3>Thank you for the application</h3>
                     <div class="btn_all2">
-                        <a href="<?=site_url('Sign-Up');?>" class="btn btn_theme">Sign up</a>
-                        <a href="<?=site_url('Search-Jobs');?>" class="btn btn_theme">Continue Searching
+                        <a href="<?= site_url('Sign-Up'); ?>" class="btn btn_theme">Sign up</a>
+                        <a href="<?= site_url('Search-Jobs'); ?>" class="btn btn_theme">Continue Searching
                         </a>
                     </div>
                 </div>

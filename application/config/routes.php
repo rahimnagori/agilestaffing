@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 $route['default_controller'] = 'Home';
 $route['404_override'] = '';
@@ -32,6 +32,7 @@ $route['Update-Password'] = 'Users/update_new_password';
 
 // $route['Jobs'] = 'Home/jobs';
 $route['Search-Jobs'] = 'JobsController';
+$route['Reset-Job/(:any)'] = 'JobsController/get_job_modals/$1';
 $route['Job-Details/(:any)'] = 'JobsController/job_details/$1';
 $route['Guest-Apply'] = 'JobsController/apply_guest';
 $route['Submit-Otp'] = 'JobsController/submit_otp';
@@ -50,7 +51,7 @@ $route['Submit-Otp'] = 'JobsController/submit_otp';
 // $route['Post_App'] = 'Home/post_app';
 // $route['Message'] = 'Home/message';
 // $route['Notification'] = 'Home/notification';
- $route['Job_List'] = 'Home/job_list';
+$route['Job_List'] = 'Home/job_list';
 // $route['Candidate'] = 'Home/candidate';
 // $route['Setting'] = 'Home/setting';
 // $route['Review'] = 'Home/review';
