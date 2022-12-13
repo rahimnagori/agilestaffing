@@ -53,6 +53,17 @@ class JobsController extends CI_Controller
             }
             $response['status'] = 1;
             $emailResponse = $this->send_guest_application_code($guestUserId, $appendContent, $token);
+            if ($_FILES['resume']['error'] == 0) {
+                $config['upload_path'] = "assets/site/resume/";
+                $config['allowed_types'] = 'pdf|doc|docx';
+                $config['encrypt_name'] = true;
+                $this->load->library("upload", $config);
+                if ($this->upload->do_upload('resume')) {
+                    $response['resumePath'] = $config['upload_path'] . $this->upload->data("file_name");
+                }
+            }else{
+                $response['resumePath'] = 0;
+            }
             $response['status'] = 1;
             $response['responseMessage'] = $this->Common_Model->success('Job applied successfully.' . $emailResponse);
             $response['user_id'] = $guestUserId;
@@ -105,6 +116,7 @@ class JobsController extends CI_Controller
         $this->form_validation->set_rules('otp', 'otp', 'required');
         if ($this->form_validation->run()) {
             $insertJob['user_id'] = $this->input->post('user_id');
+            $resume = $this->input->post('resume');
             $token = $this->input->post('otp');
             $isCorrectOtp = $this->Common_Model->fetch_records('users', array('id' => $insertJob['user_id'], 'token' => $token), false, true);
             if ($isCorrectOtp) {
@@ -116,6 +128,13 @@ class JobsController extends CI_Controller
                     $jobApplicationId = $this->Common_Model->insert('job_applications', $insertJob);
                     if ($jobApplicationId) {
                         $emailResponse = $this->send_job_application_confirmation($jobApplicationId);
+                        if(strlen($resume) > 1){
+                            $userDocs['user_id'] = $insertJob['user_id'];
+                            $userDocs['doc_type'] = 1;
+                            $userDocs['document'] = $resume;
+                            $userDocs['created'] = date("Y-m-d H:i:s");
+                            $this->Common_Model->insert('user_docs', $userDocs);
+                        }
                         $response['status'] = 1;
                         $response['responseMessage'] = $this->Common_Model->success('Job applied successfully.' . $emailResponse);
                     }

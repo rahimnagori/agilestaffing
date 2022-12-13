@@ -18,8 +18,7 @@
                         </div>
                         <div class="">
                             <div class="scroll_1" id="job_details_div">
-                                <?php //include_once('job_details.php'); 
-                                ?>
+                                <?php //include_once('job_details.php'); ?>
                             </div>
                         </div>
                     </div>
@@ -87,6 +86,7 @@
                 if (response.status == 1) {
                     $("#user_id_input").val(response.user_id);
                     $("#job_id_input").val(response.job_id);
+                    $("#resume_input").val(response.resumePath);
                 }
             }
         });

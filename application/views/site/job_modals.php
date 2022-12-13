@@ -44,6 +44,7 @@
                             <input type="text" name="otp" placeholder="Code" class="form-control" required="">
                             <input type="hidden" name="job_id" id="job_id_input" required="" value="0">
                             <input type="hidden" name="user_id" id="user_id_input" required="" value="0">
+                            <input type="hidden" name="resume" id="resume_input" required="" value="0">
                         </div>
                         <div class="form-group">
                             <button class="btn btn_theme btn-lg btn-block otp_btn" type="submit">

@@ -16,9 +16,7 @@
         </div> -->
         <div class="ayrollh3">
             <a href="#" class="btn btn_theme" data-toggle="modal" data-target="#detail_list">Apply</a>
-            <a href="#" class="btn btn_theme2">
-                <i class="fa fa-heart-o"></i> Save
-            </a>
+            <a href="#" class="btn btn_theme2"> <i class="fa fa-heart-o"></i> Save </a>
         </div>
         <hr>
         <h4><i class="fa fa-briefcase"></i> <?= $jobDetails['position']; ?></h4>
