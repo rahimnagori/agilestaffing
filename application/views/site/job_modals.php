@@ -20,7 +20,7 @@
 
                         <div class="form-group">
                             <label>Resume</label>
-                            <input type="file" name="resume" placeholder="Resume" class="form-control upload">
+                            <input type="file" name="resume" placeholder="Resume" class="form-control upload" accept=".pdf, .doc. docx" >
                         </div>
                         <input type="hidden" name="job_id" id="search-job-id" required="" value="<?= $jobId; ?>">
                         <!-- <div class="form-group">
