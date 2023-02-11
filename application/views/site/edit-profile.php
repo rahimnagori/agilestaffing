@@ -96,13 +96,31 @@
                 <div class="row">
                   <div class="col-sm-6">
                     <div class="form-group">
-                      <label for="coverLetter">Cover Letter</label>
-                      <input type="file" name="coverLetter" accept=".pdf, .doc, .docx">
+                      <label for="cover_letter">
+                        Cover Letter
+                        <?php
+                          if($moreUserDetails['cover_letter'] && file_exists($moreUserDetails['cover_letter'])){
+                        ?>
+                            <a href="<?=site_url($moreUserDetails['cover_letter']);?>" target="_blank"> (View) </a>
+                        <?php
+                          }
+                        ?>
+                      </label>
+                      <input type="file" name="cover_letter" accept=".pdf, .doc, .docx">
                     </div>
                   </div>
                   <div class="col-sm-6">
                     <div class="form-group">
-                      <label for="coverLetter">Resume</label>
+                      <label for="coverLetter">
+                        Resume
+                        <?php
+                          if($moreUserDetails['resume'] && file_exists($moreUserDetails['resume'])){
+                        ?>
+                            <a href="<?=site_url($moreUserDetails['resume']);?>" target="_blank"> (View) </a>
+                        <?php
+                          }
+                        ?>
+                      </label>
                       <input type="file" name="resume" accept=".pdf, .doc, .docx">
                     </div>
                   </div>
@@ -155,7 +173,7 @@
       reader.onload = function(e) {
         let previewImg = $('<img />', {
           src: e.target.result,
-          alt: 'Resume',
+          alt: 'Profile Image',
           width: '50px'
         });
         $('#' + previewId).html(previewImg);
