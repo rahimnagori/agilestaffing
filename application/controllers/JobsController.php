@@ -18,13 +18,47 @@ class JobsController extends CI_Controller
         $pageData['jobs'] = $this->Common_Model->fetch_records('jobs');
 
         $this->load->view('site/include/header', $pageData);
-        $this->load->view('site/search_jobs', $pageData);
+        if ($this->session->userdata('id')) {
+            $this->load->view('site/user_search_jobs', $pageData);
+        } else {
+            $this->load->view('site/search_jobs', $pageData);
+        }
         $this->load->view('site/include/footer', $pageData);
     }
 
     private function check_login()
     {
         return ($this->session->userdata('is_user_logged_in')) ? true : false;
+    }
+
+    public function apply_job()
+    {
+        $response['status'] = 0;
+        $response['responseMessage'] = $this->Common_Model->error('Something went wrong, please try again later.');
+        if ($_FILES['resume']['error'] == 0) {
+            $config['upload_path'] = "assets/site/resume/";
+            $config['allowed_types'] = 'pdf|doc|docx';
+            $config['encrypt_name'] = true;
+            $this->load->library("upload", $config);
+            if ($this->upload->do_upload('resume')) {
+                $userDetails['resume'] = $config['upload_path'] . $this->upload->data("file_name");
+            }
+        }
+        $jobApplication['user_id'] = $this->session->userdata('id');
+        $jobApplication['job_id'] = $this->input->post('job_id');
+        $isJobExist = $this->Common_Model->fetch_records('job_applications', $jobApplication, false, true);
+        if (!$isJobExist) {
+            $jobApplication['status'] = 1;
+            $jobApplication['created'] = date("Y-m-d H:i:s");
+            $jobApplicationId = $this->Common_Model->insert('job_applications', $jobApplication);
+            $emailResponse = $this->send_job_application_confirmation($jobApplicationId);
+            $response['status'] = 1;
+            $response['responseMessage'] = $this->Common_Model->success('Job applied successfully.' . $emailResponse);
+        } else {
+            $response['status'] = 2;
+            $response['responseMessage'] = $this->Common_Model->error('Job already applied.');
+        }
+        echo json_encode($response);
     }
 
     public function apply_guest()
@@ -61,7 +95,7 @@ class JobsController extends CI_Controller
                 if ($this->upload->do_upload('resume')) {
                     $response['resumePath'] = $config['upload_path'] . $this->upload->data("file_name");
                 }
-            }else{
+            } else {
                 $response['resumePath'] = 0;
             }
             $response['status'] = 1;
@@ -128,7 +162,7 @@ class JobsController extends CI_Controller
                     $jobApplicationId = $this->Common_Model->insert('job_applications', $insertJob);
                     if ($jobApplicationId) {
                         $emailResponse = $this->send_job_application_confirmation($jobApplicationId);
-                        if(strlen($resume) > 1){
+                        if (strlen($resume) > 1) {
                             $userDocs['user_id'] = $insertJob['user_id'];
                             $userDocs['doc_type'] = 1;
                             $userDocs['document'] = $resume;
@@ -184,12 +218,9 @@ class JobsController extends CI_Controller
     public function job_details($id)
     {
         $pageData = $this->Common_Model->get_userdata();
+        $pageData['isLoggedIn'] = $this->session->userdata('id');
         $where = [
             'id' => $id
-        ];
-        $whereJobApplication = [
-            'user_id' => $this->session->userdata('id'),
-            'job_id' => $id
         ];
         $pageData['jobDetails'] = $this->Common_Model->fetch_records('jobs', $where, false, true);
         if (empty($pageData['jobDetails'])) {
@@ -197,13 +228,28 @@ class JobsController extends CI_Controller
             $this->session->set_flashdata('responseMessage', $response['responseMessage']);
             redirect('Jobs');
         }
+        if ($pageData['isLoggedIn']) {
+            $whereJobApplication = [
+                'user_id' => $pageData['isLoggedIn'],
+                'job_id' => $id
+            ];
+            $pageData['isJobApplied'] = $this->Common_Model->fetch_records('job_applications', $whereJobApplication, false, true);
 
-        $this->load->view('site/job_details', $pageData);
+            $this->load->view('site/user_job_details', $pageData);
+        } else {
+            $this->load->view('site/job_details', $pageData);
+        }
     }
 
     public function get_job_modals($id)
     {
+        $pageData = $this->Common_Model->get_userdata();
         $pageData['jobId'] = $id;
-        $this->load->view('site/job_modals', $pageData);
+        $pageData['isLoggedIn'] = $this->session->userdata('id');
+        if ($pageData['isLoggedIn']) {
+            $this->load->view('site/user_job_modals', $pageData);
+        } else {
+            $this->load->view('site/job_modals', $pageData);
+        }
     }
 }

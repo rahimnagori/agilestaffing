@@ -40,12 +40,12 @@
                                                 <?= $job['title']; ?>
                                             </h3>
                                             <!-- <div class="star_5">
-                                                        <span class="active fa fa-star"></span>
-                                                        <span class="active fa fa-star"></span>
-                                                        <span class="active fa fa-star"></span>
-                                                        <span class="active fa fa-star"></span>
-                                                        <span class="fa fa-star"></span>
-                                                    </div> -->
+                                                            <span class="active fa fa-star"></span>
+                                                            <span class="active fa fa-star"></span>
+                                                            <span class="active fa fa-star"></span>
+                                                            <span class="active fa fa-star"></span>
+                                                            <span class="fa fa-star"></span>
+                                                        </div> -->
                                             <h4><i class="fa fa-briefcase"></i>
                                                 <?= $job['position']; ?>
                                             </h4>
@@ -67,7 +67,7 @@
 </div>
 
 <div id="modals-div">
-    <?php include_once('job_modals.php'); ?>
+    <?php include_once('user_job_modals.php'); ?>
 </div>
 
 <script type="text/javascript">
@@ -75,7 +75,7 @@
         e.preventDefault();
         $.ajax({
             type: 'POST',
-            url: BASE_URL + 'Guest-Apply',
+            url: BASE_URL + 'User-Apply',
             data: new FormData($('#jobApplicationForm')[0]),
             dataType: 'json',
             processData: false,
@@ -85,17 +85,14 @@
                 $(".apply_btn").attr('disabled', true);
                 $(".apply_btn").html(LOADING);
                 $("#responseMessageOtp").hide();
-                $("#submitOtpForm").hide();
             },
             success: function (response) {
                 $("#responseMessageOtp").html(response.responseMessage);
                 $("#responseMessageOtp").show();
-                $("#jobApplicationForm").hide();
-                $("#submitOtpForm").show();
                 if (response.status == 1) {
-                    $("#user_id_input").val(response.user_id);
-                    $("#job_id_input").val(response.job_id);
-                    $("#resume_input").val(response.resumePath);
+                    $("#jobApplicationForm").hide();
+                    $("#job_apply_btn").html('Applied');
+                    $("#job_apply_btn").attr('disabled', true);
                 }
             }
         });

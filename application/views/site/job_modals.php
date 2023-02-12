@@ -1,9 +1,11 @@
 <!-- Modal -->
-<div class="modal fade modal_desus modal_md detail_modal" id="detail_list" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade modal_desus modal_md detail_modal" id="detail_list" tabindex="-1" role="dialog"
+    aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="fa fa-times"></i></span></button>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i
+                            class="fa fa-times"></i></span></button>
                 <h4 class="modal-title" id="myModalLabel">Apply </h4>
             </div>
             <div class="modal-body">
@@ -20,7 +22,8 @@
 
                         <div class="form-group">
                             <label>Resume</label>
-                            <input type="file" name="resume" placeholder="Resume" class="form-control upload" accept=".pdf, .doc. docx" >
+                            <input type="file" name="resume" placeholder="Resume" class="form-control upload"
+                                accept=".pdf, .doc. docx">
                         </div>
                         <input type="hidden" name="job_id" id="search-job-id" required="" value="<?= $jobId; ?>">
                         <!-- <div class="form-group">
@@ -60,11 +63,13 @@
 </div>
 
 <!-- Modal -->
-<div class="modal fade modal_desus modal_md detail_modal" id="adddl" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade modal_desus modal_md detail_modal" id="adddl" tabindex="-1" role="dialog"
+    aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="fa fa-times"></i></span></button>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i
+                            class="fa fa-times"></i></span></button>
                 <h4 class="modal-title" id="myModalLabel">Thank you </h4>
             </div>
             <div class="modal-body">
@@ -85,11 +90,13 @@
 </div>
 
 <!-- Modal -->
-<div class="modal fade modal_desus modal_lg detail_modal" id="adddl" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade modal_desus modal_lg detail_modal" id="adddl" tabindex="-1" role="dialog"
+    aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="fa fa-times"></i></span></button>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i
+                            class="fa fa-times"></i></span></button>
                 <h4 class="modal-title" id="myModalLabel">
                     <!-- Apply Job  -->
                 </h4>

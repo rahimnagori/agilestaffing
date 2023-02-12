@@ -35,9 +35,13 @@ $route['Search-Jobs'] = 'JobsController';
 $route['Reset-Job/(:any)'] = 'JobsController/get_job_modals/$1';
 $route['Job-Details/(:any)'] = 'JobsController/job_details/$1';
 $route['Guest-Apply'] = 'JobsController/apply_guest';
+$route['User-Apply'] = 'JobsController/apply_job';
 $route['Submit-Otp'] = 'JobsController/submit_otp';
-// $route['Apply'] = 'Jobs/apply';
 
+$route['Job-Applications'] = 'Home/applied_jobs';
+$route['Job_List'] = 'Home/job_list';
+
+// $route['Apply'] = 'Jobs/apply';
 // $route['Contact'] = 'Home/contact';
 // $route['Contact/Request'] = 'Home/contact_request';
 // $route['Contact/Resume'] = 'Home/resume';
@@ -48,10 +52,8 @@ $route['Submit-Otp'] = 'JobsController/submit_otp';
 // $route['Policy'] = 'Home/policy';
 // $route['Post_Jobs'] = 'Home/post_jobs';
 // $route['Post_Jobs2'] = 'Home/post_jobs2';
-// $route['Post_App'] = 'Home/post_app';
 // $route['Message'] = 'Home/message';
 // $route['Notification'] = 'Home/notification';
-$route['Job_List'] = 'Home/job_list';
 // $route['Candidate'] = 'Home/candidate';
 // $route['Setting'] = 'Home/setting';
 // $route['Review'] = 'Home/review';

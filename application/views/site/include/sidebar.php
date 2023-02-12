@@ -25,10 +25,10 @@
         <li>
             <a href="<?= site_url('Edit-Profile'); ?>"><i class="fa fa-user"></i> Edit Profile</a>
         </li>
-        <!-- <li>
-            <a href="<?= site_url('Post_App'); ?>"><i class="fa fa-file-text-o"></i> Past application list</a>
-        </li>
         <li>
+            <a href="<?= site_url('Job-Applications'); ?>"><i class="fa fa-file-text-o"></i> Job Applications</a>
+        </li>
+        <!-- <li>
             <a href="<?= site_url('Message'); ?>"><i class="fa fa-comments-o"></i> Message </a>
         </li>
         <li>
