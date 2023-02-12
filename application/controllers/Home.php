@@ -58,21 +58,6 @@ class Home extends CI_Controller
     $this->load->view('site/include/footer', $pageData);
   }
 
-  public function applied_jobs()
-  {
-    $pageData = $this->Common_Model->get_userdata();
-    $join[0][] = 'jobs';
-    $join[0][] = 'job_applications.job_id = jobs.id';
-    $join[0][] = 'left';
-    $select = 'jobs.title, jobs.description';
-    $where['job_applications.user_id'] = $this->session->userdata('id');
-    $pageData['jobApplications'] = $this->Common_Model->join_records('job_applications', $join, $where, $select, 'job_applications.id', 'DESC');
-
-    $this->load->view('site/include/header', $pageData);
-    $this->load->view('site/job_applications', $pageData);
-    $this->load->view('site/include/footer', $pageData);
-  }
-
   /* Some static pages */
 
   public function contact()

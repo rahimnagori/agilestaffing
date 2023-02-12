@@ -1,22 +1,22 @@
 <div class="left_side">
     <div class="img_usee" id="previewImage">
         <?php
-            $profileImage = (!empty($moreUserDetails) && $moreUserDetails['profile_image']) ? $moreUserDetails['profile_image'] : 'assets/site/img/img_9.png';
+        $profileImage = (!empty($moreUserDetails) && $moreUserDetails['profile_image']) ? $moreUserDetails['profile_image'] : 'assets/site/img/img_9.png';
         ?>
-        <img src="<?= site_url($profileImage); ?>" alt="Profile Image" >
+        <img src="<?= site_url($profileImage); ?>" alt="Profile Image">
     </div>
     <h4>
-        <?=$userDetails['first_name'] .' ' .$userDetails['last_name'];?>
+        <?= $userDetails['first_name'] . ' ' . $userDetails['last_name']; ?>
     </h4>
     <?php
-        if($editPage == true){
-    ?>
-            
-    <?php
-        }
+    if ($editPage == true) {
+        ?>
+
+        <?php
+    }
     ?>
     <p>
-        <?=(!empty($moreUserDetails)) ? $moreUserDetails['current_job_role'] : 'Please add job role';?>
+        <?=(!empty($moreUserDetails)) ? $moreUserDetails['current_job_role'] : 'Please add job role'; ?>
     </p>
     <ul class="ul_set sider_barr">
         <li>

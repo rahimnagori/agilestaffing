@@ -37,8 +37,8 @@ $route['Job-Details/(:any)'] = 'JobsController/job_details/$1';
 $route['Guest-Apply'] = 'JobsController/apply_guest';
 $route['User-Apply'] = 'JobsController/apply_job';
 $route['Submit-Otp'] = 'JobsController/submit_otp';
+$route['Job-Applications'] = 'JobsController/applied_jobs';
 
-$route['Job-Applications'] = 'Home/applied_jobs';
 $route['Job_List'] = 'Home/job_list';
 
 // $route['Apply'] = 'Jobs/apply';
@@ -111,7 +111,6 @@ $route['Update-Settings'] = 'Admin_Settings/update_settings';
 // $route['Admin-News/Add'] = 'Admin_News/add_news';
 // $route['Admin-News/delete'] = 'Admin_News/delete_news';
 // $route['Admin-News/Update'] = 'Admin_News/update_news';
-// $route['Job-Applications'] = 'Admin_Applications';
 // $route['Admin-Chat'] = 'Admin_Chat';
 // $route['Admin-Message/send'] = 'Admin_Chat/add';
 // $route['Admin-Get-Messages'] = 'Admin_Chat/get_messages';

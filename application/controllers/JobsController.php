@@ -35,19 +35,21 @@ class JobsController extends CI_Controller
     {
         $response['status'] = 0;
         $response['responseMessage'] = $this->Common_Model->error('Something went wrong, please try again later.');
-        if ($_FILES['resume']['error'] == 0) {
-            $config['upload_path'] = "assets/site/resume/";
-            $config['allowed_types'] = 'pdf|doc|docx';
-            $config['encrypt_name'] = true;
-            $this->load->library("upload", $config);
-            if ($this->upload->do_upload('resume')) {
-                $userDetails['resume'] = $config['upload_path'] . $this->upload->data("file_name");
-            }
-        }
         $jobApplication['user_id'] = $this->session->userdata('id');
         $jobApplication['job_id'] = $this->input->post('job_id');
         $isJobExist = $this->Common_Model->fetch_records('job_applications', $jobApplication, false, true);
         if (!$isJobExist) {
+            if ($_FILES['resume']['error'] == 0) {
+                $config['upload_path'] = "assets/site/resume/";
+                $config['allowed_types'] = 'pdf|doc|docx';
+                $config['encrypt_name'] = true;
+                $this->load->library("upload", $config);
+                if ($this->upload->do_upload('resume')) {
+                    $resume = $config['upload_path'] . $this->upload->data("file_name");
+                    $this->Common_Model->update('user_details', array('user_id' => $jobApplication['user_id']), array('resume' => $resume));
+                    $response['debug'] = $this->db->last_query();
+                }
+            }
             $jobApplication['status'] = 1;
             $jobApplication['created'] = date("Y-m-d H:i:s");
             $jobApplicationId = $this->Common_Model->insert('job_applications', $jobApplication);
@@ -251,5 +253,20 @@ class JobsController extends CI_Controller
         } else {
             $this->load->view('site/job_modals', $pageData);
         }
+    }
+
+    public function applied_jobs()
+    {
+        $pageData = $this->Common_Model->get_userdata();
+        $join[0][] = 'jobs';
+        $join[0][] = 'job_applications.job_id = jobs.id';
+        $join[0][] = 'left';
+        $select = 'jobs.title, job_applications.created, jobs.position, jobs.company, jobs.address, jobs.salary, jobs.last_date';
+        $where['job_applications.user_id'] = $this->session->userdata('id');
+        $pageData['jobApplications'] = $this->Common_Model->join_records('job_applications', $join, $where, $select, 'job_applications.id', 'DESC');
+
+        $this->load->view('site/include/header', $pageData);
+        $this->load->view('site/job_applications', $pageData);
+        $this->load->view('site/include/footer', $pageData);
     }
 }

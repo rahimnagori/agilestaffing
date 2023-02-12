@@ -12,23 +12,46 @@
                             <table id="extent_tbl1" class="table display tabel_me">
                                 <thead>
                                     <tr>
-                                        <th>Name</th>
-                                        <th>Email</th>
-                                        <th style="width: 40%;">Location</th>
-                                        <th>Destination</th>
+                                        <th>Job</th>
+                                        <th>Applied On</th>
+                                        <th>Position</th>
+                                        <th>Company</th>
+                                        <th>Address</th>
+                                        <th>Salary</th>
+                                        <th>Last Date</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php
-                                    
+                                    foreach ($jobApplications as $jobApplication) {
+                                        ?>
+                                        <tr>
+                                            <td>
+                                                <a href="<?= site_url('Search-Jobs'); ?>"
+                                                    target="_blank"><?= $jobApplication['title']; ?></a>
+                                            </td>
+                                            <td>
+                                                <?= date("d M Y", strtotime($jobApplication['created'])); ?>
+                                            </td>
+                                            <td>
+                                                <?= $jobApplication['position']; ?>
+                                            </td>
+                                            <td>
+                                                <?= $jobApplication['company']; ?>
+                                            </td>
+                                            <td>
+                                                <?= $jobApplication['address']; ?>
+                                            </td>
+                                            <td>
+                                                <?= $jobApplication['salary']; ?>
+                                            </td>
+                                            <td>
+                                                <?= date("d M Y", strtotime($jobApplication['last_date'])); ?>
+                                            </td>
+                                        </tr>
+                                        <?php
+                                    }
                                     ?>
-                                    <tr>
-                                        <td>Tom Mosser</td>
-                                        <td>info@gmail.com</td>
-                                        <td>315, Pukhraj Corporate, Near Navlakha, Janki Nagar, Indore, Madhya Pradesh
-                                            452001</td>
-                                        <td>Web and Graphic Designer </td>
-                                    </tr>
                                 </tbody>
                             </table>
                         </div>
