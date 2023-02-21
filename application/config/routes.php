@@ -22,9 +22,13 @@ $route['Forgot'] = 'Home/forget';
 $route['Reset-Password'] = 'Users/reset';
 $route['Reset/(:any)/(:any)'] = 'Users/reset_password/$1/$2';
 $route['Update-Password'] = 'Users/update_new_password';
+
 /* Static Route */
-// $route['About'] = 'Home/about';
-// $route['Legal'] = 'Home/legal';
+$route['About'] = 'Home/about';
+$route['Cookie'] = 'Home/cookie';
+$route['Terms'] = 'Home/terms';
+$route['Privacy'] = 'Home/privacy';
+$route['Legal'] = 'Home/legal';
 // $route['Career'] = 'Home/career';
 // $route['Newses'] = 'Home/newses';
 // $route['News/(:any)'] = 'Home/news/$1';
@@ -47,9 +51,6 @@ $route['Job_List'] = 'Home/job_list';
 // $route['Contact/Resume'] = 'Home/resume';
 // $route['Request-Professional'] = 'Home/request_professional';
 
-// $route['Terms'] = 'Home/terms';
-// $route['Privacy'] = 'Home/privacy';
-// $route['Policy'] = 'Home/policy';
 // $route['Post_Jobs'] = 'Home/post_jobs';
 // $route['Post_Jobs2'] = 'Home/post_jobs2';
 // $route['Message'] = 'Home/message';

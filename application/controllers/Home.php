@@ -60,11 +60,19 @@ class Home extends CI_Controller
 
   /* Some static pages */
 
-  public function contact()
+  public function about()
   {
     $pageData = $this->Common_Model->get_userdata();
     $this->load->view('site/include/header', $pageData);
-    $this->load->view('site/contact', $pageData);
+    $this->load->view('site/about', $pageData);
+    $this->load->view('site/include/footer', $pageData);
+  }
+
+  public function cookie()
+  {
+    $pageData = $this->Common_Model->get_userdata();
+    $this->load->view('site/include/header', $pageData);
+    $this->load->view('site/cookie', $pageData);
     $this->load->view('site/include/footer', $pageData);
   }
 
@@ -76,11 +84,27 @@ class Home extends CI_Controller
     $this->load->view('site/include/footer', $pageData);
   }
 
+  public function contact()
+  {
+    $pageData = $this->Common_Model->get_userdata();
+    $this->load->view('site/include/header', $pageData);
+    $this->load->view('site/contact', $pageData);
+    $this->load->view('site/include/footer', $pageData);
+  }
+
   public function privacy()
   {
     $pageData = $this->Common_Model->get_userdata();
     $this->load->view('site/include/header', $pageData);
     $this->load->view('site/privacy', $pageData);
+    $this->load->view('site/include/footer', $pageData);
+  }
+
+  public function legal()
+  {
+    $pageData = $this->Common_Model->get_userdata();
+    $this->load->view('site/include/header', $pageData);
+    $this->load->view('site/legal', $pageData);
     $this->load->view('site/include/footer', $pageData);
   }
 

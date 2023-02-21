@@ -42,7 +42,8 @@
 
               <h4>About</h4>
 
-              <p> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer. </p>
+              <p> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+                industry's standard dummy text ever since the 1500s, when an unknown printer. </p>
 
               <h4>Skill</h4>
 
