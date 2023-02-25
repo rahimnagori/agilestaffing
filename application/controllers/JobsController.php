@@ -255,6 +255,18 @@ class JobsController extends CI_Controller
         }
     }
 
+    public function experience()
+    {
+        $pageData = $this->Common_Model->get_userdata();
+        if(empty($pageData)) redirect('');
+        $where['user_id'] = $pageData['userDetails']['id'];
+        $pageData['userExperiences'] = $this->Common_Model->fetch_records('user_experiences', $where);
+
+        $this->load->view('site/include/header', $pageData);
+        $this->load->view('site/experience', $pageData);
+        $this->load->view('site/include/footer', $pageData);
+    }
+
     public function applied_jobs()
     {
         $pageData = $this->Common_Model->get_userdata();

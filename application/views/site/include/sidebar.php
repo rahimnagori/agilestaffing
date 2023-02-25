@@ -28,6 +28,9 @@
         <li>
             <a href="<?= site_url('Job-Applications'); ?>"><i class="fa fa-file-text-o"></i> Job Applications</a>
         </li>
+        <li>
+            <a href="<?= site_url('User-Experience'); ?>"><i class="fa fa-file-text-o"></i> Experience</a>
+        </li>
         <!-- <li>
             <a href="<?= site_url('Message'); ?>"><i class="fa fa-comments-o"></i> Message </a>
         </li>

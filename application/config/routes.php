@@ -14,6 +14,8 @@ $route['Log-In'] = 'Users';
 $route['Profile'] = 'Users/profile';
 $route['Edit-Profile'] = 'Users/edit_profile';
 $route['Update-Profile'] = 'Users/update_profile';
+$route['Update-Experience'] = 'Users/update_experience';
+$route['Remove-Experience'] = 'Users/remove_experience';
 $route['Logout'] = 'Users/logout';
 
 $route['Resend-Email-Verification'] = 'Users/resend';
@@ -42,6 +44,7 @@ $route['Guest-Apply'] = 'JobsController/apply_guest';
 $route['User-Apply'] = 'JobsController/apply_job';
 $route['Submit-Otp'] = 'JobsController/submit_otp';
 $route['Job-Applications'] = 'JobsController/applied_jobs';
+$route['User-Experience'] = 'JobsController/experience';
 
 $route['Job_List'] = 'Home/job_list';
 
@@ -55,9 +58,9 @@ $route['Job_List'] = 'Home/job_list';
 // $route['Post_Jobs2'] = 'Home/post_jobs2';
 // $route['Message'] = 'Home/message';
 // $route['Notification'] = 'Home/notification';
-// $route['Candidate'] = 'Home/candidate';
 // $route['Setting'] = 'Home/setting';
 // $route['Review'] = 'Home/review';
+// $route['Candidate'] = 'Home/candidate';
 // $route['Profile_Company'] = 'Home/profile_company';
 // $route['Job'] = 'Home/job';
 // $route['Company_Profile'] = 'Home/company_profile';

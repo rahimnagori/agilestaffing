@@ -107,6 +107,10 @@ class Users extends CI_Controller
     if ($pageData['userDetails']['is_email_verified'] != 1) {
       redirect('Verify');
     }
+
+    $where['user_id'] = $pageData['userDetails']['id'];
+    $pageData['userExperiences'] = $this->Common_Model->fetch_records('user_experiences', $where);
+
     $this->load->view('site/include/header', $pageData);
     $this->load->view('site/profile', $pageData);
     $this->load->view('site/include/footer', $pageData);
@@ -150,6 +154,8 @@ class Users extends CI_Controller
     $updateProfile['job_preference'] = $this->input->post('job_preference');
     $updateProfile['sex'] = $this->input->post('sex');
     $updateProfile['notice_period'] = $this->input->post('notice_period');
+    $updateProfile['user_about'] = $this->input->post('user_about');
+    $updateProfile['user_skills'] = $this->input->post('user_skills');
     $updateProfile['availability_for_meeting'] = date('Y-m-d H:i:s', strtotime($this->input->post('availability_for_meeting')));
     if (isset($_FILES) && $_FILES['profile_image']['error'] == 0) {
       $config['upload_path'] = "assets/site/img/profile/";
@@ -198,6 +204,51 @@ class Users extends CI_Controller
       $response['status'] = 1;
       $response['responseMessage'] = $this->Common_Model->success('Profile updated successfully');
     }
+    $this->session->set_flashdata('responseMessage', $response['responseMessage']);
+    echo json_encode($response);
+  }
+
+  public function update_experience(){
+    $response['status'] = 0;
+    $response['responseMessage'] = $this->Common_Model->error('Something went wrong');
+    if (!$this->check_login()) {
+      redirect('Login');
+    }
+    $this->form_validation->set_rules('position', 'position', 'required');
+    $this->form_validation->set_rules('organization', 'organization', 'required');
+    $this->form_validation->set_rules('emp_start_date', 'emp_start_date', 'required');
+    $this->form_validation->set_rules('location', 'location', 'required');
+    if ($this->form_validation->run()) {
+      $insert['user_id'] = $this->session->userdata('id');
+      $insert['position'] = $this->input->post('position');
+      $insert['organization'] = $this->input->post('organization');
+      $insert['location'] = $this->input->post('location');
+      $insert['emp_start_date'] = date('Y-m-d', strtotime($this->input->post('emp_start_date')));
+      $insert['emp_end_date'] = ($this->input->post('emp_end_date')) ? date('Y-m-d', strtotime($this->input->post('emp_end_date'))) : null;
+      $response['exp_id'] = $this->Common_Model->insert('user_experiences', $insert);
+      if($response['exp_id']){
+        $response['status'] = 1;
+        $response['responseMessage'] = $this->Common_Model->success('Experience added successfully.');
+      }
+    }else{
+      $response['status'] = 2;
+      $response['responseMessage'] = $this->Common_Model->error(validation_errors());
+    }
+
+    $this->session->set_flashdata('responseMessage', $response['responseMessage']);
+    echo json_encode($response);
+  }
+
+  public function remove_experience(){
+    $response['status'] = 0;
+    $response['responseMessage'] = $this->Common_Model->error('Something went wrong');
+    $where['id'] = $this->input->post('exp_id');
+    if($this->Common_Model->delete('user_experiences', $where)){
+      $response['status'] = 1;
+      $response['responseMessage'] = $this->Common_Model->success('Experience removed successfully.');
+      $response['exp_id'] = $where['id'];
+    }
+
     $this->session->set_flashdata('responseMessage', $response['responseMessage']);
     echo json_encode($response);
   }

@@ -50,6 +50,7 @@
                         </a>
                         <ul class="dropdown-menu">
                            <li><a href="<?= site_url('Profile'); ?>">Profile</a></li>
+                           <li><a href="<?= site_url('Job-Applications'); ?>">Job Applications</a></li>
                            <!-- <li><a href="#">Balance information: <b>0 $</b> </a></li> -->
                            <li><a href="<?= site_url('Logout') ?>"><i class="fa fa-sign-out"></i> Logout</a></li>
                         </ul>
