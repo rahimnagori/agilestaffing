@@ -16,6 +16,7 @@ $route['Edit-Profile'] = 'Users/edit_profile';
 $route['Update-Profile'] = 'Users/update_profile';
 $route['Update-Experience'] = 'Users/update_experience';
 $route['Remove-Experience'] = 'Users/remove_experience';
+$route['Modify-Experience'] = 'Users/modify_experience';
 $route['Logout'] = 'Users/logout';
 
 $route['Resend-Email-Verification'] = 'Users/resend';

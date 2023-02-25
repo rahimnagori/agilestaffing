@@ -253,6 +253,34 @@ class Users extends CI_Controller
     echo json_encode($response);
   }
 
+  public function modify_experience(){
+    $response['status'] = 0;
+    $response['responseMessage'] = $this->Common_Model->error('Something went wrong');
+    $this->form_validation->set_rules('position', 'position', 'required');
+    $this->form_validation->set_rules('organization', 'organization', 'required');
+    $this->form_validation->set_rules('emp_start_date', 'emp_start_date', 'required');
+    $this->form_validation->set_rules('location', 'location', 'required');
+    if ($this->form_validation->run()) {
+      $where['id'] = $this->input->post('update_exp_id');
+      $update['position'] = $this->input->post('position');
+      $update['organization'] = $this->input->post('organization');
+      $update['location'] = $this->input->post('location');
+      $update['emp_start_date'] = date('Y-m-d', strtotime($this->input->post('emp_start_date')));
+      $update['emp_end_date'] = ($this->input->post('emp_end_date')) ? date('Y-m-d', strtotime($this->input->post('emp_end_date'))) : null;
+      if($this->Common_Model->update('user_experiences', $where, $update)){
+        $response['status'] = 1;
+        $response['responseMessage'] = $this->Common_Model->success('Experience updated successfully.');
+        $response['exp_id'] = $where['id'];
+      }
+    }else{
+      $response['status'] = 2;
+      $response['responseMessage'] = $this->Common_Model->error(validation_errors());
+    }
+
+    $this->session->set_flashdata('responseMessage', $response['responseMessage']);
+    echo json_encode($response);
+  }
+
   public function verify()
   {
     if (!$this->check_login()) {

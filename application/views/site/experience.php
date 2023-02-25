@@ -20,22 +20,85 @@
                                 <?php
                                 foreach($userExperiences as $userExperience){
                                   $empStartDate = date("M Y", strtotime($userExperience['emp_start_date']));
+                                  $empStartDateInput = date("Y-m-d", strtotime($userExperience['emp_start_date']));
                                   $empEndDate = ($userExperience['emp_end_date']) ? date("M Y", strtotime($userExperience['emp_end_date'])) : 'Currently Working';
+                                  $empEndDateInput = ($userExperience['emp_end_date']) ? date("Y-m-d", strtotime($userExperience['emp_end_date'])) : null;
                               ?>
-                                <a class="job_com1" href="#">
+                                <a class="job_com1" href="#" id="view-exp-<?=$userExperience['id'];?>">
                                     <div class="com_img">
                                         <img src="<?= site_url('assets/site/'); ?>img/logo-short.png">
                                     </div>
                                     <div class="commodo_de">
-                                        <h3><?=$userExperience['organization'];?></h3>
-                                        <h4><i class="fa fa-briefcase"></i><?=$userExperience['position'];?></h4>
-                                        <h4><i class="fa fa-calendar"></i> <?=$empStartDate;?> – <?=$empEndDate;?></h4>
-                                        <h4><i class="fa fa-map-marker"></i><?=$userExperience['location'];?></h4>
+                                        <h3 id="view-organization-<?=$userExperience['id'];?>">
+                                            <?=$userExperience['organization'];?></h3>
+                                        <h4 id="view-position-<?=$userExperience['id'];?>"><i
+                                                class="fa fa-briefcase"></i><?=$userExperience['position'];?></h4>
+                                        <h4 id="view-emp_duration-<?=$userExperience['id'];?>"><i
+                                                class="fa fa-calendar"></i> <?=$empStartDate;?> – <?=$empEndDate;?></h4>
+                                        <h4 id="view-emp_location-<?=$userExperience['id'];?>"><i
+                                                class="fa fa-map-marker"></i><?=$userExperience['location'];?></h4>
                                     </div>
                                 </a>
+                                <div class="row hidden" id="edit-exp-input-<?=$userExperience['id'];?>">
+                                    <form id="updateExperienceForm<?=$userExperience['id'];?>" method="post"
+                                        onsubmit="update_experience(event, <?=$userExperience['id'];?>);">
+                                        <input type="hidden" name="update_exp_id" value="<?=$userExperience['id'];?>">
+                                        <div class="col-sm-2">
+                                            <div class="form-group">
+                                                <label
+                                                    for="edit-organization-<?=$userExperience['id'];?>">Company</label>
+                                                <input type="text" id="edit-organization-<?=$userExperience['id'];?>"
+                                                    name="organization" required="" class="form-control"
+                                                    value="<?=$userExperience['organization'];?>">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <div class="form-group">
+                                                <label
+                                                    for="edit-position-<?=$userExperience['id'];?>">Designation</label>
+                                                <input type="text" id="edit-position-<?=$userExperience['id'];?>"
+                                                    name="position" required="" class="form-control"
+                                                    value="<?=$userExperience['position'];?>">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <div class="form-group">
+                                                <label for="edit-emp_start_date-<?=$userExperience['id'];?>">Start
+                                                    Date</label>
+                                                <input type="date" id="edit-emp_start_date-<?=$userExperience['id'];?>"
+                                                    name="emp_start_date" required="" class="form-control"
+                                                    value="<?=$empStartDateInput;?>">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <div class="form-group">
+                                                <label for="edit-emp_end_date-<?=$userExperience['id'];?>">End
+                                                    Date</label>
+                                                <input type="date" id="edit-emp_end_date-<?=$userExperience['id'];?>"
+                                                    name="emp_end_date" class="form-control"
+                                                    value="<?=$empEndDateInput;?>">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <div class="form-group">
+                                                <label for="edit-location-<?=$userExperience['id'];?>">Location</label>
+                                                <input type="text" id="edit-location-<?=$userExperience['id'];?>"
+                                                    name="location" required="" class="form-control"
+                                                    value="<?=$userExperience['location'];?>">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <button class="btn btn-info btn_submit" type="submit"><i
+                                                    class="fa fa-check"></i></button>
+                                        </div>
+                                    </form>
+                                </div>
                                 <button class="btn btn-danger" id="remove-btn-<?=$userExperience['id'];?>"
                                     onclick="remove_experience(<?=$userExperience['id'];?>)"><i
                                         class="fa fa-close"></i></button>
+                                <button class="btn btn-info" id="edit-btn-<?=$userExperience['id'];?>"
+                                    onclick="edit_experience(<?=$userExperience['id'];?>)"><i
+                                        class="fa fa-edit"></i></button>
                                 <?php
                                 }
                               ?>
@@ -83,7 +146,8 @@
                                         </div>
                                     </div>
                                     <div class="col-sm-2">
-                                        <button class="btn btn-info btn_submit" type="submit"><i class="fa fa-plus"></i></button>
+                                        <button class="btn btn-info btn_submit" type="submit"><i
+                                                class="fa fa-plus"></i></button>
                                     </div>
                                 </div>
                                 <div class="responseMessage" id="responseMessage"></div>
@@ -97,6 +161,7 @@
 </div>
 
 <script>
+const englishMonth = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 function add_experience(e) {
     e.preventDefault();
     $.ajax({
@@ -118,6 +183,7 @@ function add_experience(e) {
             $(".btn_submit").html('<i class="fa fa-plus"></i>');
             if (response.status == 1) {
                 $(".rii2").append(append_experience(response.exp_id));
+                $('#experienceForm').trigger("reset")
                 // location.reload();
             }
             $("#responseMessage").html(response.responseMessage);
@@ -140,7 +206,10 @@ function remove_experience(id) {
             $("#responseMessage").hide();
         },
         success: function(response) {
-            // if (response.status == 1) location.reload();
+            if (response.status == 1) {
+                $("#view-exp-" + id).remove();
+                // location.reload();
+            }
             $("#responseMessage").html(response.responseMessage);
             $("#responseMessage").show();
         }
@@ -151,8 +220,8 @@ function append_experience(exp_id) {
     let organization = $("#organization").val();
     let designation = $("#position").val();
     let location = $("#location").val();
-    let start_date = $("#emp_start_date").val();
-    let end_date = $("#emp_end_date").val();
+    let start_date = format_date($("#emp_start_date").val());
+    let end_date = format_date($("#emp_end_date").val());
     return `
     <div class="rii2">
       <a class="job_com1" href="#">
@@ -169,5 +238,54 @@ function append_experience(exp_id) {
       <button class="btn btn-danger" id="remove-btn-${exp_id}" onclick="remove_experience(${exp_id})"><i class="fa fa-close"></i></button>
     </div>
   `
+}
+
+function edit_experience(id) {
+    $("#edit-exp-input-" + id).toggleClass("hidden");
+    $("#view-exp-" + id).toggleClass("hidden");
+}
+
+function update_experience(e, id) {
+    e.preventDefault();
+    $.ajax({
+        type: 'POST',
+        url: BASE_URL + 'Modify-Experience',
+        data: new FormData($('#updateExperienceForm' + id)[0]),
+        dataType: 'JSON',
+        processData: false,
+        contentType: false,
+        cache: false,
+        beforeSend: function(xhr) {
+            $("#responseMessage").html('');
+            $("#responseMessage").hide();
+        },
+        success: function(response) {
+            if (response.status == 1) {
+                update_experience_ui(id)
+                edit_experience(id)
+            }
+            $("#responseMessage").html(response.responseMessage);
+            $("#responseMessage").show();
+        }
+    });
+}
+
+function update_experience_ui(id) {
+    let organization = $("#edit-organization-" + id).val();
+    let designation = $("#edit-position-" + id).val();
+    let location = $("#edit-location-" + id).val();
+    let start_date = format_date($("#edit-emp_start_date-" + id).val());
+    let end_date = $("#edit-emp_end_date-" + id).val();
+    end_date = (end_date.length) ? format_date($("#edit-emp_end_date-" + id).val()) : 'Currently Working';
+    $("#view-position-" + id).html(`<i class="fa fa-briefcase"></i>${designation}`);
+    $("#view-emp_duration-" + id).html(`<i class="fa fa-calendar"></i> ${start_date} – ${end_date}`);
+    $("#view-emp_location-" + id).html(`<i class="fa fa-map-marker"></i>${location}`);
+}
+
+function format_date(input) {
+    let newDate = new Date(input);
+    let month = newDate.getMonth()
+    let year = newDate.getFullYear()
+    return `${englishMonth[month]} ${year}`
 }
 </script>
