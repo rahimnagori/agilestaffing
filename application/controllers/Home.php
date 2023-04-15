@@ -44,7 +44,7 @@ class Home extends CI_Controller
     }
     $this->load->view('site/include/header');
     $this->load->view('site/sign-up');
-    $this->load->view('site/include/footer');
+    // $this->load->view('site/include/footer');
   }
 
   public function forget()
