@@ -18,13 +18,23 @@
                         <div class="detail_prof">
                             <h4>About</h4>
                             <p><?=$moreUserDetails['user_about'];?></p>
-                            <h4>Skill</h4>
+                            <h4>Skills</h4>
+                            <?php
+                                if(!empty($moreUserDetails['user_skills'])){
+                                    $skills = explode(",", $moreUserDetails['user_skills']);
+                            ?>
                             <div class="keyii">
-                                <span>html</span>
-                                <span>css</span>
-                                <span>jquery</span>
-                                <span>photoshop</span>
+                                <?php
+                                            foreach($skills as $skill){
+                                        ?>
+                                <span><?=$skill;?></span>
+                                <?php
+                                            }
+                                        ?>
                             </div>
+                            <?php
+                                }
+                            ?>
                             <div class="rii2">
                                 <h4> Experience </h4>
                                 <?php

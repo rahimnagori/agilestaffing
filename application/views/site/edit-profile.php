@@ -18,13 +18,13 @@
                         <div class="detail_prof">
                             <form id="profileForm" name="profileForm" method="post" onsubmit="update_profile(event);">
                                 <div class="row">
-                                    <div class="col-sm-6">
+                                    <!-- <div class="col-sm-6">
                                         <div class="form-group">
                                             <label for="image">Profile Image</label>
                                             <input type="file" name="profile_image" accept="image/*"
                                                 onchange="preview_image(this, 'previewImage');">
                                         </div>
-                                    </div>
+                                    </div> -->
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-6">

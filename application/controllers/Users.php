@@ -63,12 +63,12 @@ class Users extends CI_Controller
     $response['status'] = 0;
     $response['responseMessage'] = $this->Common_Model->error('Something went wrong, please try again later.');
 
-    $this->form_validation->set_rules('first_name', 'first_name', 'required');
-    $this->form_validation->set_rules('last_name', 'last_name', 'required');
-    $this->form_validation->set_rules('email', 'email', 'required|valid_email|trim|is_unique[users.email]', array('is_unique' => 'This email is already taken. Please provide another email.'));
-    $this->form_validation->set_rules('password', 'password', 'required');
-    $this->form_validation->set_rules('confirm_password', 'confirm_password', 'required|matches[password]', array('matches' => 'Password and Confirm password does not match.'));
-    $this->form_validation->set_rules('phone', 'phone', 'required');
+    $this->form_validation->set_rules('first_name', 'First Name', 'required');
+    $this->form_validation->set_rules('last_name', 'Last Name', 'required');
+    $this->form_validation->set_rules('email', 'Email', 'required|valid_email|trim|is_unique[users.email]', array('is_unique' => 'This email is already taken. Please provide another email.'));
+    $this->form_validation->set_rules('password', 'Password', 'required');
+    $this->form_validation->set_rules('confirm_password', 'Confirm Password', 'required|matches[password]', array('matches' => 'Password and Confirm password does not match.'));
+    $this->form_validation->set_rules('phone', 'Phone', 'required|regex_match[/^[0-9]{10}$/]', array('regex_match' => 'Please enter correct phone.'));
     // $this->form_validation->set_rules('username', 'username', 'required|is_unique[users.username]|trim');
     if ($this->form_validation->run()) {
       $insert = $this->create_user();
@@ -103,6 +103,14 @@ class Users extends CI_Controller
       $this->session->set_flashdata('responseMessage', $responseMessage);
       redirect('Login');
     }
+
+    $where['user_id'] = $this->session->userdata('id');
+    $isUserDetailsExist = $this->Common_Model->fetch_records('user_details', $where, false, true);
+    if (empty($isUserDetailsExist)) {
+      $insertOrUpdate['user_id'] = $where['user_id'];
+      $this->Common_Model->insert('user_details', $insertOrUpdate);
+    }
+
     $pageData = $this->Common_Model->get_userdata();
     if ($pageData['userDetails']['is_email_verified'] != 1) {
       redirect('Verify');
@@ -129,13 +137,6 @@ class Users extends CI_Controller
     }
     $pageData['editPage'] = true;
 
-    $where['user_id'] = $this->session->userdata('id');
-    $isUserDetailsExist = $this->Common_Model->fetch_records('user_details', $where, false, true);
-    if (empty($isUserDetailsExist)) {
-      $insertOrUpdate['user_id'] = $where['user_id'];
-      $this->Common_Model->insert('user_details', $insertOrUpdate);
-    }
-
     $this->load->view('site/include/header', $pageData);
     $this->load->view('site/edit-profile', $pageData);
     $this->load->view('site/include/footer', $pageData);
@@ -157,6 +158,7 @@ class Users extends CI_Controller
     $updateProfile['user_about'] = $this->input->post('user_about');
     $updateProfile['user_skills'] = $this->input->post('user_skills');
     $updateProfile['availability_for_meeting'] = date('Y-m-d H:i:s', strtotime($this->input->post('availability_for_meeting')));
+    /*
     if (isset($_FILES) && $_FILES['profile_image']['error'] == 0) {
       $config['upload_path'] = "assets/site/img/profile/";
       $config['allowed_types'] = 'jpeg|gif|jpg|png';
@@ -170,6 +172,7 @@ class Users extends CI_Controller
         $response['responseMessage'] = $this->Common_Model->error($this->upload->display_errors());
       }
     }
+    */
 
     if (isset($_FILES) && $_FILES['resume']['error'] == 0) {
       $config['upload_path'] = "assets/site/resume/";
@@ -310,6 +313,66 @@ class Users extends CI_Controller
       $emailResponse = $this->send_verification_email($pageData['userDetails']['id'], true);
       $response['status'] = 1;
       $response['responseMessage'] = $this->Common_Model->success('Verification email sent successfully.' . $emailResponse);
+    }
+    echo json_encode($response);
+  }
+
+  public function delete_profile_image(){
+    $response['responseMessage'] = $this->Common_Model->error('Server error, please try again later');
+    $response['status'] = 0;
+
+    $userId = $this->session->userdata('id');
+    if ($userId) {
+      $userdata = $this->Common_Model->fetch_records('user_details', array('user_id' => $userId), false, true);
+      if(!empty($userdata)){
+        if(file_exists($userdata['profile_image'])) unlink($userdata['profile_image']);
+        $updateProfile['profile_image'] = null;
+        $this->Common_Model->update('user_details', array('id' => $userId), $updateProfile);
+        $response['status'] = 1;
+        $response['responseMessage'] = $this->Common_Model->success('Profile image updated successfully.');
+      }else {
+        $response['responseMessage'] = $this->Common_Model->error('You are not authorized.');
+        $response['status'] = 2;
+      }
+    } else {
+      $response['responseMessage'] = $this->Common_Model->error('You are not authorized.');
+      $response['status'] = 2;
+    }
+    echo json_encode($response);
+  }
+
+  public function update_profile_image(){
+    $response['responseMessage'] = $this->Common_Model->error('Server error, please try again later');
+    $response['status'] = 0;
+
+    $userId = $this->session->userdata('id');
+    if ($userId) {
+      $userdata = $this->Common_Model->fetch_records('user_details', array('user_id' => $userId), false, true);
+      if(!empty($userdata)){
+        if (isset($_FILES) && $_FILES['profile_image']['error'] == 0) {
+          $config['upload_path'] = "assets/site/img/profile/";
+          $config['allowed_types'] = 'jpeg|gif|jpg|png';
+          $config['encrypt_name'] = true;
+          $this->load->library("upload", $config);
+          if ($this->upload->do_upload('profile_image')) {
+            if(file_exists($userdata['profile_image'])) unlink($userdata['profile_image']);
+            $profileImage = $this->upload->data("file_name");
+    
+            $updateProfile['profile_image'] = $config['upload_path'] . $profileImage;
+            $this->Common_Model->update('user_details', array('id' => $userId), $updateProfile);
+            $response['status'] = 1;
+            $response['responseMessage'] = $this->Common_Model->success('Profile image updated successfully.');
+          } else {
+            $response['responseMessage'] = $this->Common_Model->error($this->upload->display_errors());
+          }
+        }
+      }else {
+        $response['responseMessage'] = $this->Common_Model->error('You are not authorized.');
+        $response['status'] = 2;
+      }
+    } else {
+      $response['responseMessage'] = $this->Common_Model->error('You are not authorized.');
+      $response['status'] = 2;
     }
     echo json_encode($response);
   }

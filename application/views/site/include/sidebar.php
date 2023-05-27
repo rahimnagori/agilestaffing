@@ -8,13 +8,17 @@
     <h4>
         <?= $userDetails['first_name'] . ' ' . $userDetails['last_name']; ?>
     </h4>
-    <?php
-    if ($editPage == true) {
-        ?>
-
+    <div class="text-center">
         <?php
-    }
-    ?>
+            if ($editPage == true) {
+        ?>
+        <input type="file" name="profile_image" id="sidebar-profile-image" accept="image/*"
+            onchange="update_image(event);">
+        <button type="button" class="btn btn-danger" onclick="delete_image()"><i class="fa fa-trash-o"></i></button>
+        <?php
+        }
+        ?>
+    </div>
     <p>
         <?=(!empty($moreUserDetails)) ? $moreUserDetails['current_job_role'] : 'Please add job role'; ?>
     </p>
