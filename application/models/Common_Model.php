@@ -243,4 +243,14 @@ class Common_Model extends CI_Model
     return implode($pass);
   }
 
+  public function get_filters($jobs){
+    $filters = [];
+    foreach($jobs as $job){
+        $filters['location'][] = $job['address'];
+        $filters['position'][] = $job['position'];
+        $filters['company'][] = $job['company'];
+    }
+    return $filters;
+  }
+
 }

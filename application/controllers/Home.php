@@ -19,7 +19,8 @@ class Home extends CI_Controller
   public function index()
   {
     $pageData = $this->Common_Model->get_userdata();
-    $pageData['newses'] = $this->Common_Model->fetch_records('newses', array('is_deleted' => 0), false, false, 'id');
+    $pageData['jobs'] = $this->Common_Model->fetch_records('jobs', array('is_deleted' => 0, 'last_date >=' => date("Y-m-d H:i:s") ));
+    $pageData['filters'] = $this->Common_Model->get_filters($pageData['jobs']);
 
     $this->load->view('site/include/header', $pageData);
     $this->load->view('site/index', $pageData);

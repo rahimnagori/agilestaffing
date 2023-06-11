@@ -16,7 +16,7 @@ class JobsController extends CI_Controller
     {
         $pageData = $this->Common_Model->get_userdata();
         $pageData['jobs'] = $this->Common_Model->fetch_records('jobs', array('is_deleted' => 0, 'last_date >=' => date("Y-m-d H:i:s") ));
-        $pageData['filters'] = $this->get_filters($pageData['jobs']);
+        $pageData['filters'] = $this->Common_Model->get_filters($pageData['jobs']);
 
         $this->load->view('site/include/header', $pageData);
         $this->load->view('site/search_jobs', $pageData);
@@ -50,16 +50,6 @@ class JobsController extends CI_Controller
         $pageData['jobs'] = $this->Common_Model->fetch_jobs('jobs', $where, $orderBy, $orderDirection, $like, $searchString, $limit, $start);
 
         $this->load->view('site/job_list', $pageData);
-    }
-
-    private function get_filters($jobs){
-        $filters = [];
-        foreach($jobs as $job){
-            $filters['location'][] = $job['address'];
-            $filters['position'][] = $job['position'];
-            $filters['company'][] = $job['company'];
-        }
-        return $filters;
     }
 
     private function check_login()
