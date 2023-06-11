@@ -37,6 +37,25 @@ class Common_Model extends CI_Model
     return ($singleRecords) ? $query->row_array() : $query->result_array();
   }
 
+  function fetch_jobs($table, $where = false, $orderBy = false, $orderDirection = 'DESC', $like = false, $searchString = false, $limit = false, $start = 0)
+  {
+    if ($where) $this->db->where($where);
+    if ($like) $this->db->like($like);
+    if ($orderBy) $this->db->order_by($orderBy, $orderDirection);
+    if ($limit) $this->db->limit($limit, $start);
+    if($searchString){
+      $this->db->group_start()
+        ->or_like('title', $searchString)
+        ->or_like('description', $searchString)
+        ->or_like('position', $searchString)
+        ->or_like('company', $searchString)
+        ->or_like('address', $searchString)
+      ->group_end();
+    }
+    $query = $this->db->get($table);
+    return $query->result_array();
+  }
+
   public function update($table, $where, $updateData)
   {
     $this->db->where($where);

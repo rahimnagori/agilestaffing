@@ -15,15 +15,51 @@ class JobsController extends CI_Controller
     public function index()
     {
         $pageData = $this->Common_Model->get_userdata();
-        $pageData['jobs'] = $this->Common_Model->fetch_records('jobs');
+        $pageData['jobs'] = $this->Common_Model->fetch_records('jobs', array('is_deleted' => 0, 'last_date >=' => date("Y-m-d H:i:s") ));
+        $pageData['filters'] = $this->get_filters($pageData['jobs']);
 
         $this->load->view('site/include/header', $pageData);
-        if ($this->session->userdata('id')) {
-            $this->load->view('site/user_search_jobs', $pageData);
-        } else {
-            $this->load->view('site/search_jobs', $pageData);
-        }
+        $this->load->view('site/search_jobs', $pageData);
         $this->load->view('site/include/footer', $pageData);
+    }
+    
+    public function get_jobs(){
+        $pageData = $this->Common_Model->get_userdata();
+        $where['is_deleted'] = 0;
+        $where['last_date >='] = date("Y-m-d H:i:s");
+        $like = [];
+        $start = 0;
+        $orderBy = false;
+        $orderDirection = 'DESC';
+        $limit = 10;
+        if($_POST['location'] && !empty($_POST['location'])) $like['address'] = $_POST['location'];
+        if($_POST['position'] && !empty($_POST['position'])) $like['position'] = $_POST['position'];
+        if($_POST['company'] && !empty($_POST['company'])) $like['company'] = $_POST['company'];
+        if($_POST['job_type'] && !empty($_POST['job_type'])) $where['job_mode'] = $_POST['job_type'];
+        if($_POST['date_posted'] && !empty($_POST['date_posted'])) $where['created'] = $_POST['date_posted'];
+        if($_POST['pageNo'] && !empty($_POST['pageNo'])) $start = $_POST['pageNo'];
+
+        $searchString = ($_POST['search_string'] && !empty($_POST['search_string'])) ? $_POST['search_string'] : false;
+        if($_POST['sort_by'] && !empty($_POST['sort_by'])){
+            $orderBy = $_POST['sort_by'];
+            $orderDirection = $_POST['sort_by_direction'];
+        }
+        if($_POST['date_posted'] && !empty($_POST['date_posted'])){
+            $where['created >='] = $_POST['date_posted'];
+        }
+        $pageData['jobs'] = $this->Common_Model->fetch_jobs('jobs', $where, $orderBy, $orderDirection, $like, $searchString, $limit, $start);
+
+        $this->load->view('site/job_list', $pageData);
+    }
+
+    private function get_filters($jobs){
+        $filters = [];
+        foreach($jobs as $job){
+            $filters['location'][] = $job['address'];
+            $filters['position'][] = $job['position'];
+            $filters['company'][] = $job['company'];
+        }
+        return $filters;
     }
 
     private function check_login()
@@ -31,7 +67,11 @@ class JobsController extends CI_Controller
         return ($this->session->userdata('is_user_logged_in')) ? true : false;
     }
 
-    public function apply_job()
+    public function apply_job(){
+        ($this->check_login()) ? $this->apply_user() : $this->apply_guest();
+    }
+
+    public function apply_user()
     {
         $response['status'] = 0;
         $response['responseMessage'] = $this->Common_Model->error('Something went wrong, please try again later.');

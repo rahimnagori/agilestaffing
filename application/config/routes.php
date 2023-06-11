@@ -41,10 +41,12 @@ $route['Legal'] = 'Home/legal';
 
 // $route['Jobs'] = 'Home/jobs';
 $route['Search-Jobs'] = 'JobsController';
+$route['Jobs'] = 'JobsController/get_jobs';
 $route['Reset-Job/(:any)'] = 'JobsController/get_job_modals/$1';
 $route['Job-Details/(:any)'] = 'JobsController/job_details/$1';
-$route['Guest-Apply'] = 'JobsController/apply_guest';
-$route['User-Apply'] = 'JobsController/apply_job';
+// $route['Guest-Apply'] = 'JobsController/apply_guest';
+// $route['User-Apply'] = 'JobsController/apply_job';
+$route['Job-Apply'] = 'JobsController/apply_job';
 $route['Submit-Otp'] = 'JobsController/submit_otp';
 $route['Job-Applications'] = 'JobsController/applied_jobs';
 $route['User-Experience'] = 'JobsController/experience';

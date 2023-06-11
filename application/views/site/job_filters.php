@@ -164,7 +164,7 @@
                                     </ul>
                                 </li>
                                 <li class="filss_me">
-                                    <a href="#">All Filter</a>
+                                    <button onclick="openCloseFilters();">All Filters</button>
                                 </li>
                             </ul>
                         </div>
@@ -177,7 +177,7 @@
         <div class="hedaa_md">
             <div class="chann_sall2">
                 <div class="pull-left">
-                    <h4>All jobs filters</h4>
+                    <h4>All Job Filters</h4>
                 </div>
                 <div class="pull-right">
                     <ul class="ul_set">
