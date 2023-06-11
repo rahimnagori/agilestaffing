@@ -99,6 +99,13 @@ function get_job_modal(job_id) {
 }
 
 function fetch_jobs() {
+  let url = new URL(window.location.href);
+  let search_location_string = url.searchParams.get("location-string");
+  if (search_location_string) {
+    $("#search_string").val(search_location_string);
+    window.history.replaceState(null, "", window.location.pathname);
+  }
+
   $.ajax({
     type: "POST",
     url: BASE_URL + "Jobs",

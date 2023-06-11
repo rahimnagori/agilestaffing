@@ -244,12 +244,17 @@ class Common_Model extends CI_Model
   }
 
   public function get_filters($jobs){
-    $filters = [];
+    $location = [];
+    $position = [];
+    $company = [];
     foreach($jobs as $job){
-        $filters['location'][] = $job['address'];
-        $filters['position'][] = $job['position'];
-        $filters['company'][] = $job['company'];
+      if(!in_array($job['address'], $location)) $location[] = $job['address'];
+      if(!in_array($job['position'], $position)) $position[] = $job['position'];
+      if(!in_array($job['company'], $company)) $company[] = $job['company'];
     }
+    $filters = [
+      'location' => $location, 'position' => $position, 'company' => $company
+    ];
     return $filters;
   }
 

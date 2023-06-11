@@ -23,17 +23,17 @@
                                     <div class="col-sm-6">
                                         <div class="icon_in">
                                             <i class="fa fa-search"></i>
-                                            <input type="text" name="location-string" required="" placeholder="Search"
-                                                class="form-control">
+                                            <input type="text" name="location-string" required=""
+                                                placeholder="Search Position, Company or Location" class="form-control">
                                         </div>
                                     </div>
-                                    <div class="col-sm-6">
+                                    <!-- <div class="col-sm-6">
                                         <div class="icon_in">
                                             <i class="fa fa-location-arrow"></i>
                                             <input type="text" name="location" required="" placeholder="Location"
                                                 class="form-control">
                                         </div>
-                                    </div>
+                                    </div> -->
                                 </div>
                                 <button class="btn btn_theme">Search</button>
                             </form>
