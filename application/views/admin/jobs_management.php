@@ -1,8 +1,10 @@
 <?php include 'include/header.php'; ?>
 
 <div class="conten_web">
-    <h4 class="heading">Jobs <small>Management</small><span><button class="btn btn_theme2" data-toggle="modal"
-                data-target="#addJobModal">Add</button></span></h4>
+    <h4 class="heading">Jobs <small>Management</small><span>
+            <button class="btn btn_theme2" data-toggle="modal" data-target="#addJobModal" data-backdrop="static"
+                data-keyboard="false">Add</button>
+        </span></h4>
     <div class="white_box">
         <?= $this->session->flashdata('responseMessage'); ?>
         <div class="card_bodym">

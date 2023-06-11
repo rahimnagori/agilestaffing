@@ -81,7 +81,7 @@
             <div class="row">
                 <div class="col-sm-6">
                     <div class="form-group">
-                        <input type="text" class="form-control" name="search_string"
+                        <input type="text" class="form-control" name="search_string" id="search_string"
                             placeholder="Search Position, Company or Location" />
                     </div>
                 </div>
