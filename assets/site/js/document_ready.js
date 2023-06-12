@@ -1,0 +1,1 @@
+function document_ready() {}

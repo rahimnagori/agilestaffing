@@ -109,7 +109,7 @@ function fetch_jobs() {
   $.ajax({
     type: "POST",
     url: BASE_URL + "Jobs",
-    dataType: "html",
+    dataType: "json",
     data: new FormData($("#filterForm")[0]),
     processData: false,
     contentType: false,
@@ -118,7 +118,8 @@ function fetch_jobs() {
       $("#job_details_div").html(LOADING);
     },
     success: function (response) {
-      $("#jobs_section").html(response);
+      $("#jobs_section").html(response.response);
+      $("#limit").val(response.pages);
     },
   });
 }
@@ -134,5 +135,19 @@ function reset_jobs() {
 
 function update_filters(e) {
   e.preventDefault();
+  fetch_jobs();
+}
+
+function change_page(direction) {
+  let currentPageNo = parseInt($("#pageNo").val());
+  let newPageNo =
+    direction === "next" ? currentPageNo + 10 : currentPageNo - 10;
+  $("#pageNo").val(newPageNo > 0 ? newPageNo : 0);
+  fetch_jobs();
+}
+
+function got_to_page(pageNo) {
+  let limit = parseInt($("#limit").val());
+  $("#pageNo").val(pageNo > 0 && pageNo <= limit ? pageNo * 10 : 0);
   fetch_jobs();
 }
