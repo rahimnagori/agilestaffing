@@ -52,9 +52,7 @@ class JobsController extends CI_Controller
         $pageData['totalJobs'] = count($totalJobs);
         $pageData['fetchedJobs'] = count($pageData['jobs']) + $start;
         $response['pages'] = $pageData['pages'] = $pageData['totalJobs'] / $limit;
-        // echo "<pre>";
-        // print_r($pageData);
-        // die;
+
         $response['response'] = $this->load->view('site/job_list', $pageData, true);
         echo json_encode($response);
     }
