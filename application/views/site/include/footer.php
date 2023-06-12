@@ -26,7 +26,7 @@
                             <h4>Know Link</h4>
                             <div class="link_1">
                                 <a href="<?= site_url('About') ?>">About us </a>
-                                <a href="<?= site_url('Career') ?>">Career</a>
+                                <a href="<?= site_url('Search-Jobs') ?>">Career</a>
                             </div>
                         </div>
                         <div class="col-sm-4 col-xs-4">

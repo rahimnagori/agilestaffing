@@ -109,7 +109,7 @@ function fetch_jobs() {
   $.ajax({
     type: "POST",
     url: BASE_URL + "Jobs",
-    dataType: "html",
+    dataType: "json",
     data: new FormData($("#filterForm")[0]),
     processData: false,
     contentType: false,
@@ -118,7 +118,7 @@ function fetch_jobs() {
       $("#job_details_div").html(LOADING);
     },
     success: function (response) {
-      $("#jobs_section").html(response);
+      $("#jobs_section").html(response.response);
     },
   });
 }

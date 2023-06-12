@@ -149,3 +149,5 @@ function sign_up_user(e) {
     });
 }
 </script>
+
+<script type="text/javascript" src="<?=site_url('assets/site/js/document_ready.js');?>"></script>

@@ -48,8 +48,10 @@ class JobsController extends CI_Controller
             $where['created >='] = $_POST['date_posted'];
         }
         $pageData['jobs'] = $this->Common_Model->fetch_jobs('jobs', $where, $orderBy, $orderDirection, $like, $searchString, $limit, $start);
-
-        $this->load->view('site/job_list', $pageData);
+        $response['totalJobs'] = count($pageData['jobs']);
+        $response['pages'] = $response['totalJobs'] / $limit;
+        $response['response'] = $this->load->view('site/job_list', $pageData, true);
+        echo json_encode($response);
     }
 
     private function check_login()
