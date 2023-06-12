@@ -230,35 +230,4 @@ class Home extends CI_Controller
     $this->load->view('site/include/footer', $pageData);
   }
 
-  public function test($data = false){
-    if($data == 'Insert'){
-      $title = ["Marketing Coordinator", "Customer Service Representative", "Sales Associate", "Graphic Designer"];
-      $description = ["We are seeking a motivated Marketing Coordinator to join our dynamic marketing team. In this role, you will assist in the implementation and execution of marketing campaigns, conduct market research, and support various marketing initiatives to drive brand awareness and customer engagement.", "We are hiring a Customer Service Representative to join our dedicated team. As a Customer Service Representative, you will be the first point of contact for our customers, providing exceptional service and support to ensure their satisfaction and maintain strong customer relationships.", "We are looking for a proactive and motivated Sales Associate to join our team. As a Sales Associate, you will play a key role in driving sales and delivering exceptional customer service. Your goal will be to provide a positive shopping experience and meet or exceed sales targets.", "We are seeking a talented Graphic Designer to join our creative team. As a Graphic Designer, you will be responsible for creating visually appealing designs that communicate our brand message effectively. Your designs will be used across various marketing channels and materials, including digital and print media."];
-      $position = $title;
-      $company = ["GlobalTech Solutions", "Stellar Services Ltd.", "Alpha Retail Solutions", " CreativeWorks Agency"];
-      $address = ["Techland", "Supportland", "Salesland", "Creativia"];
-  
-      foreach($title as $titl){
-        $insert = [
-          'title' => $title[rand(0,3)],
-          'description' => $description[rand(0,3)],
-          'job_mode' => rand(1,3),
-          'user_id' => 1,
-          'is_deleted' => 0,
-          'position' => $position[rand(0,3)],
-          'company' => $company[rand(0,3)],
-          'address' => $address[rand(0,3)],
-          'salary' => rand(500, 1000),
-          'last_date' => date("Y-m-d H:i:s", strtotime("now + " .rand(100, 500) ."day")),
-          'created' => date("Y-m-d H:i:s"),
-          'updated' => date("Y-m-d H:i:s")
-        ];
-        $this->Common_Model->insert('jobs', $insert);
-        echo "<p>" .$this->db->last_query() ."</p>";
-      }
-    }else {
-      redirect('');
-    }
-  }
-
 }
