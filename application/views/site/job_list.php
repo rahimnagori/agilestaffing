@@ -44,4 +44,28 @@
             ?>
         </div>
     </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    <li class="page-item <?=($fetchedJobs <= 10) ? 'disabled' : '';?>"><a href="javascript:void(0);"
+                            onclick="change_page('previous');" class="page-link">Previous</a>
+                    </li>
+                    <?php
+                        for($i = 0; $i <= $pages; $i++){
+                    ?>
+                    <li class="page-item"><a class="page-link" href="javascript:void(0);"
+                            onclick="got_to_page(<?=$i;?>);"><?=$i + 1;?></a></li>
+                    <?php
+                        }
+                    ?>
+                    <li class="page-item <?=($fetchedJobs == $totalJobs) ? 'disabled' : '';?>"><a
+                            href="javascript:void(0);" onclick="change_page('next');" class="page-link">Next</a></li>
+                    <p> (<?=$fetchedJobs;?> / <?=$totalJobs;?>)</p>
+                </ul>
+            </nav>
+            <!-- <p><?=$this->db->last_query();?></p>
+            <p><?="Total Jobs $totalJobs -- Pages $pages";?></p> -->
+        </div>
+    </div>
 </div>

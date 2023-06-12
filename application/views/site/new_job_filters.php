@@ -5,7 +5,8 @@
     <form id="filterForm" name="filterForm" method="post" onsubmit="update_filters(event);">
         <div class="container-fluid">
             <div class="row">
-                <input type="hidden" name="pageNo" id="pageNo" />
+                <input type="hidden" name="pageNo" id="pageNo" value="0" />
+                <input type="hidden" name="limit" id="limit" value="0" />
                 <div class="col-sm-2">
                     <div class="form-group">
                         <select class="form-control" name="location">

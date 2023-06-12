@@ -47,9 +47,14 @@ class JobsController extends CI_Controller
         if($_POST['date_posted'] && !empty($_POST['date_posted'])){
             $where['created >='] = $_POST['date_posted'];
         }
+        $totalJobs = $this->Common_Model->fetch_jobs('jobs', $where, $orderBy, $orderDirection, $like, $searchString);
         $pageData['jobs'] = $this->Common_Model->fetch_jobs('jobs', $where, $orderBy, $orderDirection, $like, $searchString, $limit, $start);
-        $response['totalJobs'] = count($pageData['jobs']);
-        $response['pages'] = $response['totalJobs'] / $limit;
+        $pageData['totalJobs'] = count($totalJobs);
+        $pageData['fetchedJobs'] = count($pageData['jobs']) + $start;
+        $response['pages'] = $pageData['pages'] = $pageData['totalJobs'] / $limit;
+        // echo "<pre>";
+        // print_r($pageData);
+        // die;
         $response['response'] = $this->load->view('site/job_list', $pageData, true);
         echo json_encode($response);
     }
