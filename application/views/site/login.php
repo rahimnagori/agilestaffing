@@ -35,8 +35,10 @@
                             <?= $this->session->flashdata('responseMessage'); ?>
                         </div>
                         <div class="form-group btnloggib">
+                            <div class="form-group">
                             <div class="g-recaptcha" data-sitekey="<?=$this->config->item("GCAPTCHAKEY");?>"></div>
                             <input type="hidden" id="g-captcha-response" name="g-captcha-response">
+                            </div>
                             <button class="btn btn_theme btn-lg btn-block btn_submit" type="submit">Login</button>
                         </div>
 

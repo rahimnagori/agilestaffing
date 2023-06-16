@@ -218,3 +218,5 @@ function preview_image(input, previewId) {
     }
 }
 </script>
+
+<script type="text/javascript" src="<?=site_url('assets/site/js/document_ready.js');?>"></script>

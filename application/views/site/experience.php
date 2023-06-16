@@ -24,7 +24,7 @@
                                   $empEndDate = ($userExperience['emp_end_date']) ? date("M Y", strtotime($userExperience['emp_end_date'])) : 'Currently Working';
                                   $empEndDateInput = ($userExperience['emp_end_date']) ? date("Y-m-d", strtotime($userExperience['emp_end_date'])) : null;
                               ?>
-                                <a class="job_com1" href="#" id="view-exp-<?=$userExperience['id'];?>">
+                                <a class="job_com1 set_p2d" href="#" id="view-exp-<?=$userExperience['id'];?>">
                                     <div class="com_img">
                                         <img src="<?= site_url('assets/site/'); ?>img/logo-short.png">
                                     </div>
@@ -38,10 +38,19 @@
                                         <h4 id="view-emp_location-<?=$userExperience['id'];?>"><i
                                                 class="fa fa-map-marker"></i><?=$userExperience['location'];?></h4>
                                     </div>
+                                    <span class="bo_btj">
+                                <button class="btn btn-danger" id="remove-btn-<?=$userExperience['id'];?>"
+                                    onclick="remove_experience(<?=$userExperience['id'];?>)"><i
+                                        class="fa fa-close"></i></button>
+                                <button class="btn btn_theme" id="edit-btn-<?=$userExperience['id'];?>"
+                                    onclick="edit_experience(<?=$userExperience['id'];?>)"><i
+                                        class="fa fa-edit"></i></button>
+                                </span>
                                 </a>
-                                <div class="row hidden" id="edit-exp-input-<?=$userExperience['id'];?>">
+                                <div class=" hidden" id="edit-exp-input-<?=$userExperience['id'];?>">
                                     <form id="updateExperienceForm<?=$userExperience['id'];?>" method="post"
                                         onsubmit="update_experience(event, <?=$userExperience['id'];?>);">
+                                        <div class="set_med1">
                                         <input type="hidden" name="update_exp_id" value="<?=$userExperience['id'];?>">
                                         <div class="col-sm-2">
                                             <div class="form-group">
@@ -87,26 +96,21 @@
                                                     value="<?=$userExperience['location'];?>">
                                             </div>
                                         </div>
-                                        <div class="col-sm-2">
-                                            <button class="btn btn-info btn_submit" type="submit"><i
+                                       <div class="bo_btj">
+                                       <button class="btn btn_theme btn_submit" type="submit"><i
                                                     class="fa fa-check"></i></button>
+                                       </div>
                                         </div>
                                     </form>
                                 </div>
-                                <button class="btn btn-danger" id="remove-btn-<?=$userExperience['id'];?>"
-                                    onclick="remove_experience(<?=$userExperience['id'];?>)"><i
-                                        class="fa fa-close"></i></button>
-                                <button class="btn btn-info" id="edit-btn-<?=$userExperience['id'];?>"
-                                    onclick="edit_experience(<?=$userExperience['id'];?>)"><i
-                                        class="fa fa-edit"></i></button>
+                                
                                 <?php
                                 }
                               ?>
                             </div>
                         </div>
-                    </div>
-                    <div class="set_whight">
-                        <div class="detail_prof">
+
+                        <div class="set_med1">
                             <form id="experienceForm" name="experienceForm" method="post"
                                 onsubmit="add_experience(event);">
                                 <div class="row">
@@ -145,15 +149,17 @@
                                                 class="form-control">
                                         </div>
                                     </div>
-                                    <div class="col-sm-2">
-                                        <button class="btn btn-info btn_submit" type="submit"><i
-                                                class="fa fa-plus"></i></button>
-                                    </div>
+                                
                                 </div>
+                               <div class="bo_btj">
+                               <button class="btn btn_theme btn_submit" type="submit"><i
+                                                class="fa fa-plus"></i></button>
+                               </div>
                                 <div class="responseMessage" id="responseMessage"></div>
                             </form>
                         </div>
                     </div>
+                    
                 </div>
             </div>
         </div>
@@ -224,7 +230,7 @@ function append_experience(exp_id) {
     let end_date = format_date($("#emp_end_date").val());
     return `
     <div class="rii2">
-      <a class="job_com1" href="#">
+      <a class="job_com1 set_p2d" href="#">
           <div class="com_img">
               <img src="<?= site_url('assets/site/'); ?>img/logo-short.png">
           </div>
@@ -234,9 +240,12 @@ function append_experience(exp_id) {
               <h4><i class="fa fa-calendar"></i>${start_date} – ${end_date}</h4>
               <h4><i class="fa fa-map-marker"></i>${location}</h4>
           </div>
-      </a>
+          <span class="bo_btj">
       <button class="btn btn-danger" id="remove-btn-${exp_id}" onclick="remove_experience(${exp_id})"><i class="fa fa-close"></i></button>
-    </div>
+      </div>
+    </span>
+      </a>
+      
   `
 }
 
