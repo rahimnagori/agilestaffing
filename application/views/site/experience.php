@@ -39,71 +39,76 @@
                                                 class="fa fa-map-marker"></i><?=$userExperience['location'];?></h4>
                                     </div>
                                     <span class="bo_btj">
-                                <button class="btn btn-danger" id="remove-btn-<?=$userExperience['id'];?>"
-                                    onclick="remove_experience(<?=$userExperience['id'];?>)"><i
-                                        class="fa fa-close"></i></button>
-                                <button class="btn btn_theme" id="edit-btn-<?=$userExperience['id'];?>"
-                                    onclick="edit_experience(<?=$userExperience['id'];?>)"><i
-                                        class="fa fa-edit"></i></button>
-                                </span>
+                                        <button class="btn btn-danger" id="remove-btn-<?=$userExperience['id'];?>"
+                                            onclick="remove_experience(<?=$userExperience['id'];?>)"><i
+                                                class="fa fa-close"></i></button>
+                                        <button class="btn btn_theme" id="edit-btn-<?=$userExperience['id'];?>"
+                                            onclick="edit_experience(<?=$userExperience['id'];?>)"><i
+                                                class="fa fa-edit"></i></button>
+                                    </span>
                                 </a>
                                 <div class=" hidden" id="edit-exp-input-<?=$userExperience['id'];?>">
                                     <form id="updateExperienceForm<?=$userExperience['id'];?>" method="post"
                                         onsubmit="update_experience(event, <?=$userExperience['id'];?>);">
                                         <div class="set_med1">
-                                        <input type="hidden" name="update_exp_id" value="<?=$userExperience['id'];?>">
-                                        <div class="col-sm-2">
-                                            <div class="form-group">
-                                                <label
-                                                    for="edit-organization-<?=$userExperience['id'];?>">Company</label>
-                                                <input type="text" id="edit-organization-<?=$userExperience['id'];?>"
-                                                    name="organization" required="" class="form-control"
-                                                    value="<?=$userExperience['organization'];?>">
+                                            <input type="hidden" name="update_exp_id"
+                                                value="<?=$userExperience['id'];?>">
+                                            <div class="col-sm-2">
+                                                <div class="form-group">
+                                                    <label
+                                                        for="edit-organization-<?=$userExperience['id'];?>">Company</label>
+                                                    <input type="text"
+                                                        id="edit-organization-<?=$userExperience['id'];?>"
+                                                        name="organization" required="" class="form-control"
+                                                        value="<?=$userExperience['organization'];?>">
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="col-sm-2">
-                                            <div class="form-group">
-                                                <label
-                                                    for="edit-position-<?=$userExperience['id'];?>">Designation</label>
-                                                <input type="text" id="edit-position-<?=$userExperience['id'];?>"
-                                                    name="position" required="" class="form-control"
-                                                    value="<?=$userExperience['position'];?>">
+                                            <div class="col-sm-2">
+                                                <div class="form-group">
+                                                    <label
+                                                        for="edit-position-<?=$userExperience['id'];?>">Designation</label>
+                                                    <input type="text" id="edit-position-<?=$userExperience['id'];?>"
+                                                        name="position" required="" class="form-control"
+                                                        value="<?=$userExperience['position'];?>">
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="col-sm-2">
-                                            <div class="form-group">
-                                                <label for="edit-emp_start_date-<?=$userExperience['id'];?>">Start
-                                                    Date</label>
-                                                <input type="date" id="edit-emp_start_date-<?=$userExperience['id'];?>"
-                                                    name="emp_start_date" required="" class="form-control"
-                                                    value="<?=$empStartDateInput;?>">
+                                            <div class="col-sm-2">
+                                                <div class="form-group">
+                                                    <label for="edit-emp_start_date-<?=$userExperience['id'];?>">Start
+                                                        Date</label>
+                                                    <input type="date"
+                                                        id="edit-emp_start_date-<?=$userExperience['id'];?>"
+                                                        name="emp_start_date" required="" class="form-control"
+                                                        value="<?=$empStartDateInput;?>">
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="col-sm-2">
-                                            <div class="form-group">
-                                                <label for="edit-emp_end_date-<?=$userExperience['id'];?>">End
-                                                    Date</label>
-                                                <input type="date" id="edit-emp_end_date-<?=$userExperience['id'];?>"
-                                                    name="emp_end_date" class="form-control"
-                                                    value="<?=$empEndDateInput;?>">
+                                            <div class="col-sm-2">
+                                                <div class="form-group">
+                                                    <label for="edit-emp_end_date-<?=$userExperience['id'];?>">End
+                                                        Date</label>
+                                                    <input type="date"
+                                                        id="edit-emp_end_date-<?=$userExperience['id'];?>"
+                                                        name="emp_end_date" class="form-control"
+                                                        value="<?=$empEndDateInput;?>">
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="col-sm-2">
-                                            <div class="form-group">
-                                                <label for="edit-location-<?=$userExperience['id'];?>">Location</label>
-                                                <input type="text" id="edit-location-<?=$userExperience['id'];?>"
-                                                    name="location" required="" class="form-control"
-                                                    value="<?=$userExperience['location'];?>">
+                                            <div class="col-sm-2">
+                                                <div class="form-group">
+                                                    <label
+                                                        for="edit-location-<?=$userExperience['id'];?>">Location</label>
+                                                    <input type="text" id="edit-location-<?=$userExperience['id'];?>"
+                                                        name="location" required="" class="form-control"
+                                                        value="<?=$userExperience['location'];?>">
+                                                </div>
                                             </div>
-                                        </div>
-                                       <div class="bo_btj">
-                                       <button class="btn btn_theme btn_submit" type="submit"><i
-                                                    class="fa fa-check"></i></button>
-                                       </div>
+                                            <div class="bo_btj">
+                                                <button class="btn btn_theme btn_submit" type="submit"><i
+                                                        class="fa fa-check"></i></button>
+                                            </div>
                                         </div>
                                     </form>
                                 </div>
-                                
+
                                 <?php
                                 }
                               ?>
@@ -149,17 +154,17 @@
                                                 class="form-control">
                                         </div>
                                     </div>
-                                
+
                                 </div>
-                               <div class="bo_btj">
-                               <button class="btn btn_theme btn_submit" type="submit"><i
-                                                class="fa fa-plus"></i></button>
-                               </div>
+                                <div class="bo_btj">
+                                    <button class="btn btn_theme btn_submit" type="submit"><i
+                                            class="fa fa-plus"></i></button>
+                                </div>
                                 <div class="responseMessage" id="responseMessage"></div>
                             </form>
                         </div>
                     </div>
-                    
+
                 </div>
             </div>
         </div>
@@ -168,6 +173,7 @@
 
 <script>
 const englishMonth = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
 function add_experience(e) {
     e.preventDefault();
     $.ajax({
@@ -298,3 +304,5 @@ function format_date(input) {
     return `${englishMonth[month]} ${year}`
 }
 </script>
+
+<script type="text/javascript" src="<?=site_url('assets/site/js/document_ready.js');?>"></script>
