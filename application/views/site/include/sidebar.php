@@ -1,5 +1,19 @@
 <div class="left_side">
     <div class="img_usee" id="previewImage">
+    <div class="icon_fi">
+        <?php
+            if ($editPage == true) {
+        ?>
+        <button class="btn btn_theme">
+        <i class="fa fa-camera"></i>
+        <input type="file" name="profile_image" id="sidebar-profile-image" accept="image/*"
+            onchange="update_image(event);">
+        </button>
+        <button type="button" class="btn btn-danger" onclick="delete_image()"><i class="fa fa-trash-o"></i></button>
+        <?php
+        }
+        ?>
+    </div>
         <?php
         $profileImage = (!empty($moreUserDetails) && $moreUserDetails['profile_image']) ? $moreUserDetails['profile_image'] : 'assets/site/img/img_9.png';
         ?>
@@ -8,17 +22,7 @@
     <h4>
         <?= $userDetails['first_name'] . ' ' . $userDetails['last_name']; ?>
     </h4>
-    <div class="text-center">
-        <?php
-            if ($editPage == true) {
-        ?>
-        <input type="file" name="profile_image" id="sidebar-profile-image" accept="image/*"
-            onchange="update_image(event);">
-        <button type="button" class="btn btn-danger" onclick="delete_image()"><i class="fa fa-trash-o"></i></button>
-        <?php
-        }
-        ?>
-    </div>
+    
     <p>
         <?=(!empty($moreUserDetails)) ? $moreUserDetails['current_job_role'] : 'Please add job role'; ?>
     </p>

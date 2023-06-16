@@ -4,10 +4,11 @@
 <div class="filters">
     <form id="filterForm" name="filterForm" method="post" onsubmit="update_filters(event);">
         <div class="container-fluid">
+        <div class="search_us">
             <div class="row">
                 <input type="hidden" name="pageNo" id="pageNo" value="0" />
                 <input type="hidden" name="limit" id="limit" value="0" />
-                <div class="col-sm-2">
+                <div class="col-sm-3">
                     <div class="form-group">
                         <select class="form-control" name="location">
                             <option value="">Location</option>
@@ -21,7 +22,7 @@
                         </select>
                     </div>
                 </div>
-                <div class="col-sm-2">
+                <div class="col-sm-3">
                     <div class="form-group">
                         <select class="form-control" name="position">
                             <option value="">Position</option>
@@ -35,7 +36,7 @@
                         </select>
                     </div>
                 </div>
-                <div class="col-sm-2">
+                <div class="col-sm-3">
                     <div class="form-group">
                         <select class="form-control" name="company">
                             <option value="">Company</option>
@@ -49,7 +50,7 @@
                         </select>
                     </div>
                 </div>
-                <div class="col-sm-2">
+                <div class="col-sm-3">
                     <div class="form-group">
                         <select class="form-control" name="sort_by">
                             <option value="">Sort By</option>
@@ -59,7 +60,7 @@
                         </select>
                     </div>
                 </div>
-                <div class="col-sm-2">
+                <div class="col-sm-3">
                     <div class="form-group">
                         <select class="form-control" name="sort_by_direction">
                             <option value="">Sort By Direction</option>
@@ -68,7 +69,7 @@
                         </select>
                     </div>
                 </div>
-                <div class="col-sm-2">
+                <div class="col-sm-3">
                     <div class="form-group">
                         <select class="form-control" name="date_posted">
                             <option value="">Date Posted</option>
@@ -78,15 +79,13 @@
                         </select>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-6">
+                <div class="col-sm-3">
                     <div class="form-group">
                         <input type="text" class="form-control" name="search_string" id="search_string"
                             placeholder="Search Position, Company or Location" />
                     </div>
                 </div>
-                <div class="col-sm-4">
+                <div class="col-sm-3">
                     <div class="form-group">
                         <select class="form-control" name="job_type">
                             <option value="">Job Type</option>
@@ -96,11 +95,14 @@
                         </select>
                     </div>
                 </div>
-                <div class="col-sm-2">
-                    <button type="button" onclick="fetch_jobs();" class="btn btn-info">Search</button>
-                    <button type="button" onclick="reset_jobs();" class="btn btn-danger">Reset</button>
-                </div>
             </div>
+           
+                
+                <div class="searc_bbtn">
+                    <button type="button" onclick="fetch_jobs();" class="btn btn_theme">Search</button>
+                    <button type="button" onclick="reset_jobs();" class="btn btn_theme2">Reset</button>
+                </div>
+        </div>
         </div>
     </form>
 </div>
