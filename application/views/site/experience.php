@@ -235,7 +235,6 @@ function append_experience(exp_id) {
     let start_date = format_date($("#emp_start_date").val());
     let end_date = format_date($("#emp_end_date").val());
     return `
-    <div class="rii2">
       <a class="job_com1 set_p2d" href="#">
           <div class="com_img">
               <img src="<?= site_url('assets/site/'); ?>img/logo-short.png">
@@ -251,7 +250,6 @@ function append_experience(exp_id) {
       </div>
     </span>
       </a>
-      
   `
 }
 
