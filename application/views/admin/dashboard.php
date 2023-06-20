@@ -1,7 +1,7 @@
 <?php include 'include/header.php'; ?>
 
 <div class="conten_web">
-  <h4 class="heading">Dasboard</h4>
+  <h4 class="heading">Dashboard</h4>
   <div class="ddd">
     <div class="row">
       <div class="col-sm-3">
