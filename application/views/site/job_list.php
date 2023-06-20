@@ -38,7 +38,10 @@
             <?php
                 if(empty($jobs)) {
             ?>
-            <h1>No Jobs Found</h1>
+            <!-- <h1>No Jobs Found</h1> -->
+            <div class="text-center" style="padding: 0 20%;">
+            <img src="<?= site_url('assets/site/'); ?>img/find.jpg" class="img_r" alt="" >
+            </div>
             <?php
                 }
             ?>
