@@ -67,9 +67,9 @@ function submit_otp(e) {
   });
 }
 
-function get_job(e, job_id) {
+function get_job(job_id, e = false) {
   $(".sidebar-jobs").removeClass("active");
-  $(e).addClass("active");
+  if(e) $(e).addClass("active");
   $.ajax({
     type: "POST",
     url: BASE_URL + "Job-Details/" + job_id,
@@ -101,10 +101,14 @@ function get_job_modal(job_id) {
 function fetch_jobs() {
   let url = new URL(window.location.href);
   let search_location_string = url.searchParams.get("location-string");
+  let job_id = url.searchParams.get("job-id");
+  if(job_id){
+    $("#selected_job_id").val(job_id);
+  }
   if (search_location_string) {
     $("#search_string").val(search_location_string);
-    window.history.replaceState(null, "", window.location.pathname);
   }
+  window.history.replaceState(null, "", window.location.pathname);
 
   $.ajax({
     type: "POST",
@@ -120,6 +124,7 @@ function fetch_jobs() {
     success: function (response) {
       $("#jobs_section").html(response.response);
       $("#limit").val(response.pages);
+      if(job_id) get_job(job_id);
     },
   });
 }

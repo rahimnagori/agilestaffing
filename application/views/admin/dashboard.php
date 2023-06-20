@@ -29,15 +29,15 @@
       <div class="col-sm-3">
         <div class="dashboard-tile1 detail1 ">
           <div class="content1">
-            <p>Bookings</p>
-            <h1>480</h1>
+            <p>Job Applications</p>
+            <h1><?=count($jobApplications);?></h1>
           </div>
           <div class="ussicon">
             <i class="fa fa-graduation-cap"></i>
           </div>
         </div>
       </div>
-      <div class="col-sm-3">
+      <!-- <div class="col-sm-3">
         <div class="dashboard-tile1 detail1 ">
           <div class="content1">
             <p>Bookings</p>
@@ -47,7 +47,7 @@
             <i class="fa fa-user-o"></i>
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
 </div>

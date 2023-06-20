@@ -83,6 +83,7 @@
                     <div class="form-group">
                         <input type="text" class="form-control" name="search_string" id="search_string"
                             placeholder="Search Position, Company or Location" />
+                        <input type="hidden" name="selected_job_id" id="selected_job_id" />
                     </div>
                 </div>
                 <div class="col-sm-3">
