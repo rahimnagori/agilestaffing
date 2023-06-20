@@ -12,7 +12,7 @@ class Admin extends CI_Controller {
 
   public function index(){
     if($this->check_login()){
-      redirect('Dashboard');
+      redirect('Admin-Dashboard');
     }
     $pageData = [];
     $this->load->view('admin/login', $pageData);
@@ -46,7 +46,7 @@ class Admin extends CI_Controller {
       $this->Common_Model->update('admins', $where, $update);
       $this->session->set_userdata(array('id' => $userdata['id'], 'is_admin_logged_in' => true));
       $response['responseMessage'] = $this->Common_Model->success('Login successfully.');
-      $response['redirect'] = 'Dashboard';
+      $response['redirect'] = 'Admin-Dashboard';
     }else{
       $response['responseMessage'] = $this->Common_Model->error('Invalid Username or Password.');
     }

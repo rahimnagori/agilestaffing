@@ -52,7 +52,7 @@ $route['Admin'] = 'Admin';
 $route['Admin-Login'] = 'Admin/login';
 $route['Admin-Logout'] = 'Admin/logout';
 
-$route['Dashboard'] = 'Admin_Dashboard';
+$route['Admin-Dashboard'] = 'Admin_Dashboard';
 $route['Admin-Profile'] = 'Admin_Dashboard/profile';
 $route['Update-Admin'] = 'Admin_Dashboard/update_profile';
 $route['Update-Admin-Password'] = 'Admin_Dashboard/update_password';
@@ -63,6 +63,8 @@ $route['Admin-Jobs/Get/(:any)'] = 'Admin_Jobs/get_job/$1';
 $route['Admin-Jobs/Add'] = 'Admin_Jobs/add_job';
 $route['Admin-Jobs/delete'] = 'Admin_Jobs/delete_job';
 $route['Admin-Jobs/Update'] = 'Admin_Jobs/update_job';
+
+$route['Admin-Job-Applications'] = 'Admin_Jobs/applications';
 
 $route['Admin-Settings'] = 'Admin_Settings';
 $route['Get-Email'] = 'Admin_Settings/get_email';

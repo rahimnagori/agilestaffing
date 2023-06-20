@@ -19,7 +19,7 @@
   <div class="header_top">
     <div class="header_top2">
       <div class="logo">
-        <a href="<?= site_url('Dashboard'); ?>">
+        <a href="<?= site_url('Admin-Dashboard'); ?>">
           <img src="<?= site_url('assets/site/'); ?>img/logo.png">
         </a>
       </div>
