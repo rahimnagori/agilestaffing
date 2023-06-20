@@ -40,6 +40,7 @@
             ?>
                 <div class="text-center" style="padding: 0 20%;">
                     <img src="<?= site_url('assets/site/'); ?>img/find.jpg" class="img_r" alt="" >
+                    
                 </div>
             <?php
             }
