@@ -390,7 +390,7 @@ class Users extends CI_Controller
 
         $subject = ($resend) ? 'Re: Verify you email address.' : 'Verify your email address.';
         $body = "<p>Hello " . $userdata['first_name'] . " " . $userdata['last_name'] . ",</p>";
-        $body .= "<p>Please verify your account to continue using our services by clicking the link below.</p>";
+        $body .= $this->Common_Model->get_email_content('registration');
         $body .= "<p><a href='" . $verificationLink . "'>Verify Now</a></p>";
         $body .= "<p>If the above link doesn't work, you may copy paste the below link in your browser also.</p>";
         $body .= "<p>" . $verificationLink . "</p>";
