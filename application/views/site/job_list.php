@@ -14,57 +14,62 @@
     <div class="scroll_1">
         <div class="job_com2">
             <?php
-                foreach ($jobs as $job) {
+            foreach ($jobs as $job) {
             ?>
-            <button class="job_com1 sidebar-jobs" type="button" onclick="get_job(this, <?= $job['id']; ?>);">
-                <div class="com_img">
-                    <img src="<?= site_url('assets/site/'); ?>img/img_7.png">
+                <button class="job_com1 sidebar-jobs" type="button" onclick="get_job(<?= $job['id']; ?>, this);">
+                    <div class="com_img">
+                        <img src="<?= site_url('assets/site/'); ?>img/img_7.png">
+                    </div>
+                    <div class="commodo_de">
+                        <h3>
+                            <?= $job['title']; ?>
+                        </h3>
+                        <h4><i class="fa fa-briefcase"></i>
+                            <?= $job['position']; ?>
+                        </h4>
+                        <h4><i class="fa fa-map-marker"></i>
+                            <?= $job['address']; ?>
+                        </h4>
+                    </div>
+                </button>
+            <?php
+            }
+            ?>
+            <?php
+            if (empty($jobs)) {
+            ?>
+                <div class="text-center" style="padding: 0 20%;">
+                    <img src="<?= site_url('assets/site/'); ?>img/find.jpg" class="img_r" alt="" >
                 </div>
-                <div class="commodo_de">
-                    <h3>
-                        <?= $job['title']; ?>
-                    </h3>
-                    <h4><i class="fa fa-briefcase"></i>
-                        <?= $job['position']; ?>
-                    </h4>
-                    <h4><i class="fa fa-map-marker"></i>
-                        <?= $job['address']; ?>
-                    </h4>
-                </div>
-            </button>
             <?php
-                }
-            ?>
-            <?php
-                if(empty($jobs)) {
-            ?>
-            <h1>No Jobs Found</h1>
-            <?php
-                }
+            }
             ?>
         </div>
     </div>
-    
+
 </div>
 
+<?php
+    if(!empty($totalJobs)) {
+?>
 <div class="pag_des">
-<nav aria-label="Page navigation example">
-                <ul class="pagination">
-                    <li class="page-item <?=($fetchedJobs <= 10) ? 'disabled' : '';?>"><a href="javascript:void(0);"
-                            onclick="change_page('previous');" class="page-link">Previous</a>
-                    </li>
-                    <?php
-                        for($i = 0; $i <= $pages; $i++){
-                    ?>
-                    <li class="page-item"><a class="page-link" href="javascript:void(0);"
-                            onclick="got_to_page(<?=$i;?>);"><?=$i + 1;?></a></li>
-                    <?php
-                        }
-                    ?>
-                    <li class="page-item <?=($fetchedJobs == $totalJobs) ? 'disabled' : '';?>"><a
-                            href="javascript:void(0);" onclick="change_page('next');" class="page-link">Next</a></li>
-                    
-                </ul>
-            </nav>
-            <p> (<?=$fetchedJobs;?> / <?=$totalJobs;?>)</p>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            <li class="page-item <?= ($fetchedJobs <= 10) ? 'disabled' : ''; ?>"><a href="javascript:void(0);" onclick="change_page('previous');" class="page-link">Previous</a>
+            </li>
+            <?php
+            for ($i = 0; $i <= $pages; $i++) {
+            ?>
+                <li class="page-item"><a class="page-link" href="javascript:void(0);" onclick="got_to_page(<?= $i; ?>);"><?= $i + 1; ?></a></li>
+            <?php
+            }
+            ?>
+            <li class="page-item <?= ($fetchedJobs == $totalJobs) ? 'disabled' : ''; ?>"><a href="javascript:void(0);" onclick="change_page('next');" class="page-link">Next</a></li>
+
+        </ul>
+    </nav>
+    <p> (<?= $fetchedJobs; ?> / <?= $totalJobs; ?>)</p>
 </div>
+<?php
+    }
+?>

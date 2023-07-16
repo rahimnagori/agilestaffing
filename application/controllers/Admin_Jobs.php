@@ -106,4 +106,28 @@ class Admin_Jobs extends CI_Controller {
     echo json_encode($response);
   }
 
+  public function applications(){
+    $pageData = [];
+    $admin_id = $this->session->userdata('id');
+    $where['id'] = $admin_id;
+    $adminData = $this->Common_Model->fetch_records('admins', $where, false, true);
+    $pageData['adminData'] = $adminData;
+
+    $join[0][] = "users";
+    $join[0][] = "job_applications.user_id = users.id";
+    $join[0][] = "left";
+    $join[1][] = "jobs";
+    $join[1][] = "job_applications.job_id = jobs.id";
+    $join[1][] = "left";
+    $where = false;
+    $select = "job_applications.status, users.*, jobs.id AS job_id, jobs.title, jobs.job_mode";
+    $pageData['jobApplications'] = $this->Common_Model->join_records('job_applications', $join, $where, $select, false, 'job_applications.id');
+    // echo "<p>" .$this->db->last_query() ."</p>";
+    // echo "<pre>";
+    // print_r($pageData);
+    // die;
+
+    $this->load->view('admin/job_applications', $pageData);
+  }
+
 }

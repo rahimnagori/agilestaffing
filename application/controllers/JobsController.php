@@ -39,6 +39,8 @@ class JobsController extends CI_Controller
         if($_POST['date_posted'] && !empty($_POST['date_posted'])) $where['created'] = $_POST['date_posted'];
         if($_POST['pageNo'] && !empty($_POST['pageNo'])) $start = $_POST['pageNo'];
 
+        if($_POST['selected_job_id'] && !empty($_POST['selected_job_id'])) $where['id'] = $_POST['selected_job_id'];
+
         $searchString = ($_POST['search_string'] && !empty($_POST['search_string'])) ? $_POST['search_string'] : false;
         if($_POST['sort_by'] && !empty($_POST['sort_by'])){
             $orderBy = $_POST['sort_by'];
