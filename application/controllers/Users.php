@@ -70,6 +70,7 @@ class Users extends CI_Controller
     $this->form_validation->set_rules('confirm_password', 'Confirm Password', 'required|matches[password]', array('matches' => 'Password and Confirm password does not match.'));
     $this->form_validation->set_rules('phone', 'Phone', 'required|regex_match[/^[0-9]{10}$/]', array('regex_match' => 'Please enter correct phone.'));
     // $this->form_validation->set_rules('username', 'username', 'required|is_unique[users.username]|trim');
+    $response['resumeUpload'] = false;
     if ($this->form_validation->run()) {
       $insert = $this->create_user();
       if ($_FILES['resume']['error'] === 0) {
@@ -78,12 +79,16 @@ class Users extends CI_Controller
         $config['encrypt_name'] = true;
         $this->load->library("upload", $config);
         if ($this->upload->do_upload('resume')) {
-          $insert['resume'] = $config['upload_path'] . $this->upload->data("file_name");
+          $insertUserDetails['resume'] = $config['upload_path'] . $this->upload->data("file_name");
           $response['resumeUpload'] = true;
         }
       }
       $userId = $this->Common_Model->insert('users', $insert);
       if ($userId) {
+        if($response['resumeUpload']){
+          $insertUserDetails['user_id'] = $userId;
+          $userId = $this->Common_Model->insert('user_details', $insertUserDetails);
+        }
         $emailResponse = $this->send_verification_email($userId);
         $response['status'] = 1;
         $response['responseMessage'] = $this->Common_Model->success('Check your email to complete registration. If you have not found mail in Inbox please check your junk folder.' . $emailResponse);

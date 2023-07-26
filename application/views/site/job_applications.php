@@ -25,31 +25,31 @@
                                     <?php
                                     foreach ($jobApplications as $jobApplication) {
                                         ?>
-                                        <tr>
-                                            <td>
-                                                <a href="<?= site_url('Search-Jobs'); ?>"
-                                                    target="_blank"><?= $jobApplication['title']; ?></a>
-                                            </td>
-                                            <td>
-                                                <?= date("d M Y", strtotime($jobApplication['created'])); ?>
-                                            </td>
-                                            <td>
-                                                <?= $jobApplication['position']; ?>
-                                            </td>
-                                            <td>
-                                                <?= $jobApplication['company']; ?>
-                                            </td>
-                                            <td>
-                                                <?= $jobApplication['address']; ?>
-                                            </td>
-                                            <td>
-                                                <?= $jobApplication['salary']; ?>
-                                            </td>
-                                            <td>
-                                                <?= date("d M Y", strtotime($jobApplication['last_date'])); ?>
-                                            </td>
-                                        </tr>
-                                        <?php
+                                    <tr>
+                                        <td>
+                                            <a href="<?= site_url('Search-Jobs'); ?>"
+                                                target="_blank"><?= $jobApplication['title']; ?></a>
+                                        </td>
+                                        <td>
+                                            <?= date("d M Y", strtotime($jobApplication['created'])); ?>
+                                        </td>
+                                        <td>
+                                            <?= $jobApplication['position']; ?>
+                                        </td>
+                                        <td>
+                                            <?= $jobApplication['company']; ?>
+                                        </td>
+                                        <td>
+                                            <?= $jobApplication['address']; ?>
+                                        </td>
+                                        <td>
+                                            <?= $jobApplication['salary']; ?>
+                                        </td>
+                                        <td>
+                                            <?= date("d M Y", strtotime($jobApplication['last_date'])); ?>
+                                        </td>
+                                    </tr>
+                                    <?php
                                     }
                                     ?>
                                 </tbody>
@@ -61,3 +61,5 @@
         </div>
     </div>
 </div>
+
+<script type="text/javascript" src="<?=site_url('assets/site/js/document_ready.js');?>"></script>
