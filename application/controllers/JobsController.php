@@ -77,15 +77,8 @@ class JobsController extends CI_Controller
         $isJobExist = $this->Common_Model->fetch_records('job_applications', $jobApplication, false, true);
         if (!$isJobExist) {
             if ($_FILES['resume']['error'] == 0) {
-                $config['upload_path'] = "assets/site/resume/";
-                $config['allowed_types'] = 'pdf|doc|docx';
-                $config['encrypt_name'] = true;
-                $this->load->library("upload", $config);
-                if ($this->upload->do_upload('resume')) {
-                    $resume = $config['upload_path'] . $this->upload->data("file_name");
-                    $this->Common_Model->update('user_details', array('user_id' => $jobApplication['user_id']), array('resume' => $resume));
-                    $response['debug'] = $this->db->last_query();
-                }
+                $resume = $this->update_doc();
+                $this->Common_Model->update('user_details', array('user_id' => $jobApplication['user_id']), array('resume' => $resume));
             }
             $jobApplication['status'] = 1;
             $jobApplication['created'] = date("Y-m-d H:i:s");
@@ -126,17 +119,8 @@ class JobsController extends CI_Controller
             }
             $response['status'] = 1;
             $emailResponse = $this->send_guest_application_code($guestUserId, $appendContent, $token);
-            if ($_FILES['resume']['error'] == 0) {
-                $config['upload_path'] = "assets/site/resume/";
-                $config['allowed_types'] = 'pdf|doc|docx';
-                $config['encrypt_name'] = true;
-                $this->load->library("upload", $config);
-                if ($this->upload->do_upload('resume')) {
-                    $response['resumePath'] = $config['upload_path'] . $this->upload->data("file_name");
-                }
-            } else {
-                $response['resumePath'] = 0;
-            }
+            $this->Common_Model->send_verification_email($guestUserId);
+            $response['resumePath'] = ($_FILES['resume']['error'] == 0) ? $this->update_doc() : 0;
             $response['status'] = 1;
             $response['responseMessage'] = $this->Common_Model->success('Job applied successfully.' . $emailResponse);
             $response['user_id'] = $guestUserId;
@@ -202,11 +186,9 @@ class JobsController extends CI_Controller
                     if ($jobApplicationId) {
                         $emailResponse = $this->send_job_application_confirmation($jobApplicationId);
                         if (strlen($resume) > 1) {
-                            $userDocs['user_id'] = $insertJob['user_id'];
-                            $userDocs['doc_type'] = 1;
-                            $userDocs['document'] = $resume;
-                            $userDocs['created'] = date("Y-m-d H:i:s");
-                            $this->Common_Model->insert('user_docs', $userDocs);
+                            $userDetails['user_id'] = $insertJob['user_id'];
+                            $userDetails['resume'] = $resume;
+                            $this->Common_Model->insert('user_details', $userDetails);
                         }
                         $response['status'] = 1;
                         $response['responseMessage'] = $this->Common_Model->success('Job applied successfully.' . $emailResponse);
@@ -317,5 +299,18 @@ class JobsController extends CI_Controller
         $this->load->view('site/include/header', $pageData);
         $this->load->view('site/job_applications', $pageData);
         $this->load->view('site/include/footer', $pageData);
+    }
+
+    private function update_doc(){
+        $resume = '';
+        $config['upload_path'] = "assets/site/resume/";
+        $config['allowed_types'] = 'pdf|doc|docx';
+        $config['encrypt_name'] = true;
+        $this->load->library("upload", $config);
+        if ($this->upload->do_upload('resume')) {
+            $resume = $config['upload_path'] . $this->upload->data("file_name");
+            // $response['debug'] = $this->db->last_query();
+        }
+        return $resume;
     }
 }

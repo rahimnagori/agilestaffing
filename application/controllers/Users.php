@@ -89,7 +89,7 @@ class Users extends CI_Controller
           $insertUserDetails['user_id'] = $userId;
           $userId = $this->Common_Model->insert('user_details', $insertUserDetails);
         }
-        $emailResponse = $this->send_verification_email($userId);
+        $emailResponse = $this->Common_Model->send_verification_email($userId);
         $response['status'] = 1;
         $response['responseMessage'] = $this->Common_Model->success('Check your email to complete registration. If you have not found mail in Inbox please check your junk folder.' . $emailResponse);
       }
@@ -315,7 +315,7 @@ class Users extends CI_Controller
     $response['status'] = 0;
 
     if ($pageData['userDetails']['id']) {
-      $emailResponse = $this->send_verification_email($pageData['userDetails']['id'], true);
+      $emailResponse = $this->Common_Model->send_verification_email($pageData['userDetails']['id'], true);
       $response['status'] = 1;
       $response['responseMessage'] = $this->Common_Model->success('Verification email sent successfully.' . $emailResponse);
     }
@@ -380,35 +380,6 @@ class Users extends CI_Controller
       $response['status'] = 2;
     }
     echo json_encode($response);
-  }
-
-  private function send_verification_email($userId, $resend = false)
-  {
-    $userdata = $this->Common_Model->fetch_records('users', array('id' => $userId), false, true);
-    if ($userdata) {
-      if ($userdata['is_email_verified'] == 0) {
-        $token = rand(100000, 999999);
-        $update['token'] = $token;
-        $this->Common_Model->update('users', array('id' => $userId), $update);
-        $verificationLink = $this->config->item('base_url');
-        $verificationLink .= 'Verify/' . $userdata['id'] . '/' . $token;
-
-        $subject = ($resend) ? 'Re: Verify you email address.' : 'Verify your email address.';
-        $body = "<p>Hello " . $userdata['first_name'] . " " . $userdata['last_name'] . ",</p>";
-        $body .= $this->Common_Model->get_email_content('registration');
-        $body .= "<p><a href='" . $verificationLink . "'>Verify Now</a></p>";
-        $body .= "<p>If the above link doesn't work, you may copy paste the below link in your browser also.</p>";
-        $body .= "<p>" . $verificationLink . "</p>";
-        if ($this->config->item('ENVIRONMENT') == 'production') {
-          $this->Common_Model->send_mail($userdata['email'], $subject, $body);
-          return '';
-        } else {
-          return "<br/>" . $body;
-        }
-      }
-    } else {
-      /* User does not exist */
-    }
   }
 
   public function email_verification($user_id, $token)
