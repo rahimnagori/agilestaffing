@@ -58,10 +58,12 @@ $route['Update-Admin'] = 'Admin_Dashboard/update_profile';
 $route['Update-Admin-Password'] = 'Admin_Dashboard/update_password';
 
 $route['Users-Management'] = 'Admin_Users';
+$route['Admin-Users/Delete'] = 'Admin_Users/delete_user';
+
 $route['Admin-Jobs'] = 'Admin_Jobs';
 $route['Admin-Jobs/Get/(:any)'] = 'Admin_Jobs/get_job/$1';
 $route['Admin-Jobs/Add'] = 'Admin_Jobs/add_job';
-$route['Admin-Jobs/delete'] = 'Admin_Jobs/delete_job';
+$route['Admin-Jobs/Delete'] = 'Admin_Jobs/delete_job';
 $route['Admin-Jobs/Update'] = 'Admin_Jobs/update_job';
 
 $route['Admin-Job-Applications'] = 'Admin_Jobs/applications';

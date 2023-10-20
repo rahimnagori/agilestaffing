@@ -225,7 +225,7 @@ function delete_job(e) {
     e.preventDefault();
     $.ajax({
         type: 'POST',
-        url: BASE_URL + 'Admin-Jobs/delete',
+        url: BASE_URL + 'Admin-Jobs/Delete',
         data: new FormData($('#deleteForm')[0]),
         dataType: 'JSON',
         processData: false,
