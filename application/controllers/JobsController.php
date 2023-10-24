@@ -119,7 +119,7 @@ class JobsController extends CI_Controller
             }
             $response['status'] = 1;
             $emailResponse = $this->send_guest_application_code($guestUserId, $appendContent, $token);
-            $this->Common_Model->send_verification_email($guestUserId);
+            // $this->Common_Model->send_verification_email($guestUserId);
             $response['resumePath'] = ($_FILES['resume']['error'] == 0) ? $this->update_doc() : 0;
             $response['status'] = 1;
             $response['responseMessage'] = $this->Common_Model->success('Job applied successfully.' . $emailResponse);
