@@ -11,7 +11,7 @@
         <div class="job-main4">
             <div class="job-filter">
                 <div class="row" id="jobs_section">
-                    <!-- Jobs section -->
+                    <!-- application\views\site\job_list.php -->
                 </div>
             </div>
         </div>
@@ -19,7 +19,7 @@
 </div>
 
 <div id="modals-div">
-    <?php //include_once('job_modals.php'); ?>
+    <!-- job_modals.php -->
 </div>
 
 <script type="text/javascript" src="<?=site_url('assets/site/js/jobs.js');?>"></script>

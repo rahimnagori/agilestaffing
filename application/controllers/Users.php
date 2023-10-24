@@ -35,17 +35,23 @@ class Users extends CI_Controller
       $where['email'] = $this->input->post('email');
       unset($where['phone']);
       $userDetailsWithEmail = $this->Common_Model->fetch_records('users', $where);
+
       if (!empty($userDetailsWithEmail)) {
         $isUserExist = true;
         $userDetails = $userDetailsWithEmail;
       }
       if ($isUserExist) {
-        $update['is_logged_in'] = 1;
-        $update['last_login'] = date("Y-m-d H:i:s");
-        $this->Common_Model->update('users', $where, $update);
-        $this->session->set_userdata(array('id' => $userDetails[0]['id'], 'is_user_logged_in' => true, 'userdata' => $userDetails[0]));
-        $response['status'] = 1;
-        $response['responseMessage'] = $this->Common_Model->success('Logged in successfully.');
+        if($userDetails[0]['is_deleted'] == 1){
+          $response['status'] = 2;
+          $response['responseMessage'] = $this->Common_Model->error('Your account is deleted, please contact administrator.');
+        } else {
+          $update['is_logged_in'] = 1;
+          $update['last_login'] = date("Y-m-d H:i:s");
+          $this->Common_Model->update('users', $where, $update);
+          $this->session->set_userdata(array('id' => $userDetails[0]['id'], 'is_user_logged_in' => true, 'userdata' => $userDetails[0]));
+          $response['status'] = 1;
+          $response['responseMessage'] = $this->Common_Model->success('Logged in successfully.');
+        }
       } else {
         $response['status'] = 2;
         $response['responseMessage'] = $this->Common_Model->error('User does not exists. Please check your credentials.');

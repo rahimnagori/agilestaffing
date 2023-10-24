@@ -3,6 +3,7 @@
 <div class="conten_web">
     <h4 class="heading">Users <small>Management</small></h4>
     <div class="white_box">
+        <?= $this->session->flashdata('responseMessage'); ?>
         <div class="card_bodym">
             <div class="table-responsive">
                 <table id="extent_tbl1" class="table display">
@@ -71,13 +72,7 @@
                             </td>
                             <td><?= date("d M, Y", strtotime($user['created'])); ?></td>
                             <td><?= date("d M, Y", strtotime($user['updated'])); ?></td>
-                            <td>
-                                <!-- <a href="#" class="btn btn-info btn-xs">Send Mail</a>
-                                <a href="#" class="btn btn-info btn-xs">Edit</a>
-                                -->
-                                <button class="btn btn-danger btn-xs"
-                                    onclick="open_delete_modal(<?= $user['id'] ?>)">Delete</button>
-                            </td>
+                            <td><?php include 'include/user_buttons.php'; ?></td>
                         </tr>
                         <?php
             }

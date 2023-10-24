@@ -5,7 +5,7 @@
     </div>
     <div class="">
         <div class="scroll_1" id="job_details_div">
-            <!-- Job details section -->
+            <!-- application\views\site\job_details.php -->
         </div>
     </div>
 </div>
@@ -16,31 +16,31 @@
             <?php
             foreach ($jobs as $job) {
             ?>
-                <button class="job_com1 sidebar-jobs" type="button" onclick="get_job(<?= $job['id']; ?>, this);">
-                    <div class="com_img">
-                        <img src="<?= site_url('assets/site/'); ?>img/img_7.png">
-                    </div>
-                    <div class="commodo_de">
-                        <h3>
-                            <?= $job['title']; ?>
-                        </h3>
-                        <h4><i class="fa fa-briefcase"></i>
-                            <?= $job['position']; ?>
-                        </h4>
-                        <h4><i class="fa fa-map-marker"></i>
-                            <?= $job['address']; ?>
-                        </h4>
-                    </div>
-                </button>
+            <button class="job_com1 sidebar-jobs" type="button" onclick="get_job(<?= $job['id']; ?>, this);">
+                <div class="com_img">
+                    <img src="<?= site_url('assets/site/'); ?>img/img_7.png">
+                </div>
+                <div class="commodo_de">
+                    <h3>
+                        <?= $job['title']; ?>
+                    </h3>
+                    <h4><i class="fa fa-briefcase"></i>
+                        <?= $job['position']; ?>
+                    </h4>
+                    <h4><i class="fa fa-map-marker"></i>
+                        <?= $job['address']; ?>
+                    </h4>
+                </div>
+            </button>
             <?php
             }
             ?>
             <?php
             if (empty($jobs)) {
             ?>
-                <div class="text-center" style="padding: 0 20%;">
-                    <img src="<?= site_url('assets/site/'); ?>img/find.jpg" class="img_r" alt="" >
-                </div>
+            <div class="text-center" style="padding: 0 20%;">
+                <img src="<?= site_url('assets/site/'); ?>img/find.jpg" class="img_r" alt="">
+            </div>
             <?php
             }
             ?>
@@ -55,16 +55,19 @@
 <div class="pag_des">
     <nav aria-label="Page navigation example">
         <ul class="pagination">
-            <li class="page-item <?= ($fetchedJobs <= 10) ? 'disabled' : ''; ?>"><a href="javascript:void(0);" onclick="change_page('previous');" class="page-link">Previous</a>
+            <li class="page-item <?= ($fetchedJobs <= 10) ? 'disabled' : ''; ?>"><a href="javascript:void(0);"
+                    onclick="change_page('previous');" class="page-link">Previous</a>
             </li>
             <?php
             for ($i = 0; $i <= $pages; $i++) {
             ?>
-                <li class="page-item"><a class="page-link" href="javascript:void(0);" onclick="got_to_page(<?= $i; ?>);"><?= $i + 1; ?></a></li>
+            <li class="page-item"><a class="page-link" href="javascript:void(0);"
+                    onclick="got_to_page(<?= $i; ?>);"><?= $i + 1; ?></a></li>
             <?php
             }
             ?>
-            <li class="page-item <?= ($fetchedJobs == $totalJobs) ? 'disabled' : ''; ?>"><a href="javascript:void(0);" onclick="change_page('next');" class="page-link">Next</a></li>
+            <li class="page-item <?= ($fetchedJobs == $totalJobs) ? 'disabled' : ''; ?>"><a href="javascript:void(0);"
+                    onclick="change_page('next');" class="page-link">Next</a></li>
 
         </ul>
     </nav>

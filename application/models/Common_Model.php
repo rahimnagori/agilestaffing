@@ -258,7 +258,7 @@ class Common_Model extends CI_Model
     return $filters;
   }
 
-  private function send_verification_email($userId, $resend = false)
+  public function send_verification_email($userId, $resend = false)
   {
     $userdata = $this->Common_Model->fetch_records('users', array('id' => $userId), false, true);
     if ($userdata) {
