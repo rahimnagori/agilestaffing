@@ -287,4 +287,21 @@ class Common_Model extends CI_Model
     }
   }
 
+  public function generate_final_email($email){
+    $pattern = '/\[([^}]+)\]/';
+    $params = $this->Common_Model->fetch_records('email_params');
+    echo "<pre>";
+    echo "<p>Original email</p>";
+    print_r($email);
+    foreach($params as $param){
+      $replacementString = ' --wow-- ';
+      $email = preg_replace($pattern, $replacementString, $email, 1);
+      print_r($email);
+      echo "<br/> ---- <br/><br/><br/>-------- ";
+    }
+    print_r($email);
+    die;
+    return $finalEmail;
+  }
+
 }

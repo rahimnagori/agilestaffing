@@ -20,8 +20,22 @@ class Admin_Settings extends CI_Controller
     $pageData['emails'] = $this->Common_Model->fetch_records('emails', array('is_active' => 1));
     // $pageData['settings'] = $this->Common_Model->fetch_records('settings', false, 'smtp_user, smtp_pass, contact_email, admin_email, doc_expire_days, cv_expire_days', true);
     $pageData['settings'] = $this->Common_Model->fetch_records('settings', false, false, true);
+    $params = $this->Common_Model->fetch_records('email_params');
+    foreach($params as $param){
+      $pageData['params'][] = $param['view_param'];
+    }
+
+    // $this->testing();
 
     $this->load->view('admin/settings', $pageData);
+  }
+
+  private function testing(){
+    $emailContent = $this->Common_Model->get_email_content('testing');
+    $newEmailContent = $this->Common_Model->generate_final_email($emailContent);
+    echo "<pre>";
+    print_r($newEmailContent);
+    die;
   }
 
   public function update_admin_permissions()

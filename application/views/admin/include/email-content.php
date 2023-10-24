@@ -1,5 +1,4 @@
 <div class="form-group">
-    <label> Content </label>
     <textarea class="form-control textarea-edit" name="content" required=""><?= $emailData['content']; ?></textarea>
     <input type="hidden" name="email_id" value="<?= $emailData['id']; ?>" />
 </div>
