@@ -27,7 +27,7 @@
                                         ?>
                                     <tr>
                                         <td>
-                                            <a href="<?= site_url('Search-Jobs'); ?>"
+                                            <a href="<?=site_url('Search-Jobs?job-id=') .$jobApplication['id'];?>"
                                                 target="_blank"><?= $jobApplication['title']; ?></a>
                                         </td>
                                         <td>

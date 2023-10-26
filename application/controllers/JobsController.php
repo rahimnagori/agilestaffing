@@ -120,9 +120,9 @@ class JobsController extends CI_Controller
             $response['status'] = 1;
             $emailResponse = $this->send_guest_application_code($guestUserId, $appendContent, $token);
             // $this->Common_Model->send_verification_email($guestUserId);
-            $response['resumePath'] = ($_FILES['resume']['error'] == 0) ? $this->update_doc() : 0;
+            ($_FILES['resume']['error'] == 0) ? $this->update_doc($guestUserId) : 0;
             $response['status'] = 1;
-            $response['responseMessage'] = $this->Common_Model->success('Job applied successfully.' . $emailResponse);
+            $response['responseMessage'] = $this->Common_Model->success('We have sent you a code. Enter it here to apply successfully.' . $emailResponse);
             $response['user_id'] = $guestUserId;
             $response['job_id'] = $jobId;
         } else {
@@ -192,6 +192,12 @@ class JobsController extends CI_Controller
                         }
                         $response['status'] = 1;
                         $response['responseMessage'] = $this->Common_Model->success('Job applied successfully.' . $emailResponse);
+
+                        $userDetails = $this->Common_Model->fetch_records('users', array('id' => $insertJob['user_id']));
+                        $update['is_logged_in'] = 1;
+                        $update['last_login'] = date("Y-m-d H:i:s");
+                        $this->Common_Model->update('users', array('id' => $insertJob['user_id']), $update);
+                        $this->session->set_userdata(array('id' => $userDetails[0]['id'], 'is_user_logged_in' => true, 'userdata' => $userDetails[0]));
                     }
                 } else {
                     $response['status'] = 3;
@@ -292,7 +298,7 @@ class JobsController extends CI_Controller
         $join[0][] = 'jobs';
         $join[0][] = 'job_applications.job_id = jobs.id';
         $join[0][] = 'left';
-        $select = 'jobs.title, job_applications.created, jobs.position, jobs.company, jobs.address, jobs.salary, jobs.last_date';
+        $select = 'jobs.id, jobs.title, job_applications.created, jobs.position, jobs.company, jobs.address, jobs.salary, jobs.last_date';
         $where['job_applications.user_id'] = $this->session->userdata('id');
         $pageData['jobApplications'] = $this->Common_Model->join_records('job_applications', $join, $where, $select, 'job_applications.id', 'DESC');
 
@@ -301,16 +307,16 @@ class JobsController extends CI_Controller
         $this->load->view('site/include/footer', $pageData);
     }
 
-    private function update_doc(){
-        $resume = '';
+    private function update_doc($userId){
         $config['upload_path'] = "assets/site/resume/";
         $config['allowed_types'] = 'pdf|doc|docx';
         $config['encrypt_name'] = true;
         $this->load->library("upload", $config);
         if ($this->upload->do_upload('resume')) {
             $resume = $config['upload_path'] . $this->upload->data("file_name");
-            // $response['debug'] = $this->db->last_query();
+            $update['user_id'] = $userId;
+            $update['resume'] = $resume;
+            $this->db->replace('user_details', $update);
         }
-        return $resume;
     }
 }

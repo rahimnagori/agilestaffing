@@ -120,12 +120,14 @@ class Admin_Jobs extends CI_Controller {
     $join[1][] = "job_applications.job_id = jobs.id";
     $join[1][] = "left";
     $where = false;
-    $select = "job_applications.status, users.*, jobs.id AS job_id, jobs.title, jobs.job_mode";
+    $select = "job_applications.status, users.first_name, users.last_name, users.email, users.phone, jobs.id AS job_id, jobs.title, jobs.job_mode";
     $pageData['jobApplications'] = $this->Common_Model->join_records('job_applications', $join, $where, $select, false, 'job_applications.id');
-    // echo "<p>" .$this->db->last_query() ."</p>";
-    // echo "<pre>";
-    // print_r($pageData);
-    // die;
+    /*
+      #Job Modes
+      1. Remote
+      2. Hybrid
+      3. Onsite
+    */
 
     $this->load->view('admin/job_applications', $pageData);
   }
