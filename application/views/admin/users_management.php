@@ -62,9 +62,7 @@
                                 <a href="<?= $user['resume']; ?>" download> View </a>
                                 <?php
                   } else {
-                    ?>
-                                'No resume uploaded yet';
-                                <?php
+                        echo "No resume uploaded yet";
                   }
                   ?>
                             </td>

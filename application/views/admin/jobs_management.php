@@ -41,7 +41,8 @@
             ?>
                         <tr>
                             <td><?= $serialNumber + 1; ?></td>
-                            <td><?= $job['title']; ?></td>
+                            <td><a href="<?=site_url('Search-Jobs?job-id=') .$job['id'];?>"
+                                    target="_blank"><?= $job['title']; ?></a></td>
                             <td><?= $job['position']; ?></td>
                             <td>
                                 <?php
