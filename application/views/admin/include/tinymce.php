@@ -1,4 +1,4 @@
-<script src="https://cdn.tiny.cloud/1/wnfamalcy2rutxy049cbmuvrrwymhdgs1k6ut0ql1ozgn6ji/tinymce/5/tinymce.min.js"
+<script src="https://cdn.tiny.cloud/1/<?=$this->config->item("TINYKEY");?>/tinymce/7/tinymce.min.js"
     referrerpolicy="origin"></script>
 
 <script>
