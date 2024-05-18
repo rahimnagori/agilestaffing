@@ -123,6 +123,7 @@
                                         <div class="form-group">
                                             <label for="availability">Availability For Meeting</label>
                                             <input type="date" name="availability_for_meeting" class="form-control"
+                                                min="<?=date("Y-m-d");?>"
                                                 value="<?= date("Y-m-d", strtotime($moreUserDetails['availability_for_meeting'])); ?>">
                                         </div>
                                     </div>
@@ -133,13 +134,13 @@
                                             <label for="cover_letter">
                                                 Cover Letter
                                                 <?php
-                          if($moreUserDetails['cover_letter'] && file_exists($moreUserDetails['cover_letter'])){
-                        ?>
+                                                    if($moreUserDetails['cover_letter'] && file_exists($moreUserDetails['cover_letter'])){
+                                                ?>
                                                 <a href="<?=site_url($moreUserDetails['cover_letter']);?>"
                                                     target="_blank"> (View) </a>
                                                 <?php
-                          }
-                        ?>
+                                                    }
+                                                ?>
                                             </label>
                                             <input type="file" name="cover_letter" accept=".pdf, .doc, .docx">
                                         </div>
@@ -149,13 +150,13 @@
                                             <label for="coverLetter">
                                                 Resume
                                                 <?php
-                          if($moreUserDetails['resume'] && file_exists($moreUserDetails['resume'])){
-                        ?>
+                                                    if($moreUserDetails['resume'] && file_exists($moreUserDetails['resume'])){
+                                                ?>
                                                 <a href="<?=site_url($moreUserDetails['resume']);?>" target="_blank">
                                                     (View) </a>
                                                 <?php
-                          }
-                        ?>
+                                                    }
+                                                ?>
                                             </label>
                                             <input type="file" name="resume" accept=".pdf, .doc, .docx">
                                         </div>

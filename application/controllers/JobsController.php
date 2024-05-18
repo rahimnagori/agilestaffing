@@ -77,7 +77,7 @@ class JobsController extends CI_Controller
         $isJobExist = $this->Common_Model->fetch_records('job_applications', $jobApplication, false, true);
         if (!$isJobExist) {
             if ($_FILES['resume']['error'] == 0) {
-                $resume = $this->update_doc();
+                $resume = $this->update_doc($jobApplication['user_id']);
                 $this->Common_Model->update('user_details', array('user_id' => $jobApplication['user_id']), array('resume' => $resume));
             }
             $jobApplication['status'] = 1;

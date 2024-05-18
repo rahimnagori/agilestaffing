@@ -142,7 +142,7 @@ class Common_Model extends CI_Model
         $response['responseMessage'] = $e->getMessage();
         $response['status'] = false;
       }
-      return $response['status'];
+      return '';
     } else {
       return "<br/>" . $body;
     }
