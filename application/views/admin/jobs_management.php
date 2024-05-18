@@ -108,11 +108,11 @@
                         </div>
                         <div class="form-group">
                             <label> Company </label>
-                            <input type="text" name="company" class="form-control" required="">
+                            <input type="text" name="company" class="form-control">
                         </div>
                         <div class="form-group">
                             <label> Address </label>
-                            <input type="text" name="address" class="form-control" required="">
+                            <input type="text" name="address" class="form-control">
                         </div>
                         <div class="form-group">
                             <label> Salary </label>

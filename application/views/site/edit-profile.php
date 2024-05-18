@@ -27,18 +27,11 @@
                                     </div> -->
                                 </div>
                                 <div class="row">
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-12">
                                         <div class="form-group">
                                             <label for="user_about">About</label>
                                             <textarea name="user_about" id="user_about" rows="5"
                                                 class="form-control"><?= $moreUserDetails['user_about']; ?></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <label for="user_about">Skills (Comma separated)</label>
-                                            <input type="text" name="user_skills" class="form-control"
-                                                value="<?= $moreUserDetails['user_skills']; ?>">
                                         </div>
                                     </div>
                                 </div>
@@ -102,11 +95,18 @@
                                                 value="<?= $moreUserDetails['job_preference']; ?>">
                                         </div>
                                     </div>
-                                    <div class="col-sm-6">
+                                    <!-- <div class="col-sm-6">
                                         <div class="form-group">
                                             <label for="sex">Sex</label>
                                             <input type="radio" name="sex" value="1" checked> Male
                                             <input type="radio" name="sex" value="0"> Female
+                                        </div>
+                                    </div> -->
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="user_about">Skills (Comma separated)</label>
+                                            <input type="text" name="user_skills" class="form-control"
+                                                value="<?= $moreUserDetails['user_skills']; ?>">
                                         </div>
                                     </div>
                                 </div>

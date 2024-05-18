@@ -71,7 +71,7 @@ class Users extends CI_Controller
 
     $this->form_validation->set_rules('first_name', 'First Name', 'required');
     $this->form_validation->set_rules('last_name', 'Last Name', 'required');
-    $this->form_validation->set_rules('email', 'Email', 'required|valid_email|trim|is_unique[users.email]', array('is_unique' => 'This email is already taken. Please provide another email.'));
+    $this->form_validation->set_rules('email', 'Email', 'required|valid_email|trim|is_unique[users.email]', array('is_unique' => 'User already exists. Try <a href="' .site_url('Login') .'">Login</a> to continue.'));
     $this->form_validation->set_rules('password', 'Password', 'required');
     $this->form_validation->set_rules('confirm_password', 'Confirm Password', 'required|matches[password]', array('matches' => 'Password and Confirm password does not match.'));
     $this->form_validation->set_rules('phone', 'Phone', 'required|regex_match[/^[0-9]{10}$/]', array('regex_match' => 'Please enter correct phone.'));
