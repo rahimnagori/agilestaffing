@@ -17,6 +17,7 @@
                             <th>Position</th>
                             <th>Description</th>
                             <th>Job Mode</th>
+                            <th>Job Type</th>
                             <th>Company</th>
                             <th>Address</th>
                             <th>Salary</th>
@@ -51,6 +52,7 @@
                   ?>
                             </td>
                             <td><?= $jobMode; ?></td>
+                            <td><?= $jobTypes[$job['job_type']]; ?></td>
                             <td><?= $job['company']; ?></td>
                             <td><?= $job['address']; ?></td>
                             <td><?= $job['salary']; ?></td>
@@ -98,13 +100,38 @@
                             <label> Position </label>
                             <input type="text" name="position" class="form-control" required="">
                         </div>
-                        <div class="form-group">
-                            <label> Job Mode </label>
-                            <select name="job_mode" class="form-control" required="">
-                                <option value="1">Remote</option>
-                                <option value="2">Hybrid</option>
-                                <option value="3">Onsite</option>
-                            </select>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label> Job Mode </label>
+                                    <select name="job_mode" class="form-control" required="">
+                                        <option value="1">Remote</option>
+                                        <option value="2">Hybrid</option>
+                                        <option value="3">Onsite</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label> Salary </label>
+                                    <span class="input-group-text"><i class="fa fa-gbp" aria-hidden="true"></i></span>
+                                    <input type="number" name="salary" class="form-control" required="">
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label> Job Type </label>
+                                    <select name="job_type" class="form-control" required="">
+                                        <?php
+                                            foreach($jobTypes as $jobId => $jobType){
+                                                ?>
+                                        <option value="<?=$jobId;?>"><?=$jobType;?></option>
+                                        <?php
+                                            }
+                                        ?>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
                         <div class="form-group">
                             <label> Company </label>
@@ -113,10 +140,6 @@
                         <div class="form-group">
                             <label> Address </label>
                             <input type="text" name="address" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label> Salary </label>
-                            <input type="number" name="salary" class="form-control" required="">
                         </div>
                         <div class="form-group">
                             <label> Last Date </label>

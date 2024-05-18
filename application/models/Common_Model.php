@@ -91,48 +91,61 @@ class Common_Model extends CI_Model
     $this->insert('histories', $insert);
   }
 
+  public function get_job_types(){
+    $jobTypes = $this->fetch_records('job_types');
+    $i  = 1;
+    foreach($jobTypes as $id => $jobType){
+      $response['jobTypes'][$i] = $jobType['name'];
+      $i = $i + 1 ;
+    }
+    return $response['jobTypes'];
+  }
+
   public function send_mail($to, $subject, $body, $bcc = null, $attachment = false)
   {
-    $response['status'] = 0;
-    $PROJECT = $this->config->item('PROJECT');
-    $fromEmail = 'contact@rahimnagori.com';
-    $config = array();
-    $config['mailtype'] = "html";
-    $config['charset'] = "utf-8";
-    $config['newline'] = "\r\n";
-    $config['wordwrap'] = TRUE;
-    $config['validate'] = FALSE;
-
-    $this->load->library('email', $config);
-    $this->email->initialize($config);
-
-    $this->email->from($fromEmail, 'Admin');
-    $this->email->to($to);
-    $this->email->set_crlf("\r\n");
-    $this->email->subject($subject);
-
-    if ($bcc) {
-      $this->email->bcc($bcc);
+    if ($this->config->item('ENVIRONMENT') == 'production') {
+      $response['status'] = 0;
+      $PROJECT = $this->config->item('PROJECT');
+      $fromEmail = 'contact@rahimnagori.com';
+      $config = array();
+      $config['mailtype'] = "html";
+      $config['charset'] = "utf-8";
+      $config['newline'] = "\r\n";
+      $config['wordwrap'] = TRUE;
+      $config['validate'] = FALSE;
+  
+      $this->load->library('email', $config);
+      $this->email->initialize($config);
+  
+      $this->email->from($fromEmail, 'Admin');
+      $this->email->to($to);
+      $this->email->set_crlf("\r\n");
+      $this->email->subject($subject);
+  
+      if ($bcc) {
+        $this->email->bcc($bcc);
+      }
+  
+      $pageData['body'] = $body;
+      $pageData['PROJECT'] = $PROJECT;
+      $msg = $this->load->view('site/include/email_template', $pageData, true);
+      // $this->load->view('site/include/email_template', $pageData); /* Debug */
+  
+      if ($attachment) {
+        $this->email->attach($attachment);
+      }
+      $this->email->message($msg);
+      try {
+        $this->email->send();
+        $response['status'] = true;
+      } catch (Exception $e) {
+        $response['responseMessage'] = $e->getMessage();
+        $response['status'] = false;
+      }
+      return $response['status'];
+    } else {
+      return "<br/>" . $body;
     }
-
-    $pageData['body'] = $body;
-    $pageData['PROJECT'] = $PROJECT;
-    $msg = $this->load->view('site/include/email_template', $pageData, true);
-    // $this->load->view('site/include/email_template', $pageData); /* Debug */
-
-    if ($attachment) {
-      $this->email->attach($attachment);
-    }
-    $this->email->message($msg);
-    try {
-      $this->email->send();
-      $response['status'] = 1;
-    } catch (Exception $e) {
-      $response['responseMessage'] = $e->getMessage();
-      $response['status'] = 2;
-    }
-    return $response;
-
   }
 
   public function send_mail_with_smtp($to, $subject, $body, $bcc = null, $attachment = false)
@@ -275,12 +288,7 @@ class Common_Model extends CI_Model
         $body .= "<p><a href='" . $verificationLink . "'>Verify Now</a></p>";
         $body .= "<p>If the above link doesn't work, you may copy paste the below link in your browser also.</p>";
         $body .= "<p>" . $verificationLink . "</p>";
-        if ($this->config->item('ENVIRONMENT') == 'production') {
-          $this->Common_Model->send_mail($userdata['email'], $subject, $body);
-          return '';
-        } else {
-          return "<br/>" . $body;
-        }
+        return $this->Common_Model->send_mail($userdata['email'], $subject, $body);
       }
     } else {
       /* User does not exist */

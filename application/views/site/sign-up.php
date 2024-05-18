@@ -51,23 +51,13 @@
                                     <label>Phone </label>
                                     <input type="text" name="phone" placeholder="Phone" class="form-control"
                                         required="">
+                                    <span class="Alert_m">
+                                        <p>* Phone number must be 10 digit.</p>
+                                        <p>* Do not add zero or any code before the phone number.</p>
+                                    </span>
                                 </div>
                             </div>
                         </div>
-                        <!-- <div class="row">
-                     <div class="col-sm-6">
-                        <div class="form-group">
-                           <label>Username </label>
-                           <input type="text" name="username" placeholder="Username" class="form-control" required="" >
-                        </div>
-                     </div>
-                     <div class="col-sm-6">
-                        <div class="form-group">
-                           <label>Job Title </label>
-                           <input type="text" name="job_title" placeholder="Job Title" class="form-control" required="" >
-                        </div>
-                     </div>
-                  </div> -->
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-group">

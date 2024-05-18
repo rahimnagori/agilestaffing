@@ -6,6 +6,7 @@
     <div class="">
         <div class="scroll_1" id="job_details_div">
             <!-- application\views\site\job_details.php -->
+            <!-- application\views\site\user_job_details.php -->
         </div>
     </div>
 </div>

@@ -21,17 +21,10 @@ class Admin_Jobs extends CI_Controller {
     $where['id'] = $admin_id;
     $adminData = $this->Common_Model->fetch_records('admins', $where, false, true);
     $pageData['adminData'] = $adminData;
-    // $join[0][] = 'job_types';
-    // $join[0][] = 'jobs.job_type = job_types.id';
-    // $join[0][] = 'left';
-    // $join[1][] = 'job_modes';
-    // $join[1][] = 'jobs.job_mode = job_modes.id';
-    // $join[1][] = 'left';
-    // $whereJoin['jobs.is_deleted'] = 0;
-    // $select = 'jobs.*, job_types.job_type_title, job_types.job_type_description, job_modes.mode_title';
-    // $pageData['jobs'] = $this->Common_Model->join_records('jobs', $join, $whereJoin, $select, 'jobs.id', 'DESC');
-    // $pageData['locations'] = $this->Common_Model->fetch_records('job_locations');
-    // $pageData['jobTypes'] = $this->Common_Model->fetch_records('job_types');
+    $pageData['jobTypes'] = $this->Common_Model->get_job_types('job_types');
+    // echo "<pre>";
+    // print_r($pageData);
+    // die;
     $pageData['jobs'] = $this->Common_Model->fetch_records('jobs', array('is_deleted' => 0), false, false, 'id');
 
     $this->load->view('admin/jobs_management', $pageData);
@@ -54,6 +47,7 @@ class Admin_Jobs extends CI_Controller {
     $insert['description'] = $this->input->post('description');
     $insert['position'] = $this->input->post('position');
     $insert['job_mode'] = $this->input->post('job_mode');
+    $insert['job_type'] = $this->input->post('job_type');
     $insert['company'] = $this->input->post('company');
     $insert['address'] = $this->input->post('address');
     $insert['salary'] = $this->input->post('salary');
@@ -80,15 +74,8 @@ class Admin_Jobs extends CI_Controller {
   }
 
   public function get_job($id){
-    // $join[0][] = 'job_types';
-    // $join[0][] = 'jobs.job_type = job_types.id';
-    // $join[0][] = 'left';
-    // $where['jobs.is_deleted'] = 0;
-    // $where['jobs.id'] = $id;
-    // $select = 'jobs.*, job_types.name';
-    // $jobDetails = $this->Common_Model->join_records('jobs', $join, $where, $select, 'jobs.id', 'DESC');
-    // $pageData['jobDetails'] = $jobDetails[0];
     $pageData['jobDetails'] = $this->Common_Model->fetch_records('jobs', array('id' => $id), false, true);
+    $pageData['jobTypes'] = $this->Common_Model->get_job_types('job_types');
 
     $this->load->view('admin/include/job_details', $pageData);
   }

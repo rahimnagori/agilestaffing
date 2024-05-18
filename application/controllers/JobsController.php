@@ -155,12 +155,7 @@ class JobsController extends CI_Controller
             $body .= $this->Common_Model->get_email_content('guest_job_apply');
             $body .= "<p><strong>" . $token . "</strong></p>";
             $body .= $appendContent;
-            if ($this->config->item('ENVIRONMENT') == 'production') {
-                $this->Common_Model->send_mail($userdata['email'], $subject, $body);
-                return '';
-            } else {
-                return "<br/>" . $body;
-            }
+            return $this->Common_Model->send_mail($userdata['email'], $subject, $body);
         }
     }
 
@@ -229,17 +224,12 @@ class JobsController extends CI_Controller
         $jobApplicationsDetails = $jobApplicationsDetails[0];
 
         $body = "<p>Hello " . $jobApplicationsDetails['first_name'] . " " . $jobApplicationsDetails['last_name'] . ",</p>";
+        $subject = "Job applied successfully.";
         $body .= $this->Common_Model->get_email_content('job_apply_confirmation');
         if ($jobApplicationsDetails['is_email_verified'] == 0) {
             $body .= $this->Common_Model->get_email_content('application_track');
         }
-        if ($this->config->item('ENVIRONMENT') == 'production') {
-            $subject = "Job applied successfully.";
-            $this->Common_Model->send_mail($jobApplicationsDetails['email'], $subject, $body);
-            return '';
-        } else {
-            return "<br/>" . $body;
-        }
+        return $this->Common_Model->send_mail($jobApplicationsDetails['email'], $subject, $body);
     }
 
     public function job_details($id)

@@ -994,6 +994,7 @@ body {
     .conten_web {
         margin-left: 280px;
     }
+
     .butobn_menu {
         display: none;
     }
@@ -1005,18 +1006,22 @@ body {
         left: 0;
         top: 15px;
     }
+
     .namee {
         display: none;
     }
+
     .logo {
         padding-left: 50px;
     }
+
     .sidebar {
         height: calc(100% - 67px);
         top: 67px;
         left: -100%;
         transition: all ease-in-out 0.5s;
     }
+
     .sidebar.menu_open {
         left: 0;
     }

@@ -15,13 +15,13 @@
             <?php
             if ($isJobApplied) {
                 ?>
-                <a href="#" class="btn btn_theme" disabled>Applied</a>
-                <?php
+            <a href="#" class="btn btn_theme" disabled>Applied</a>
+            <?php
             } else {
                 ?>
-                <a href="#" id="job_apply_btn" class="btn btn_theme" data-toggle="modal"
-                    data-target="#detail_list">Apply</a>
-                <?php
+            <a href="#" id="job_apply_btn" class="btn btn_theme" data-toggle="modal"
+                data-target="#detail_list">Apply</a>
+            <?php
             }
             ?>
             <!-- <a href="#" class="btn btn_theme2"> <i class="fa fa-heart-o"></i> Save </a> -->
@@ -33,6 +33,7 @@
         <h4><i class="fa fa-map-marker"></i>
             <?= $jobDetails['address']; ?>
         </h4>
+        <!-- <h4><i class="fa fa-money"></i>₹30,000 a month</h4> -->
     </div>
     <?= $jobDetails['description']; ?>
 </div>

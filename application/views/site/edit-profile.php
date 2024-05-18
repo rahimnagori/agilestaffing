@@ -80,7 +80,7 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label for="jobRole">Post Code</label>
-                                            <input type="number" name="post_code" placeholder="Post Code"
+                                            <input type="text" name="post_code" placeholder="Post Code"
                                                 class="form-control" required=""
                                                 value="<?= $moreUserDetails['post_code']; ?>">
                                         </div>
