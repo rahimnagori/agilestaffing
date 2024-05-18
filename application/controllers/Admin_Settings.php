@@ -15,6 +15,7 @@ class Admin_Settings extends CI_Controller
 
   public function index()
   {
+    redirect('Admin');
     $pageData = $this->Common_Model->getAdmin($this->session->userdata('id'));
     $pageData['permissions'] = $this->Common_Model->fetch_records('permissions', array('is_active' => 1), false, false, 'type', 'ASC');
     $pageData['emails'] = $this->Common_Model->fetch_records('emails', array('is_active' => 1));
