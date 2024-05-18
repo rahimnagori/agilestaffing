@@ -272,8 +272,16 @@ class JobsController extends CI_Controller
 
     public function experience()
     {
+        if (!$this->check_login()) {
+            $responseMessage = $this->Common_Model->error('Please login to continue.');
+            $this->session->set_flashdata('responseMessage', $responseMessage);
+            redirect('Login');
+        }
         $pageData = $this->Common_Model->get_userdata();
         if(empty($pageData)) redirect('');
+        if ($pageData['userDetails']['is_email_verified'] != 1) {
+            redirect('Verify');
+        }
         $where['user_id'] = $pageData['userDetails']['id'];
         $pageData['userExperiences'] = $this->Common_Model->fetch_records('user_experiences', $where);
 
@@ -284,6 +292,16 @@ class JobsController extends CI_Controller
 
     public function applied_jobs()
     {
+        if (!$this->check_login()) {
+            $responseMessage = $this->Common_Model->error('Please login to continue.');
+            $this->session->set_flashdata('responseMessage', $responseMessage);
+            redirect('Login');
+        }
+        $pageData = $this->Common_Model->get_userdata();
+        if(empty($pageData)) redirect('');
+        if ($pageData['userDetails']['is_email_verified'] != 1) {
+            redirect('Verify');
+        }
         $pageData = $this->Common_Model->get_userdata();
         $join[0][] = 'jobs';
         $join[0][] = 'job_applications.job_id = jobs.id';
